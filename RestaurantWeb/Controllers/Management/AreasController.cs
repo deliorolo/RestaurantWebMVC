@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -13,7 +12,7 @@ namespace RestaurantWeb.Controllers
 {
     public class AreasController : Controller
     {
-        private IDataAccessRegular<AreaModel> areaData = new AreaDataAccess();
+        private IDataAccessRegular<IAreaModel> areaData = new AreaDataAccess();
 
         public ActionResult Index()
         {
@@ -31,7 +30,8 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                areaData.Create(area);
+                IAreaModel model = area;
+                areaData.Create(model);
             }
 
             return RedirectToAction("Index");
@@ -44,7 +44,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            AreaModel area = areaData.Get((int)id);
+            IAreaModel area = areaData.Get((int)id);
 
             if (area == null)
             {
@@ -60,7 +60,8 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                areaData.Update(area);
+                IAreaModel model = area;
+                areaData.Update(model);
                 return RedirectToAction("Index");
             }
             return View(area);
@@ -73,7 +74,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            AreaModel area = areaData.Get((int)id);
+            IAreaModel area = areaData.Get((int)id);
 
             if (area == null)
             {

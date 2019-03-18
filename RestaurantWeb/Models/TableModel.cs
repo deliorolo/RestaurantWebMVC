@@ -5,12 +5,12 @@ using System.Web;
 
 namespace RestaurantWeb.Models
 {
-    public class TableModel
+    public class TableModel : ITableModel
     {
         public TableModel()
         {
             Area = new AreaModel();
-            SoldProducts = new List<SoldProductModel>();
+            SoldProducts = new List<ISoldProductModel>();
         }
 
         public int ID { get; set; }
@@ -19,10 +19,10 @@ namespace RestaurantWeb.Models
 
         public int NumberOfTable { get; set; }
 
-        public AreaModel Area { get; set; }
+        public IAreaModel Area { get; set; }
 
         public bool Occupied { get; set; } = false;
 
-        public List<SoldProductModel> SoldProducts { get; set; }
+        public List<ISoldProductModel> SoldProducts { get; set; }
     }
 }

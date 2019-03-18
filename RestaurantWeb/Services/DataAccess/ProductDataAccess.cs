@@ -7,11 +7,11 @@ using System.Web;
 
 namespace RestaurantWeb.Services
 {
-    public class ProductDataAccess : IDataAccessSubCategory<ProductModel>
+    public class ProductDataAccess : IDataAccessSubCategory<IProductModel>
     {
         private RestaurantContext db = new RestaurantContext();
 
-        public void Create(ProductModel model)
+        public void Create(IProductModel model)
         {
             Product item = new Product();
 
@@ -29,18 +29,18 @@ namespace RestaurantWeb.Services
             db.SaveChanges();
         }
 
-        public ProductModel Get(int id)
+        public IProductModel Get(int id)
         {
             Product item = db.Products.Find(id);
-            ProductModel model = MapTheProductObject(item);
+            IProductModel model = MapTheProductObject(item);
 
             return model;
         }
 
-        public List<ProductModel> GetAll()
+        public List<IProductModel> GetAll()
         {
             List<Product> list = db.Products.ToList();
-            List<ProductModel> modelList = new List<ProductModel>();
+            List<IProductModel> modelList = new List<IProductModel>();
 
             foreach (Product item in list)
             {
@@ -50,10 +50,10 @@ namespace RestaurantWeb.Services
             return modelList;
         }
 
-        public List<ProductModel> GetByParameter(int id)
+        public List<IProductModel> GetByParameter(int id)
         {
             List<Product> list = db.Products.Where(x => x.CategoryID == id).ToList();
-            List<ProductModel> modelList = new List<ProductModel>();
+            List<IProductModel> modelList = new List<IProductModel>();
 
             foreach (Product item in list)
             {
@@ -63,7 +63,7 @@ namespace RestaurantWeb.Services
             return modelList;
         }
 
-        public void Update(ProductModel model)
+        public void Update(IProductModel model)
         {
             var item = db.Products.Find(model.ID);
 
@@ -74,9 +74,9 @@ namespace RestaurantWeb.Services
             db.SaveChanges();
         }
 
-        private ProductModel MapTheProductObject(Product item)
+        private IProductModel MapTheProductObject(Product item)
         {
-            ProductModel model = new ProductModel();
+            IProductModel model = new ProductModel();
 
             model.ID = item.ID;
             model.Name = item.Name;

@@ -8,11 +8,11 @@ using System.Web;
 
 namespace RestaurantWeb.Services
 {
-    public class AreaDataAccess : IDataAccessRegular<AreaModel>
+    public class AreaDataAccess : IDataAccessRegular<IAreaModel>
     {
         private RestaurantContext db = new RestaurantContext();
 
-        public void Create(AreaModel model)
+        public void Create(IAreaModel model)
         {
             Area item = new Area();
 
@@ -28,18 +28,18 @@ namespace RestaurantWeb.Services
             db.SaveChanges();
         }
 
-        public AreaModel Get(int id)
+        public IAreaModel Get(int id)
         {
             Area item = db.Areas.Find(id);
-            AreaModel model = MapTheAreaObject(item);
+            IAreaModel model = MapTheAreaObject(item);
 
             return model;
         }
 
-        public List<AreaModel> GetAll()
+        public List<IAreaModel> GetAll()
         {
             List<Area> list = db.Areas.ToList();
-            List<AreaModel> modelList = new List<AreaModel>();
+            List<IAreaModel> modelList = new List<IAreaModel>();
 
             foreach (Area item in list)
             {
@@ -49,7 +49,7 @@ namespace RestaurantWeb.Services
             return modelList;
         }
 
-        public void Update(AreaModel model)
+        public void Update(IAreaModel model)
         {
             var item = db.Areas.Find(model.ID);
 
@@ -57,9 +57,9 @@ namespace RestaurantWeb.Services
             db.SaveChanges();
         }
 
-        private AreaModel MapTheAreaObject(Area item)
+        private IAreaModel MapTheAreaObject(Area item)
         {
-            AreaModel model = new AreaModel();
+            IAreaModel model = new AreaModel();
 
             model.ID = item.ID;
             model.Name = item.Name;

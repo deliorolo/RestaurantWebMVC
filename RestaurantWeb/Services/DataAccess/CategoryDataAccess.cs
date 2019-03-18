@@ -7,11 +7,11 @@ using System.Web;
 
 namespace RestaurantWeb.Services
 {
-    public class CategoryDataAccess : IDataAccessRegular<CategoryModel>
+    public class CategoryDataAccess : IDataAccessRegular<ICategoryModel>
     {
         private RestaurantContext db = new RestaurantContext();
 
-        public void Create(CategoryModel model)
+        public void Create(ICategoryModel model)
         {
             Category item = new Category();
 
@@ -27,18 +27,18 @@ namespace RestaurantWeb.Services
             db.SaveChanges();
         }
 
-        public CategoryModel Get(int id)
+        public ICategoryModel Get(int id)
         {
             var item = db.Categories.Find(id);
-            CategoryModel model = MapTheCategoryObject(item);
+            ICategoryModel model = MapTheCategoryObject(item);
 
             return model;
         }
 
-        public List<CategoryModel> GetAll()
+        public List<ICategoryModel> GetAll()
         {
             var list = db.Categories.ToList();
-            List<CategoryModel> modelList = new List<CategoryModel>();
+            List<ICategoryModel> modelList = new List<ICategoryModel>();
 
             foreach (var item in list)
             {
@@ -48,7 +48,7 @@ namespace RestaurantWeb.Services
             return modelList;
         }
 
-        public void Update(CategoryModel model)
+        public void Update(ICategoryModel model)
         {
             var item = db.Categories.Find(model.ID);
 
@@ -56,9 +56,9 @@ namespace RestaurantWeb.Services
             db.SaveChanges();
         }
 
-        private CategoryModel MapTheCategoryObject(Category item)
+        private ICategoryModel MapTheCategoryObject(Category item)
         {
-            CategoryModel model = new CategoryModel();
+            ICategoryModel model = new CategoryModel();
 
             model.ID = item.ID;
             model.Name = item.Name;

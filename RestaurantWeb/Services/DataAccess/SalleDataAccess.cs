@@ -18,20 +18,20 @@ namespace RestaurantWeb.Services
             db.SaveChanges();
         }
 
-        public List<SalleModel> GetSalleList()
+        public List<ISalleModel> GetSalleList()
         {
-            List<SalleModel> salles = new List<SalleModel>();
+            List<ISalleModel> salles = new List<ISalleModel>();
             List<SoldProductAccomplished> products = db.SoldProductsAccomplished.ToList();
 
             foreach (SoldProductAccomplished product in products)
             {
-                SalleModel salleAux = new SalleModel();
+                ISalleModel salleAux = new SalleModel();
 
                 salleAux = salles.Where(x => x.Name == product.Name && x.CategoryName == product.Category.Name).FirstOrDefault();
 
                 if (salleAux == null)
                 {
-                    SalleModel salle = new SalleModel();
+                    ISalleModel salle = new SalleModel();
 
                     salle.Name = product.Name;
                     salle.CategoryName = product.Category.Name;

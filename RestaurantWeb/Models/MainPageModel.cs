@@ -5,14 +5,14 @@ using System.Web;
 
 namespace RestaurantWeb.Models
 {
-    public class MainPageModel
+    public class MainPageModel : IMainPageModel
     {
-        public List<AreaModel> Areas { get; set; }
+        public List<IAreaModel> Areas { get; set; }
 
-        public List<TableModel> Tables { get; set; }
+        public List<ITableModel> Tables { get; set; }
 
-        public List<CategoryModel> Categories { get; set; }
+        public List<ICategoryModel> Categories { get; set; }
 
-        public List<ProductModel> Products { get; set; }
+        public List<IProductModel> Products { get; set; }
     }
 }

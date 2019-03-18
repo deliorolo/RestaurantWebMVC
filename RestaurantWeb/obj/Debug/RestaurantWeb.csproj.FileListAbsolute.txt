@@ -217,7 +217,6 @@ C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\EntityFramework
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.csprojAssemblyReference.cache
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.Migrations.InitialCreate.resources
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.csproj.GenerateResource.cache
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.csproj.CoreCompileInputs.cache

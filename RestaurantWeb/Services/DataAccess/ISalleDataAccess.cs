@@ -5,7 +5,7 @@ namespace RestaurantWeb.Services
 {
     public interface ISalleDataAccess
     {
-        List<SalleModel> GetSalleList();
+        List<ISalleModel> GetSalleList();
 
         void EraseDataFromSalleList();
     }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -13,8 +12,8 @@ namespace RestaurantWeb.Controllers
 {
     public class ProductsController : Controller
     {
-        private IDataAccessSubCategory<ProductModel> productData = new ProductDataAccess();
-        private IDataAccessRegular<CategoryModel> categoryData = new CategoryDataAccess();
+        private IDataAccessSubCategory<IProductModel> productData = new ProductDataAccess();
+        private IDataAccessRegular<ICategoryModel> categoryData = new CategoryDataAccess();
 
         public ActionResult Index()
         {
@@ -32,8 +31,9 @@ namespace RestaurantWeb.Controllers
         public ActionResult Create([Bind(Include = "ID,Name,CategoryID,Price")] ProductModel product)
         {
             if (ModelState.IsValid)
-            {               
-                productData.Create(product);
+            {
+                IProductModel model = product;
+                productData.Create(model);
             }
 
             return RedirectToAction("Index");
@@ -46,7 +46,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ProductModel product = productData.Get((int)id);
+            IProductModel product = productData.Get((int)id);
 
             if (product == null)
             {
@@ -64,7 +64,8 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                productData.Update(product);
+                IProductModel model = product;
+                productData.Update(model);
                 return RedirectToAction("Index");
             }
             return View(product);
@@ -77,7 +78,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ProductModel product = productData.Get((int)id);
+            IProductModel product = productData.Get((int)id);
 
             if (product == null)
             {

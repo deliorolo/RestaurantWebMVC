@@ -7,11 +7,11 @@ using System.Web;
 
 namespace RestaurantWeb.Services
 {
-    public class SoldProductDataAccess : IDataAccessSubCategory<SoldProductModel>
+    public class SoldProductDataAccess : IDataAccessSubCategory<ISoldProductModel>
     {
         private RestaurantContext db = new RestaurantContext();
 
-        public void Create(SoldProductModel model)
+        public void Create(ISoldProductModel model)
         {
             SoldProduct item = new SoldProduct();
 
@@ -31,18 +31,18 @@ namespace RestaurantWeb.Services
             db.SaveChanges();
         }
 
-        public SoldProductModel Get(int id)
+        public ISoldProductModel Get(int id)
         {
             SoldProduct item = db.SoldProducts.Find(id);
-            SoldProductModel model = MapTheSoldProductObject(item);
+            ISoldProductModel model = MapTheSoldProductObject(item);
 
             return model;
         }
 
-        public List<SoldProductModel> GetAll()
+        public List<ISoldProductModel> GetAll()
         {
             List<SoldProduct> list = db.SoldProducts.ToList();
-            List<SoldProductModel> modelList = new List<SoldProductModel>();
+            List<ISoldProductModel> modelList = new List<ISoldProductModel>();
 
             foreach (var item in list)
             {
@@ -52,10 +52,10 @@ namespace RestaurantWeb.Services
             return modelList;
         }
 
-        public List<SoldProductModel> GetByParameter(int id)
+        public List<ISoldProductModel> GetByParameter(int id)
         {
             List<SoldProduct> list = db.SoldProducts.Where(x => x.TableID == id).ToList();
-            List<SoldProductModel> modelList = new List<SoldProductModel>();
+            List<ISoldProductModel> modelList = new List<ISoldProductModel>();
 
             foreach (var item in list)
             {               
@@ -65,7 +65,7 @@ namespace RestaurantWeb.Services
             return modelList;
         }
 
-        public void Update(SoldProductModel model)
+        public void Update(ISoldProductModel model)
         {
             var item = db.SoldProducts.Find(model.ID);
 
@@ -75,9 +75,9 @@ namespace RestaurantWeb.Services
             db.SaveChanges();
         }
 
-        private SoldProductModel MapTheSoldProductObject(SoldProduct item)
+        private ISoldProductModel MapTheSoldProductObject(SoldProduct item)
         {
-            SoldProductModel model = new SoldProductModel();
+            ISoldProductModel model = new SoldProductModel();
 
             model.ID = item.ID;
             model.Name = item.Name;

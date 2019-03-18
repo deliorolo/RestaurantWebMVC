@@ -195,6 +195,14 @@
     <Compile Include="Models\EF\RestaurantContext.cs" />
     <Compile Include="Models\EF\SoldProduct.cs" />
     <Compile Include="Models\EF\SoldProductAccomplished.cs" />
+    <Compile Include="Models\IAreaModel.cs" />
+    <Compile Include="Models\ICategoryModel.cs" />
+    <Compile Include="Models\IMainPageModel.cs" />
+    <Compile Include="Models\IProductModel.cs" />
+    <Compile Include="Models\ISalleModel.cs" />
+    <Compile Include="Models\ISoldProductAccomplishedModel.cs" />
+    <Compile Include="Models\ISoldProductModel.cs" />
+    <Compile Include="Models\ITableModel.cs" />
     <Compile Include="Models\MainPageModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\Registration\AccountViewModels.cs" />

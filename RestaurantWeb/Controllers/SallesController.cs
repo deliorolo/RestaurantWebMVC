@@ -1,5 +1,4 @@
 ﻿using RestaurantWeb.Models;
-using RestaurantWeb.Models.EF;
 using RestaurantWeb.Services;
 using System;
 using System.Collections.Generic;
@@ -13,12 +12,12 @@ namespace RestaurantWeb.Controllers
     public class SallesController : Controller
     {
         private ISalleDataAccess salleData = new SalleDataAccess();
-        private IDataAccessSubCategory<SoldProductModel> soldProductsData = new SoldProductDataAccess();
+        private IDataAccessSubCategory<ISoldProductModel> soldProductsData = new SoldProductDataAccess();
 
         // GET: Salles
         public ActionResult Menu()
         {
-            List<SalleModel> salles = new List<SalleModel>();
+            List<ISalleModel> salles = new List<ISalleModel>();
 
             salles = salleData.GetSalleList();
 
@@ -31,7 +30,7 @@ namespace RestaurantWeb.Controllers
         {
             if (soldProductsData.GetAll().Count < 1)
             {
-                List<SalleModel> salles = new List<SalleModel>();
+                List<ISalleModel> salles = new List<ISalleModel>();
 
                 salles = salleData.GetSalleList();
 

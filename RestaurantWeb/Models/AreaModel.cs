@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RestaurantWeb.Models
 {
-    public class AreaModel
+    public class AreaModel : IAreaModel
     {
         public int ID { get; set; }
 

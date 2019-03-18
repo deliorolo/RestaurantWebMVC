@@ -7,11 +7,11 @@ using System.Web;
 
 namespace RestaurantWeb.Services
 {
-    public class TableDataAccess : IDataAccessSubCategory<TableModel>
+    public class TableDataAccess : IDataAccessSubCategory<ITableModel>
     {
         private RestaurantContext db = new RestaurantContext();
 
-        public void Create(TableModel model)
+        public void Create(ITableModel model)
         {
             Table item = new Table();
 
@@ -29,14 +29,14 @@ namespace RestaurantWeb.Services
             db.SaveChanges();
         }
 
-        public TableModel Get(int id)
+        public ITableModel Get(int id)
         {
             Table item = db.Tables.Find(id);
-            TableModel model = MapTheTableObject(item);
+            ITableModel model = MapTheTableObject(item);
 
             foreach (SoldProduct product in item.SoldProducts)
             {
-                SoldProductModel sp = new SoldProductModel();
+                ISoldProductModel sp = new SoldProductModel();
 
                 sp.ID = product.ID;
                 sp.Name = product.Name;
@@ -53,10 +53,10 @@ namespace RestaurantWeb.Services
             return model;
         }
 
-        public List<TableModel> GetAll()
+        public List<ITableModel> GetAll()
         {
             List<Table> list = db.Tables.ToList();
-            List<TableModel> modelList = new List<TableModel>();
+            List<ITableModel> modelList = new List<ITableModel>();
 
             foreach (var item in list)
             {
@@ -66,10 +66,10 @@ namespace RestaurantWeb.Services
             return modelList;
         }
 
-        public List<TableModel> GetByParameter(int id)
+        public List<ITableModel> GetByParameter(int id)
         {
             List<Table> list = db.Tables.Where(x => x.AreaID == id).ToList();
-            List<TableModel> modelList = new List<TableModel>();
+            List<ITableModel> modelList = new List<ITableModel>();
 
             foreach (var item in list)
             {
@@ -79,7 +79,7 @@ namespace RestaurantWeb.Services
             return modelList;
         }
 
-        public void Update(TableModel model)
+        public void Update(ITableModel model)
         {
             var item = db.Tables.Find(model.ID);
 
@@ -90,9 +90,9 @@ namespace RestaurantWeb.Services
             db.SaveChanges();
         }
 
-        private TableModel MapTheTableObject(Table item)
+        private ITableModel MapTheTableObject(Table item)
         {
-            TableModel model = new TableModel();
+            ITableModel model = new TableModel();
 
             model.ID = item.ID;
             model.NumberOfTable = item.NumberOfTable;

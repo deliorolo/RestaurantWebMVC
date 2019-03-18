@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RestaurantWeb.Models
 {
-    public class SoldProductAccomplishedModel
+    public class SoldProductAccomplishedModel : ISoldProductAccomplishedModel
     {
         public SoldProductAccomplishedModel()
         {
@@ -20,6 +20,6 @@ namespace RestaurantWeb.Models
 
         public decimal Price { get; set; }
 
-        public CategoryModel Category { get; set; }
+        public ICategoryModel Category { get; set; }
     }
 }

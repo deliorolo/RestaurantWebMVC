@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RestaurantWeb.Models
 {
-    public class ProductModel
+    public class ProductModel : IProductModel
     {
         public ProductModel()
         {
@@ -18,7 +18,7 @@ namespace RestaurantWeb.Models
 
         public string Name { get; set; }
 
-        public CategoryModel Category { get; set; }
+        public ICategoryModel Category { get; set; }
 
         public decimal Price { get; set; }
     }

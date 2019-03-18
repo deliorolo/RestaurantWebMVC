@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RestaurantWeb.Models
 {
-    public class SalleModel
+    public class SalleModel : ISalleModel
     {
         public int Ammount { get; set; }
 

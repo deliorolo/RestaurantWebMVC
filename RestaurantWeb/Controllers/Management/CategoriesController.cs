@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -13,7 +12,7 @@ namespace RestaurantWeb.Controllers
 {
     public class CategoriesController : Controller
     {
-        private IDataAccessRegular<CategoryModel> categoryData = new CategoryDataAccess();
+        private IDataAccessRegular<ICategoryModel> categoryData = new CategoryDataAccess();
 
         public ActionResult Index()
         {
@@ -31,7 +30,8 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                categoryData.Create(category);
+                ICategoryModel model = category;
+                categoryData.Create(model);
             }
 
             return RedirectToAction("Index");
@@ -44,7 +44,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            CategoryModel category = categoryData.Get((int)id);
+            ICategoryModel category = categoryData.Get((int)id);
 
             if (category == null)
             {
@@ -60,7 +60,8 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                categoryData.Update(category);
+                ICategoryModel model = category;
+                categoryData.Update(model);
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -73,7 +74,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            CategoryModel category = categoryData.Get((int)id);
+            ICategoryModel category = categoryData.Get((int)id);
 
             if (category == null)
             {

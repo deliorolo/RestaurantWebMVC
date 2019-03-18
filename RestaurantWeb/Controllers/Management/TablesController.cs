@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RestaurantWeb.Models;
-using RestaurantWeb.Models.EF;
 using RestaurantWeb.Services;
 
 namespace RestaurantWeb.Controllers
 {
     public class TablesController : Controller
     {
-        private IDataAccessSubCategory<TableModel> tableData = new TableDataAccess();
-        private IDataAccessRegular<AreaModel> areaData = new AreaDataAccess();
+        private IDataAccessSubCategory<ITableModel> tableData = new TableDataAccess();
+        private IDataAccessRegular<IAreaModel> areaData = new AreaDataAccess();
 
         public ActionResult Index()
         {
@@ -34,7 +32,8 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                tableData.Create(table);
+                ITableModel model = table;
+                tableData.Create(model);
             }
 
             return RedirectToAction("Index");
@@ -47,7 +46,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            TableModel table = tableData.Get((int)id);
+            ITableModel table = tableData.Get((int)id);
 
             if (table == null)
             {
@@ -65,7 +64,8 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                tableData.Update(table);
+                ITableModel model = table;
+                tableData.Update(model);
                 return RedirectToAction("Index");
             }
             return View(table);
@@ -78,7 +78,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            TableModel table = tableData.Get((int)id);
+            ITableModel table = tableData.Get((int)id);
 
             if (table == null)
             {

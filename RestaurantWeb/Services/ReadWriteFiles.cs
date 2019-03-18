@@ -46,7 +46,7 @@ namespace RestaurantWeb.Services
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"\DailyIncome.csv", sb.ToString(), Encoding.UTF8);
         }
 
-        public static void AddFileOfTodaySoldProducts(List<SalleModel> soldProducts, DateTime time)
+        public static void AddFileOfTodaySoldProducts(List<ISalleModel> soldProducts, DateTime time)
         {
             Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\Products Sold List");
 
@@ -70,7 +70,7 @@ namespace RestaurantWeb.Services
             sb.AppendLine();
             sb.AppendLine();
 
-            foreach (SalleModel p in soldProducts)
+            foreach (ISalleModel p in soldProducts)
             {
                 if (p.Name != "***null***")
                 {

@@ -7,11 +7,11 @@ using System.Web;
 
 namespace RestaurantWeb.Services.DataAccess
 {
-    public class SoldProductAccomplishedDataAccess : IDataAccessRegular<SoldProductAccomplishedModel>
+    public class SoldProductAccomplishedDataAccess : IDataAccessRegular<ISoldProductAccomplishedModel>
     {
         private RestaurantContext db = new RestaurantContext();
 
-        public void Create(SoldProductAccomplishedModel model)
+        public void Create(ISoldProductAccomplishedModel model)
         {
             SoldProductAccomplished item = new SoldProductAccomplished();
 
@@ -29,18 +29,18 @@ namespace RestaurantWeb.Services.DataAccess
             db.SaveChanges();
         }
 
-        public SoldProductAccomplishedModel Get(int id)
+        public ISoldProductAccomplishedModel Get(int id)
         {
             SoldProductAccomplished item = db.SoldProductsAccomplished.Find(id);
-            SoldProductAccomplishedModel model = MapTheSoldProductAccomplishedObject(item);
+            ISoldProductAccomplishedModel model = MapTheSoldProductAccomplishedObject(item);
 
             return model;
         }
 
-        public List<SoldProductAccomplishedModel> GetAll()
+        public List<ISoldProductAccomplishedModel> GetAll()
         {
             List<SoldProductAccomplished> list = db.SoldProductsAccomplished.ToList();
-            List<SoldProductAccomplishedModel> modelList = new List<SoldProductAccomplishedModel>();
+            List<ISoldProductAccomplishedModel> modelList = new List<ISoldProductAccomplishedModel>();
 
             foreach (var item in list)
             {
@@ -50,14 +50,14 @@ namespace RestaurantWeb.Services.DataAccess
             return modelList;
         }
 
-        public void Update(SoldProductAccomplishedModel model)
+        public void Update(ISoldProductAccomplishedModel model)
         {
 
         }
 
-        private SoldProductAccomplishedModel MapTheSoldProductAccomplishedObject(SoldProductAccomplished item)
+        private ISoldProductAccomplishedModel MapTheSoldProductAccomplishedObject(SoldProductAccomplished item)
         {
-            SoldProductAccomplishedModel model = new SoldProductAccomplishedModel();
+            ISoldProductAccomplishedModel model = new SoldProductAccomplishedModel();
 
             model.ID = item.ID;
             model.Name = item.Name;
