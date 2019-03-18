@@ -1,0 +1,78 @@
+﻿@model RestaurantWeb.Models.MainPageModel
+
+@{
+    ViewBag.Title = "Table";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <br />
+        <h2>Table @Html.DisplayFor(modelItem => Model.Tables.FirstOrDefault().NumberOfTable) - @Html.DisplayFor(modelItem => Model.Tables.FirstOrDefault().Area.Name)</h2>
+
+        <table class="table">
+            <tr>
+                <th>
+                    Product
+                </th>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Detail
+                </th>
+                <th>
+                    Price
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Tables.FirstOrDefault().SoldProducts)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Detail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price) €
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { idItem = item.ID }) |
+                        @Html.ActionLink("Remove", "Delete", new { idItem = item.ID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <h3>Total: @Model.Tables.FirstOrDefault().SoldProducts.Sum(x => x.Price) €</h3>
+        <br />
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button onclick="location.href='@Url.Action("PayAll", "MainMenu", new { id = Model.Tables.FirstOrDefault().ID })'" type="button" class="btn btn-success btn-lg">Pay All</button>
+            <button onclick="location.href='@Url.Action("PayPartial", "MainMenu", new { id = Model.Tables.FirstOrDefault().ID })'" type="button" class="btn btn-success btn-lg">Pay Partial</button>
+            <button onclick="location.href='@Url.Action("TableCategories", "MainMenu", new { id = Model.Tables.FirstOrDefault().ID })'" type="button" class="btn btn-warning btn-lg">Return</button>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <br />
+        <h2>@Html.DisplayFor(modelItem => Model.Products.FirstOrDefault().Category.Name)</h2>
+        <br />
+
+        <div class="form-actions no-color form-inline">
+            @foreach (var item in Model.Products)
+            {
+                using (Html.BeginForm(new { idTable = Model.Tables.FirstOrDefault().ID, idCategory = item.CategoryID, idProduct = item.ID }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" value="@Html.DisplayFor(modelItem => item.Name)" class="btn btn-primary btn-lg fixed_button border" />
+                }
+            }
+        </div>
+    </div>
+</div>
+

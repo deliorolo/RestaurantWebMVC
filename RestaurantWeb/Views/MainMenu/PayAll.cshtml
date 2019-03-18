@@ -1,0 +1,59 @@
+﻿@model RestaurantWeb.Models.TableModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    ViewBag.Title = "PayAll";
+
+
+    <br />
+
+    <h2>Table @Html.DisplayFor(modelItem => Model.NumberOfTable) - @Html.DisplayFor(modelItem => Model.Area.Name)</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                Product
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Detail
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.SoldProducts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price) €
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Detail)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    <h3>Total: @Model.SoldProducts.Sum(x => x.Price) €</h3>
+    <br />
+
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Confirm Payment" class="btn btn-success btn-lg" />
+    </div>
+}
+

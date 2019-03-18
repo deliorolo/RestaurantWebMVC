@@ -1,0 +1,79 @@
+﻿@model RestaurantWeb.Models.TableModel
+
+<script type="text/javascript">
+
+    var total = 0.00;
+
+    function test(item) {
+        if (item.checked) {
+            total += parseInt(item.id);
+        } else {
+            total -= parseInt(item.id);
+        }
+        //alert(total);
+        document.getElementById('Totalcost').innerHTML = (total/100).toFixed(2);
+    }
+
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <br />
+
+    <h2>Table @Html.DisplayFor(modelItem => Model.NumberOfTable) - @Html.DisplayFor(modelItem => Model.Area.Name)</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                Product
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Detail
+            </th>
+            <th>
+                Select
+            </th>
+            <th></th>
+        </tr>
+
+        @{ int j = 0; decimal price;}
+        @foreach (var item in Model.SoldProducts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price) €
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Detail)
+                </td>
+                <td>
+                    @{ price = item.Price * 100; }
+                    <input type="checkbox" value="@j" name="Paid" id="@price" onClick="test(this);"/>
+                </td>
+            </tr>
+            j = j + 1;
+        }
+
+    </table>
+    <h3> Total: <span id="Totalcost"> </span> €</h3>
+    <br />
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Confirm Payment" class="btn btn-success btn-lg" />
+    </div>
+}
+

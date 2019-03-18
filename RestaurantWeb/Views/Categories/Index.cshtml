@@ -1,0 +1,33 @@
+﻿@model IEnumerable<RestaurantWeb.Models.CategoryModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<h2>Categories (Products)</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Products", "ProductsByCategory", "Products", new { id = item.ID }, new { }) |
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>

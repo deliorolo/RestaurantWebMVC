@@ -1,0 +1,38 @@
+﻿@model IEnumerable<RestaurantWeb.Models.TableModel>
+
+@{
+    ViewBag.Title = "TablesByArea";
+}
+
+<h2>List of @Html.DisplayFor(model => model.FirstOrDefault().Area.Name) tables</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Area.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfTable)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Area.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfTable)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

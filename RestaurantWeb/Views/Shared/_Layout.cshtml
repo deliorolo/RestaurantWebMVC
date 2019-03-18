@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body style='background: #F0F0F0'>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #f5d317;">
+        <div class="container">
+            <h3>@Html.ActionLink("Working Menu", "Tables", "MainMenu", new { area = "" }, new { @class = "navbar-brand" })</h3>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="nav navbar-nav">
+
+                    <li class="navbar-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                            <font color="#000000" size="4">Management</font>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#" onclick="location.href='@Url.Action("Index", "Products")'">Products</a>
+                            <a class="dropdown-item" href="#" onclick="location.href='@Url.Action("Index", "Tables")'">Tables</a>
+                            <a class="dropdown-item" href="#" onclick="location.href='@Url.Action("Index", "Categories")'">Categories (Products)</a>
+                            <a class="dropdown-item" href="#" onclick="location.href='@Url.Action("Index", "Areas")'">Areas (Tables)</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="location.href='@Url.Action("Menu", "Salles")'"><font size="4" color="#000000">Salles</font></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="location.href='@Url.Action("Index", "Home")'"><font size="4" color="#000000">Info</font></a>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="~/Content/images/main logo.jpg" />
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Restaurant Web Application by Délio Rolo</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/project")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
