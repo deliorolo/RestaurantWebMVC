@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -17,6 +18,9 @@ namespace RestaurantWeb.Models
 
         public int AreaID { get; set; }
 
+        [Required]
+        [Display(Name = "Number of table")]
+        [Range(1,999, ErrorMessage = "Maximum number of table is 99999")]
         public int NumberOfTable { get; set; }
 
         public IAreaModel Area { get; set; }

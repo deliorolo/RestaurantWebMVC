@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -26,8 +27,13 @@ namespace RestaurantWeb.Models
 
         public ITableModel Table { get; set; }
 
+        [Required]
+        [Display(Name = "Price €")]
+        [Range(0.05, 9999, ErrorMessage = "Please enter a valid price ex: 1.50")]
         public decimal Price { get; set; }
 
+        [Display(Name = "Detail")]
+        [StringLength(20, ErrorMessage = "Maximum of 20 characters field")]
         public string Detail { get; set; }
     }
 }

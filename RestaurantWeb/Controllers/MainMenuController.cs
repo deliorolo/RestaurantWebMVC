@@ -21,7 +21,6 @@ namespace RestaurantWeb.Controllers
 
         private MainPageModel mainPageModel = new MainPageModel();
 
-        // GET: MainMenu
         public ActionResult Tables()
         {
             mainPageModel.Areas = areaData.GetAll();
@@ -168,13 +167,11 @@ namespace RestaurantWeb.Controllers
                 {
                     soldProductData.Delete(item.ID);
                 }
-
             }
 
             return RedirectToAction("Tables");
         }
 
-        // GET: Products/Delete/5
         public ActionResult Delete(int? idItem)
         {
             if (idItem == null)
@@ -191,7 +188,6 @@ namespace RestaurantWeb.Controllers
             return View(product);
         }
 
-        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int idItem)
@@ -221,7 +217,6 @@ namespace RestaurantWeb.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
             return View(product);
         }
 
@@ -252,5 +247,6 @@ namespace RestaurantWeb.Controllers
         // edit price with coma
         // avoid same names in registration
         // add remove range method to delete all products by table
+        // add button order by...
     }
 }

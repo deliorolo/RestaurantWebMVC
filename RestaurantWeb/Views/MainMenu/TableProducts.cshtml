@@ -12,16 +12,16 @@
         <table class="table">
             <tr>
                 <th>
-                    Product
+                    @Html.DisplayNameFor(model => model.Tables.FirstOrDefault().SoldProducts.FirstOrDefault().Name)
                 </th>
                 <th>
-                    Category
+                    @Html.DisplayNameFor(model => model.Tables.FirstOrDefault().SoldProducts.FirstOrDefault().Category.Name)
                 </th>
                 <th>
-                    Detail
+                    @Html.DisplayNameFor(model => model.Tables.FirstOrDefault().SoldProducts.FirstOrDefault().Detail)
                 </th>
                 <th>
-                    Price
+                    @Html.DisplayNameFor(model => model.Tables.FirstOrDefault().SoldProducts.FirstOrDefault().Price)
                 </th>
                 <th></th>
             </tr>
