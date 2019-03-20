@@ -223,3 +223,4 @@ C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\Restauran
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.csproj.CopyComplete
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.dll
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.pdb
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.csprojAssemblyReference.cache

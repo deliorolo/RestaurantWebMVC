@@ -11,6 +11,11 @@ namespace RestaurantWeb.Services.DataAccess
     {
         private RestaurantContext db = new RestaurantContext();
 
+        public bool CheckIfAlreadyExist(string name)
+        {
+            return false;
+        }
+
         public void Create(ISoldProductAccomplishedModel model)
         {
             SoldProductAccomplished item = new SoldProductAccomplished();
@@ -29,7 +34,7 @@ namespace RestaurantWeb.Services.DataAccess
             db.SaveChanges();
         }
 
-        public ISoldProductAccomplishedModel Get(int id)
+        public ISoldProductAccomplishedModel FindById(int id)
         {
             SoldProductAccomplished item = db.SoldProductsAccomplished.Find(id);
             ISoldProductAccomplishedModel model = MapTheSoldProductAccomplishedObject(item);

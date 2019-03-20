@@ -11,6 +11,18 @@ namespace RestaurantWeb.Services
     {
         private RestaurantContext db = new RestaurantContext();
 
+        public bool CheckIfAlreadyExist(string name)
+        {
+            bool exists = false;
+
+            if (db.Categories.Where(x => x.Name == name).FirstOrDefault() != null)
+            {
+                exists = true;
+            }
+
+            return exists;
+        }
+
         public void Create(ICategoryModel model)
         {
             Category item = new Category();
@@ -27,7 +39,7 @@ namespace RestaurantWeb.Services
             db.SaveChanges();
         }
 
-        public ICategoryModel Get(int id)
+        public ICategoryModel FindById(int id)
         {
             var item = db.Categories.Find(id);
             ICategoryModel model = MapTheCategoryObject(item);

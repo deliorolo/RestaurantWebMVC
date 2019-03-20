@@ -12,6 +12,18 @@ namespace RestaurantWeb.Services
     {
         private RestaurantContext db = new RestaurantContext();
 
+        public bool CheckIfAlreadyExist(string name)
+        {
+            bool exists = false;
+
+            if (db.Areas.Where(x => x.Name == name).FirstOrDefault() != null)
+            {
+                exists = true;
+            }
+
+            return exists;
+        }
+
         public void Create(IAreaModel model)
         {
             Area item = new Area();
@@ -28,7 +40,7 @@ namespace RestaurantWeb.Services
             db.SaveChanges();
         }
 
-        public IAreaModel Get(int id)
+        public IAreaModel FindById(int id)
         {
             Area item = db.Areas.Find(id);
             IAreaModel model = MapTheAreaObject(item);

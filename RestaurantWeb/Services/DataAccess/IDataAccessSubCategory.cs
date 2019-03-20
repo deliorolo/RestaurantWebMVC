@@ -8,6 +8,6 @@ namespace RestaurantWeb.Services
 {
     public interface IDataAccessSubCategory<T> : IDataAccessRegular<T>
     {
-        List<T> GetByParameter(int id);
+        List<T> GetBySubGroup(int id);
     }
 }

@@ -35,7 +35,7 @@ namespace RestaurantWeb.Controllers
             mainPageModel.Tables = new List<ITableModel>();
 
             mainPageModel.Categories = categoryData.GetAll();
-            table = tableData.Get((int)id);
+            table = tableData.FindById((int)id);
             mainPageModel.Tables.Add(table);
 
             return View(mainPageModel);
@@ -46,10 +46,10 @@ namespace RestaurantWeb.Controllers
             ITableModel table = new TableModel();
             mainPageModel.Tables = new List<ITableModel>();
 
-            table = tableData.Get((int)idTable);
+            table = tableData.FindById((int)idTable);
             mainPageModel.Tables.Add(table);
 
-            mainPageModel.Products = productData.GetByParameter((int)idCategory);
+            mainPageModel.Products = productData.GetBySubGroup((int)idCategory);
 
             return View(mainPageModel);
         }
@@ -64,8 +64,8 @@ namespace RestaurantWeb.Controllers
             ISoldProductModel soldProduct = new SoldProductModel();
             mainPageModel.Tables = new List<ITableModel>();
 
-            table = tableData.Get((int)idTable);
-            product = productData.Get((int)idProduct);
+            table = tableData.FindById((int)idTable);
+            product = productData.FindById((int)idProduct);
 
             soldProduct.Name = product.Name;
             soldProduct.Price = product.Price;
@@ -80,7 +80,7 @@ namespace RestaurantWeb.Controllers
             tableData.Update(table);
             table.SoldProducts.Add(soldProduct);
 
-            mainPageModel.Products = productData.GetByParameter((int)idCategory);
+            mainPageModel.Products = productData.GetBySubGroup((int)idCategory);
             mainPageModel.Tables.Add(table);
 
             return View(mainPageModel);
@@ -89,7 +89,7 @@ namespace RestaurantWeb.Controllers
         public ActionResult PayAll(int? id)
         {
             ITableModel table = new TableModel();
-            table = tableData.Get((int)id);
+            table = tableData.FindById((int)id);
 
             return View(table);
         }
@@ -98,7 +98,7 @@ namespace RestaurantWeb.Controllers
         [HttpPost, ActionName("PayAll")]
         public ActionResult PayAllConfirm(int? id)
         {
-            List<ISoldProductModel> sold = soldProductData.GetByParameter((int)id);
+            List<ISoldProductModel> sold = soldProductData.GetBySubGroup((int)id);
 
             foreach (ISoldProductModel product in sold)
             {
@@ -114,7 +114,7 @@ namespace RestaurantWeb.Controllers
                 soldProductData.Delete(item.ID);
             }
 
-            ITableModel table = tableData.Get((int)id);
+            ITableModel table = tableData.FindById((int)id);
             table.Occupied = false;
             tableData.Update(table);
 
@@ -124,7 +124,7 @@ namespace RestaurantWeb.Controllers
         public ActionResult PayPartial(int? id)
         {
             ITableModel table = new TableModel();
-            table = tableData.Get((int)id);
+            table = tableData.FindById((int)id);
 
             return View(table);
         }
@@ -135,7 +135,7 @@ namespace RestaurantWeb.Controllers
         {
             if (Paid != null)
             {
-                List<ISoldProductModel> remaining = soldProductData.GetByParameter((int)id);
+                List<ISoldProductModel> remaining = soldProductData.GetBySubGroup((int)id);
                 List<ISoldProductModel> sold = new List<ISoldProductModel>();
 
                 foreach (int item in Paid)
@@ -158,7 +158,7 @@ namespace RestaurantWeb.Controllers
 
                 if (remaining.Count() < 1)
                 {
-                    ITableModel table = tableData.Get((int)id);
+                    ITableModel table = tableData.FindById((int)id);
                     table.Occupied = false;
                     tableData.Update(table);
                 }
@@ -179,7 +179,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ISoldProductModel product = soldProductData.Get((int)idItem);
+            ISoldProductModel product = soldProductData.FindById((int)idItem);
 
             if (product == null)
             {
@@ -192,7 +192,7 @@ namespace RestaurantWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int idItem)
         {
-            ISoldProductModel product = soldProductData.Get(idItem);
+            ISoldProductModel product = soldProductData.FindById(idItem);
 
             if (tableData.GetAll().Where(x => x.ID == product.TableID).FirstOrDefault().SoldProducts.Count() == 1)
             {
@@ -211,7 +211,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ISoldProductModel product = soldProductData.Get((int)idItem);
+            ISoldProductModel product = soldProductData.FindById((int)idItem);
 
             if (product == null)
             {
@@ -237,16 +237,16 @@ namespace RestaurantWeb.Controllers
         //TODO list
         // verify all buttons
         // use sqlite
-        // add [arguments to models]
         // add security to menus
         // Change home controller views
         // Add Comments
-        // Add Interfaces
         // check view bags
         // refactoring the code
         // edit price with coma
         // avoid same names in registration
         // add remove range method to delete all products by table
         // add button order by...
+        // add pages for errors
+        // add number of products deleted when category
     }
 }

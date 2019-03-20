@@ -32,8 +32,15 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                IProductModel model = product;
-                productData.Create(model);
+                if (productData.CheckIfAlreadyExist(product.Name) == false)
+                {
+                    IProductModel model = product;
+                    productData.Create(model);
+                }
+                else
+                {
+                    return View("AlreadyExists");
+                }
             }
 
             return RedirectToAction("Index");
@@ -46,7 +53,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            IProductModel product = productData.Get((int)id);
+            IProductModel product = productData.FindById((int)id);
 
             if (product == null)
             {
@@ -64,9 +71,17 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                IProductModel model = product;
-                productData.Update(model);
-                return RedirectToAction("Index");
+                if (productData.CheckIfAlreadyExist(product.Name) == false ||
+                    productData.FindById(product.ID).Name == product.Name)
+                {
+                    IProductModel model = product;
+                    productData.Update(model);
+                    return RedirectToAction("Index"); 
+                }
+                else
+                {
+                    return View("AlreadyExists");
+                }
             }
             return View(product);
         }
@@ -78,7 +93,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            IProductModel product = productData.Get((int)id);
+            IProductModel product = productData.FindById((int)id);
 
             if (product == null)
             {
@@ -103,7 +118,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View(productData.GetByParameter((int)id));
+            return View(productData.GetBySubGroup((int)id));
         }
 
         //protected override void Dispose(bool disposing)

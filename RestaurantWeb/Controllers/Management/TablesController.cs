@@ -32,8 +32,15 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                ITableModel model = table;
-                tableData.Create(model);
+                if (tableData.CheckIfAlreadyExist(table.NumberOfTable.ToString()) == false)
+                {
+                    ITableModel model = table;
+                    tableData.Create(model);
+                }
+                else
+                {
+                    return View("AlreadyExists");
+                }
             }
 
             return RedirectToAction("Index");
@@ -46,7 +53,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ITableModel table = tableData.Get((int)id);
+            ITableModel table = tableData.FindById((int)id);
 
             if (table == null)
             {
@@ -64,21 +71,29 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                ITableModel model = table;
-                tableData.Update(model);
-                return RedirectToAction("Index");
+                if (tableData.CheckIfAlreadyExist(table.NumberOfTable.ToString()) == false ||
+                    tableData.FindById(table.ID).NumberOfTable == table.NumberOfTable)
+                {
+                    ITableModel model = table;
+                    tableData.Update(model);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("AlreadyExists");
+                }
             }
             return View(table);
         }
 
-        public ActionResult Delete(int? id)
+            public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ITableModel table = tableData.Get((int)id);
+            ITableModel table = tableData.FindById((int)id);
 
             if (table == null)
             {
@@ -103,7 +118,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View(tableData.GetByParameter((int)id));
+            return View(tableData.GetBySubGroup((int)id));
         }
 
         //protected override void Dispose(bool disposing)

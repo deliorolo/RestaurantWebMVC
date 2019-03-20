@@ -14,7 +14,6 @@ namespace RestaurantWeb.Controllers
         private ISalleDataAccess salleData = new SalleDataAccess();
         private IDataAccessSubCategory<ISoldProductModel> soldProductsData = new SoldProductDataAccess();
 
-        // GET: Salles
         public ActionResult Menu()
         {
             List<ISalleModel> salles = new List<ISalleModel>();

@@ -30,8 +30,15 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                IAreaModel model = area;
-                areaData.Create(model);
+                if (areaData.CheckIfAlreadyExist(area.Name) == false)
+                {
+                    IAreaModel model = area;
+                    areaData.Create(model);
+                }
+                else
+                {
+                    return View("AlreadyExists");
+                }
             }
 
             return RedirectToAction("Index");
@@ -44,7 +51,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            IAreaModel area = areaData.Get((int)id);
+            IAreaModel area = areaData.FindById((int)id);
 
             if (area == null)
             {
@@ -60,9 +67,16 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                IAreaModel model = area;
-                areaData.Update(model);
-                return RedirectToAction("Index");
+                if (areaData.CheckIfAlreadyExist(area.Name) == false)
+                {
+                    IAreaModel model = area;
+                    areaData.Update(model);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("AlreadyExists");
+                }
             }
             return View(area);
         }
@@ -74,7 +88,7 @@ namespace RestaurantWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            IAreaModel area = areaData.Get((int)id);
+            IAreaModel area = areaData.FindById((int)id);
 
             if (area == null)
             {

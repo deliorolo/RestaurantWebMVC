@@ -11,6 +11,18 @@ namespace RestaurantWeb.Services
     {
         private RestaurantContext db = new RestaurantContext();
 
+        public bool CheckIfAlreadyExist(string name)
+        {
+            bool exists = false;
+
+            if (db.Products.Where(x => x.Name == name).FirstOrDefault() != null)
+            {
+                exists = true;
+            }
+
+            return exists;
+        }
+
         public void Create(IProductModel model)
         {
             Product item = new Product();
@@ -29,7 +41,7 @@ namespace RestaurantWeb.Services
             db.SaveChanges();
         }
 
-        public IProductModel Get(int id)
+        public IProductModel FindById(int id)
         {
             Product item = db.Products.Find(id);
             IProductModel model = MapTheProductObject(item);
@@ -50,7 +62,7 @@ namespace RestaurantWeb.Services
             return modelList;
         }
 
-        public List<IProductModel> GetByParameter(int id)
+        public List<IProductModel> GetBySubGroup(int id)
         {
             List<Product> list = db.Products.Where(x => x.CategoryID == id).ToList();
             List<IProductModel> modelList = new List<IProductModel>();
