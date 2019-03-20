@@ -14,5 +14,7 @@ namespace RestaurantWeb.Models
         [Display (Name = "Name")]
         [StringLength(20, ErrorMessage = "Maximum of 20 characters field")]
         public string Name { get; set; }
+
+        public int NumberOfTables { get; set; } = 0;
     }
 }

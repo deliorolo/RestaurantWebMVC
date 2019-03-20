@@ -1,25 +1,25 @@
 ﻿using RestaurantWeb.Models;
-using RestaurantWeb.Services;
-using RestaurantWeb.Services.DataAccess;
+using RestaurantWeb.InternalServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using RestaurantWeb.AccessoryCode;
 
 namespace RestaurantWeb.Controllers
 {
     public class MainMenuController : Controller
     {
-        private IDataAccessSubCategory<IProductModel> productData = new ProductDataAccess();
-        private IDataAccessRegular<ICategoryModel> categoryData = new CategoryDataAccess();
-        private IDataAccessSubCategory<ITableModel> tableData = new TableDataAccess();
-        private IDataAccessRegular<IAreaModel> areaData = new AreaDataAccess();
-        private IDataAccessSubCategory<ISoldProductModel> soldProductData = new SoldProductDataAccess();
-        private IDataAccessRegular<ISoldProductAccomplishedModel> soldProductAccomplishedData = new SoldProductAccomplishedDataAccess();
+        private IDataAccessSubCategory<IProductModel> productData = ObjectCreator.ProductDataAccess();
+        private IDataAccessRegular<ICategoryModel> categoryData = ObjectCreator.CategoryDataAccess();
+        private IDataAccessSubCategory<ITableModel> tableData = ObjectCreator.TableDataAccess();
+        private IDataAccessRegular<IAreaModel> areaData = ObjectCreator.AreaDataAccess();
+        private ISoldProductDataAccess soldProductData = ObjectCreator.SoldProductDataAccess();
+        private ISoldProductAccomplishedDataAccess soldProductAccomplishedData = ObjectCreator.SoldProductAccomplishedDataAccess();
 
-        private MainPageModel mainPageModel = new MainPageModel();
+        private IMainPageModel mainPageModel = ObjectCreator.MainPageModel();
 
         public ActionResult Tables()
         {
@@ -31,8 +31,8 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult TableCategories(int? id)
         {
-            ITableModel table = new TableModel();
-            mainPageModel.Tables = new List<ITableModel>();
+            ITableModel table = ObjectCreator.TableModel();
+            mainPageModel.Tables = ObjectCreator.ITableModelList();
 
             mainPageModel.Categories = categoryData.GetAll();
             table = tableData.FindById((int)id);
@@ -43,8 +43,8 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult TableProducts(int? idTable, int? idCategory)
         {
-            ITableModel table = new TableModel();
-            mainPageModel.Tables = new List<ITableModel>();
+            ITableModel table = ObjectCreator.TableModel();
+            mainPageModel.Tables = ObjectCreator.ITableModelList();
 
             table = tableData.FindById((int)idTable);
             mainPageModel.Tables.Add(table);
@@ -59,21 +59,15 @@ namespace RestaurantWeb.Controllers
         [HttpPost, ActionName("TableProducts")]
         public ActionResult TableAddProduct(int? idTable, int? idCategory, int? idProduct)
         {
-            ITableModel table = new TableModel();
-            IProductModel product = new ProductModel();
-            ISoldProductModel soldProduct = new SoldProductModel();
-            mainPageModel.Tables = new List<ITableModel>();
+            ITableModel table = ObjectCreator.TableModel();
+            IProductModel product = ObjectCreator.ProductModel();           
+            mainPageModel.Tables = ObjectCreator.ITableModelList();
 
             table = tableData.FindById((int)idTable);
             product = productData.FindById((int)idProduct);
 
-            soldProduct.Name = product.Name;
-            soldProduct.Price = product.Price;
-            soldProduct.CategoryID = product.CategoryID;
-            soldProduct.TableID = (int)idTable;
-            soldProduct.Detail = "";
-            soldProduct.Category.ID = product.CategoryID;
-            soldProduct.Category.Name = product.Category.Name;
+            ISoldProductModel soldProduct = MappingObjects.ProductToSoldProduct(product, (int)idTable);
+
             soldProductData.Create(soldProduct);
 
             table.Occupied = true;
@@ -88,7 +82,7 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult PayAll(int? id)
         {
-            ITableModel table = new TableModel();
+            ITableModel table = ObjectCreator.TableModel();
             table = tableData.FindById((int)id);
 
             return View(table);
@@ -102,10 +96,7 @@ namespace RestaurantWeb.Controllers
 
             foreach (ISoldProductModel product in sold)
             {
-                ISoldProductAccomplishedModel auxProduct = new SoldProductAccomplishedModel();
-                auxProduct.Name = product.Name;
-                auxProduct.CategoryID = product.CategoryID;
-                auxProduct.Price = product.Price;
+                ISoldProductAccomplishedModel auxProduct = MappingObjects.SoldProductToSoldProductAccomplished(product);
                 soldProductAccomplishedData.Create(auxProduct);
             }
 
@@ -123,7 +114,7 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult PayPartial(int? id)
         {
-            ITableModel table = new TableModel();
+            ITableModel table = ObjectCreator.TableModel();
             table = tableData.FindById((int)id);
 
             return View(table);
@@ -136,17 +127,15 @@ namespace RestaurantWeb.Controllers
             if (Paid != null)
             {
                 List<ISoldProductModel> remaining = soldProductData.GetBySubGroup((int)id);
-                List<ISoldProductModel> sold = new List<ISoldProductModel>();
+                List<ISoldProductModel> sold = ObjectCreator.ISoldProductModelList();
 
                 foreach (int item in Paid)
                 {
-                    ISoldProductAccomplishedModel auxProduct = new SoldProductAccomplishedModel();
-                    ISoldProductModel product = new SoldProductModel();
+                    ISoldProductModel product = ObjectCreator.SoldProductModel();
                     product = remaining[item];
 
-                    auxProduct.Name = product.Name;
-                    auxProduct.CategoryID = product.CategoryID;
-                    auxProduct.Price = product.Price;
+                    ISoldProductAccomplishedModel auxProduct = MappingObjects.SoldProductToSoldProductAccomplished(product);
+                    
                     soldProductAccomplishedData.Create(auxProduct);
                     sold.Add(product);
                 }
@@ -243,10 +232,9 @@ namespace RestaurantWeb.Controllers
         // check view bags
         // refactoring the code
         // edit price with coma
-        // avoid same names in registration
         // add remove range method to delete all products by table
         // add button order by...
         // add pages for errors
-        // add number of products deleted when category
+        // new objects function in internal services
     }
 }

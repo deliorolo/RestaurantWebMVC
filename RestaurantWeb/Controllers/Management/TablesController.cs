@@ -5,15 +5,16 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using RestaurantWeb.AccessoryCode;
 using RestaurantWeb.Models;
-using RestaurantWeb.Services;
+using RestaurantWeb.InternalServices;
 
 namespace RestaurantWeb.Controllers
 {
     public class TablesController : Controller
     {
-        private IDataAccessSubCategory<ITableModel> tableData = new TableDataAccess();
-        private IDataAccessRegular<IAreaModel> areaData = new AreaDataAccess();
+        private IDataAccessSubCategory<ITableModel> tableData = ObjectCreator.TableDataAccess();
+        private IDataAccessRegular<IAreaModel> areaData = ObjectCreator.AreaDataAccess();
 
         public ActionResult Index()
         {

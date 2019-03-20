@@ -5,14 +5,16 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using RestaurantWeb.AccessoryCode;
 using RestaurantWeb.Models;
-using RestaurantWeb.Services;
+using RestaurantWeb.InternalServices;
 
 namespace RestaurantWeb.Controllers
 {
     public class CategoriesController : Controller
     {
-        private IDataAccessRegular<ICategoryModel> categoryData = new CategoryDataAccess();
+        private IDataAccessRegular<ICategoryModel> categoryData = ObjectCreator.CategoryDataAccess();
+        private IDataAccessSubCategory<IProductModel> productData = ObjectCreator.ProductDataAccess();
 
         public ActionResult Index()
         {
@@ -89,6 +91,7 @@ namespace RestaurantWeb.Controllers
             }
 
             ICategoryModel category = categoryData.FindById((int)id);
+            category.NumberOfProducts = productData.GetBySubGroup((int)id).Count();
 
             if (category == null)
             {

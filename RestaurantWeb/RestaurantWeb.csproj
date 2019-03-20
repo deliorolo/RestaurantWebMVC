@@ -167,6 +167,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessoryCode\FilesDownload.cs" />
+    <Compile Include="AccessoryCode\MappingObjects.cs" />
+    <Compile Include="AccessoryCode\ObjectCreator.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -217,17 +220,19 @@
     <Compile Include="Models\SoldProductModel.cs" />
     <Compile Include="Models\TableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\DataAccess\AreaDataAccess.cs" />
-    <Compile Include="Services\DataAccess\CategoryDataAccess.cs" />
-    <Compile Include="Services\DataAccess\IDataAccessRegular.cs" />
-    <Compile Include="Services\DataAccess\IDataAccessSubCategory.cs" />
-    <Compile Include="Services\DataAccess\ISalleDataAccess.cs" />
-    <Compile Include="Services\DataAccess\ProductDataAccess.cs" />
-    <Compile Include="Services\DataAccess\SoldProductAccomplishedDataAccess.cs" />
-    <Compile Include="Services\ReadWriteFiles.cs" />
-    <Compile Include="Services\DataAccess\SalleDataAccess.cs" />
-    <Compile Include="Services\DataAccess\SoldProductDataAccess.cs" />
-    <Compile Include="Services\DataAccess\TableDataAccess.cs" />
+    <Compile Include="InternalServices\DataAccess\AreaDataAccess.cs" />
+    <Compile Include="InternalServices\DataAccess\CategoryDataAccess.cs" />
+    <Compile Include="InternalServices\DataAccess\IDataAccessRegular.cs" />
+    <Compile Include="InternalServices\DataAccess\IDataAccessSubCategory.cs" />
+    <Compile Include="InternalServices\DataAccess\ISalleDataAccess.cs" />
+    <Compile Include="InternalServices\DataAccess\ISoldProductAccomplishedDataAccess.cs" />
+    <Compile Include="InternalServices\DataAccess\ISoldProductDataAccess.cs" />
+    <Compile Include="InternalServices\DataAccess\ProductDataAccess.cs" />
+    <Compile Include="InternalServices\DataAccess\SoldProductAccomplishedDataAccess.cs" />
+    <Compile Include="AccessoryCode\ReadWriteFiles.cs" />
+    <Compile Include="InternalServices\DataAccess\SalleDataAccess.cs" />
+    <Compile Include="InternalServices\DataAccess\SoldProductDataAccess.cs" />
+    <Compile Include="InternalServices\DataAccess\TableDataAccess.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

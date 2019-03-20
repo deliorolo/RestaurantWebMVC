@@ -1,5 +1,6 @@
-﻿using RestaurantWeb.Models;
-using RestaurantWeb.Services;
+﻿using RestaurantWeb.AccessoryCode;
+using RestaurantWeb.Models;
+using RestaurantWeb.InternalServices;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,13 +12,12 @@ namespace RestaurantWeb.Controllers
 {
     public class SallesController : Controller
     {
-        private ISalleDataAccess salleData = new SalleDataAccess();
-        private IDataAccessSubCategory<ISoldProductModel> soldProductsData = new SoldProductDataAccess();
+        private ISalleDataAccess salleData = ObjectCreator.SalleDataAccess();
+        private ISoldProductDataAccess soldProductsData = ObjectCreator.SoldProductDataAccess();
 
         public ActionResult Menu()
         {
-            List<ISalleModel> salles = new List<ISalleModel>();
-
+            List<ISalleModel> salles = ObjectCreator.ISalleModelList();
             salles = salleData.GetSalleList();
 
             return View(salles.OrderByDescending(x => x.Ammount));
@@ -29,8 +29,7 @@ namespace RestaurantWeb.Controllers
         {
             if (soldProductsData.GetAll().Count < 1)
             {
-                List<ISalleModel> salles = new List<ISalleModel>();
-
+                List<ISalleModel> salles = ObjectCreator.ISalleModelList();
                 salles = salleData.GetSalleList();
 
                 DateTime time = DateTime.Now;
@@ -66,9 +65,7 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult DownloadLastProductsSoldFile()
         {
-            Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\Products Sold List");
-            DirectoryInfo directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + @"\Products Sold List");
-            FileInfo file = directory.GetFiles().OrderByDescending(x => x.LastWriteTime).FirstOrDefault();
+           FileInfo file = FilesDownload.GetDirectoryProductsSoldList().GetFiles().OrderByDescending(x => x.LastWriteTime).FirstOrDefault();
 
             if (file != null)
             {
@@ -81,10 +78,8 @@ namespace RestaurantWeb.Controllers
         }
 
         public ActionResult DownloadProductsSoldFile(string fileName)
-        {
-            Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\Products Sold List");
-            DirectoryInfo directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + @"\Products Sold List");
-            FileInfo file = directory.GetFiles().Where(x => x.Name == fileName).FirstOrDefault();
+        {           
+            FileInfo file = FilesDownload.GetDirectoryProductsSoldList().GetFiles().Where(x => x.Name == fileName).FirstOrDefault();
 
             if (file != null)
             {
@@ -98,25 +93,14 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult ListAllLastProductsSoldFile()
         {
-            List<string> fileNames = new List<string>();
-            Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\Products Sold List");
-            DirectoryInfo directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + @"\Products Sold List");
-
-            ICollection<FileInfo> files = directory.GetFiles();
+            ICollection<FileInfo> files = FilesDownload.GetDirectoryProductsSoldList().GetFiles();
 
             if(files.Count < 1)
             {
                 return View("FileNotFound");
             }
 
-            foreach (FileInfo file in files)
-            {
-                string name = "";
-                name = file.Name;
-                fileNames.Add(name);
-            }
-
-            return View(fileNames);
+            return View(FilesDownload.GetListFilesNames(files));
         }
     }
 }

@@ -5,15 +5,16 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using RestaurantWeb.AccessoryCode;
 using RestaurantWeb.Models;
-using RestaurantWeb.Services;
+using RestaurantWeb.InternalServices;
 
 namespace RestaurantWeb.Controllers
 {
     public class ProductsController : Controller
     {
-        private IDataAccessSubCategory<IProductModel> productData = new ProductDataAccess();
-        private IDataAccessRegular<ICategoryModel> categoryData = new CategoryDataAccess();
+        private IDataAccessSubCategory<IProductModel> productData = ObjectCreator.ProductDataAccess();
+        private IDataAccessRegular<ICategoryModel> categoryData = ObjectCreator.CategoryDataAccess();
 
         public ActionResult Index()
         {

@@ -8,5 +8,7 @@ namespace RestaurantWeb.Models
 
         [Display(Name = "Category")]
         string Name { get; set; }
+
+        int NumberOfProducts { get; set; }
     }
 }
