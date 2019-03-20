@@ -1,4 +1,5 @@
-﻿using RestaurantWeb.Models;
+﻿using RestaurantWeb.AccessoryCode;
+using RestaurantWeb.Models;
 using RestaurantWeb.Models.EF;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace RestaurantWeb.InternalServices
 {
     public class TableDataAccess : IDataAccessSubCategory<ITableModel>
     {
-        private RestaurantContext db = new RestaurantContext();
+        private RestaurantContext db = ObjectCreator.RestaurantContext();
 
         public bool CheckIfAlreadyExist(string name)
         {
@@ -46,29 +47,13 @@ namespace RestaurantWeb.InternalServices
             Table item = db.Tables.Find(id);
             ITableModel model = MapTheTableObject(item);
 
-            foreach (SoldProduct product in item.SoldProducts)
-            {
-                ISoldProductModel sp = new SoldProductModel();
-
-                sp.ID = product.ID;
-                sp.Name = product.Name;
-                sp.Price = product.Price;
-                sp.TableID = model.ID;
-                sp.CategoryID = product.CategoryID;
-                sp.Detail = product.Detail;
-                sp.Category.ID = product.CategoryID;
-                sp.Category.Name = product.Category.Name;
-
-                model.SoldProducts.Add(sp);
-            }
-
             return model;
         }
 
         public List<ITableModel> GetAll()
         {
             List<Table> list = db.Tables.ToList();
-            List<ITableModel> modelList = new List<ITableModel>();
+            List<ITableModel> modelList = ObjectCreator.ITableModelList();
 
             foreach (var item in list)
             {
@@ -81,7 +66,7 @@ namespace RestaurantWeb.InternalServices
         public List<ITableModel> GetBySubGroup(int id)
         {
             List<Table> list = db.Tables.Where(x => x.AreaID == id).ToList();
-            List<ITableModel> modelList = new List<ITableModel>();
+            List<ITableModel> modelList = ObjectCreator.ITableModelList();
 
             foreach (var item in list)
             {
@@ -104,7 +89,7 @@ namespace RestaurantWeb.InternalServices
 
         private ITableModel MapTheTableObject(Table item)
         {
-            ITableModel model = new TableModel();
+            ITableModel model = ObjectCreator.TableModel();
 
             model.ID = item.ID;
             model.NumberOfTable = item.NumberOfTable;
@@ -112,6 +97,23 @@ namespace RestaurantWeb.InternalServices
             model.Area.ID = item.AreaID;
             model.AreaID = item.AreaID;
             model.Area.Name = item.Area.Name;
+
+            foreach (SoldProduct product in item.SoldProducts)
+            {
+                ISoldProductModel soldProduct = ObjectCreator.SoldProductModel();
+
+                soldProduct.ID = product.ID;
+                soldProduct.Name = product.Name;
+                soldProduct.Price = product.Price;
+                soldProduct.TableID = product.TableID;
+                soldProduct.CategoryID = product.CategoryID;
+                soldProduct.Category.ID = product.CategoryID;
+                soldProduct.Category.Name = product.Category.Name;
+                soldProduct.Detail = product.Detail;
+                soldProduct.Table = model;
+
+                model.SoldProducts.Add(soldProduct);
+            }
 
             return model;
         }

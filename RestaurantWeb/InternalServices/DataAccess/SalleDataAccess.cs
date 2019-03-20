@@ -1,4 +1,5 @@
-﻿using RestaurantWeb.Models;
+﻿using RestaurantWeb.AccessoryCode;
+using RestaurantWeb.Models;
 using RestaurantWeb.Models.EF;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace RestaurantWeb.InternalServices
 {
     public class SalleDataAccess : ISalleDataAccess
     {
-        private RestaurantContext db = new RestaurantContext();
+        private RestaurantContext db = ObjectCreator.RestaurantContext();
 
         public void EraseDataFromSalleList()
         {
@@ -20,18 +21,18 @@ namespace RestaurantWeb.InternalServices
 
         public List<ISalleModel> GetSalleList()
         {
-            List<ISalleModel> salles = new List<ISalleModel>();
+            List<ISalleModel> salles = ObjectCreator.ISalleModelList();
             List<SoldProductAccomplished> products = db.SoldProductsAccomplished.ToList();
 
             foreach (SoldProductAccomplished product in products)
             {
-                ISalleModel salleAux = new SalleModel();
+                ISalleModel salleAux = ObjectCreator.SalleModel();
 
                 salleAux = salles.Where(x => x.Name == product.Name && x.CategoryName == product.Category.Name).FirstOrDefault();
 
                 if (salleAux == null)
                 {
-                    ISalleModel salle = new SalleModel();
+                    ISalleModel salle = ObjectCreator.SalleModel();
 
                     salle.Name = product.Name;
                     salle.CategoryName = product.Category.Name;

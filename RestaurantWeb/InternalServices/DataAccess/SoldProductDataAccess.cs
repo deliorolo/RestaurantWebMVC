@@ -1,4 +1,5 @@
-﻿using RestaurantWeb.Models;
+﻿using RestaurantWeb.AccessoryCode;
+using RestaurantWeb.Models;
 using RestaurantWeb.Models.EF;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace RestaurantWeb.InternalServices
 {
     public class SoldProductDataAccess : ISoldProductDataAccess
     {
-        private RestaurantContext db = new RestaurantContext();
+        private RestaurantContext db = ObjectCreator.RestaurantContext();
 
         public void Create(ISoldProductModel model)
         {
@@ -20,6 +21,7 @@ namespace RestaurantWeb.InternalServices
             item.TableID = model.TableID;
             item.Price = model.Price;
             item.Detail = model.Detail;
+
             db.SoldProducts.Add(item);
             db.SaveChanges();
         }
@@ -42,7 +44,7 @@ namespace RestaurantWeb.InternalServices
         public List<ISoldProductModel> GetAll()
         {
             List<SoldProduct> list = db.SoldProducts.ToList();
-            List<ISoldProductModel> modelList = new List<ISoldProductModel>();
+            List<ISoldProductModel> modelList = ObjectCreator.ISoldProductModelList();
 
             foreach (var item in list)
             {
@@ -55,7 +57,7 @@ namespace RestaurantWeb.InternalServices
         public List<ISoldProductModel> GetBySubGroup(int id)
         {
             List<SoldProduct> list = db.SoldProducts.Where(x => x.TableID == id).ToList();
-            List<ISoldProductModel> modelList = new List<ISoldProductModel>();
+            List<ISoldProductModel> modelList = ObjectCreator.ISoldProductModelList();
 
             foreach (var item in list)
             {               
@@ -77,13 +79,13 @@ namespace RestaurantWeb.InternalServices
 
         private ISoldProductModel MapTheSoldProductObject(SoldProduct item)
         {
-            ISoldProductModel model = new SoldProductModel();
+            ISoldProductModel model = ObjectCreator.SoldProductModel();
 
             model.ID = item.ID;
             model.Name = item.Name;
             model.CategoryID = item.CategoryID;
             model.Category.ID = item.CategoryID;
-            model.Category.Name = item.Category.Name;
+            model.Category.Name = db.Categories.Where(x => x.ID == item.CategoryID).FirstOrDefault().Name;
             model.TableID = item.TableID;
             model.Table.ID = item.TableID;
             model.Price = item.Price;

@@ -1,4 +1,5 @@
-﻿using RestaurantWeb.Models;
+﻿using RestaurantWeb.AccessoryCode;
+using RestaurantWeb.Models;
 using RestaurantWeb.Models.EF;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,8 @@ namespace RestaurantWeb.InternalServices
 {
     public class SoldProductAccomplishedDataAccess : ISoldProductAccomplishedDataAccess
     {
-        private RestaurantContext db = new RestaurantContext();
- 
+        private RestaurantContext db = ObjectCreator.RestaurantContext();
+
         public void Create(ISoldProductAccomplishedModel model)
         {
             SoldProductAccomplished item = new SoldProductAccomplished();
@@ -40,7 +41,7 @@ namespace RestaurantWeb.InternalServices
         public List<ISoldProductAccomplishedModel> GetAll()
         {
             List<SoldProductAccomplished> list = db.SoldProductsAccomplished.ToList();
-            List<ISoldProductAccomplishedModel> modelList = new List<ISoldProductAccomplishedModel>();
+            List<ISoldProductAccomplishedModel> modelList = ObjectCreator.ISoldProductAccomplishedModelList();
 
             foreach (var item in list)
             {
@@ -52,7 +53,7 @@ namespace RestaurantWeb.InternalServices
 
         private ISoldProductAccomplishedModel MapTheSoldProductAccomplishedObject(SoldProductAccomplished item)
         {
-            ISoldProductAccomplishedModel model = new SoldProductAccomplishedModel();
+            ISoldProductAccomplishedModel model = ObjectCreator.SoldProductAccomplishedModel();
 
             model.ID = item.ID;
             model.Name = item.Name;

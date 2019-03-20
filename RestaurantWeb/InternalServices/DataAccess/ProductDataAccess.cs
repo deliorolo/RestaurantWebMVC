@@ -1,4 +1,5 @@
-﻿using RestaurantWeb.Models;
+﻿using RestaurantWeb.AccessoryCode;
+using RestaurantWeb.Models;
 using RestaurantWeb.Models.EF;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace RestaurantWeb.InternalServices
 {
     public class ProductDataAccess : IDataAccessSubCategory<IProductModel>
     {
-        private RestaurantContext db = new RestaurantContext();
+        private RestaurantContext db = ObjectCreator.RestaurantContext();
 
         public bool CheckIfAlreadyExist(string name)
         {
@@ -52,7 +53,7 @@ namespace RestaurantWeb.InternalServices
         public List<IProductModel> GetAll()
         {
             List<Product> list = db.Products.ToList();
-            List<IProductModel> modelList = new List<IProductModel>();
+            List<IProductModel> modelList = ObjectCreator.IProductModelList();
 
             foreach (Product item in list)
             {
@@ -65,7 +66,7 @@ namespace RestaurantWeb.InternalServices
         public List<IProductModel> GetBySubGroup(int id)
         {
             List<Product> list = db.Products.Where(x => x.CategoryID == id).ToList();
-            List<IProductModel> modelList = new List<IProductModel>();
+            List<IProductModel> modelList = ObjectCreator.IProductModelList();
 
             foreach (Product item in list)
             {
@@ -88,7 +89,7 @@ namespace RestaurantWeb.InternalServices
 
         private IProductModel MapTheProductObject(Product item)
         {
-            IProductModel model = new ProductModel();
+            IProductModel model = ObjectCreator.ProductModel();
 
             model.ID = item.ID;
             model.Name = item.Name;

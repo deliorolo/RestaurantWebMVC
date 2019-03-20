@@ -1,4 +1,5 @@
-﻿using RestaurantWeb.Models;
+﻿using RestaurantWeb.AccessoryCode;
+using RestaurantWeb.Models;
 using RestaurantWeb.Models.EF;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace RestaurantWeb.InternalServices
 {
     public class CategoryDataAccess : IDataAccessRegular<ICategoryModel>
     {
-        private RestaurantContext db = new RestaurantContext();
+        private RestaurantContext db = ObjectCreator.RestaurantContext();
 
         public bool CheckIfAlreadyExist(string name)
         {
@@ -50,7 +51,7 @@ namespace RestaurantWeb.InternalServices
         public List<ICategoryModel> GetAll()
         {
             var list = db.Categories.ToList();
-            List<ICategoryModel> modelList = new List<ICategoryModel>();
+            List<ICategoryModel> modelList = ObjectCreator.ICategoryModelList();
 
             foreach (var item in list)
             {
@@ -70,7 +71,7 @@ namespace RestaurantWeb.InternalServices
 
         private ICategoryModel MapTheCategoryObject(Category item)
         {
-            ICategoryModel model = new CategoryModel();
+            ICategoryModel model = ObjectCreator.CategoryModel();
 
             model.ID = item.ID;
             model.Name = item.Name;

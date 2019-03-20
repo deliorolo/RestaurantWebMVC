@@ -1,4 +1,5 @@
-﻿using RestaurantWeb.Models;
+﻿using RestaurantWeb.AccessoryCode;
+using RestaurantWeb.Models;
 using RestaurantWeb.Models.EF;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace RestaurantWeb.InternalServices
 {
     public class AreaDataAccess : IDataAccessRegular<IAreaModel>
     {
-        private RestaurantContext db = new RestaurantContext();
+        private RestaurantContext db = ObjectCreator.RestaurantContext();
 
         public bool CheckIfAlreadyExist(string name)
         {
@@ -51,7 +52,7 @@ namespace RestaurantWeb.InternalServices
         public List<IAreaModel> GetAll()
         {
             List<Area> list = db.Areas.ToList();
-            List<IAreaModel> modelList = new List<IAreaModel>();
+            List<IAreaModel> modelList = ObjectCreator.IAreaModelList();
 
             foreach (Area item in list)
             {
@@ -71,7 +72,7 @@ namespace RestaurantWeb.InternalServices
 
         private IAreaModel MapTheAreaObject(Area item)
         {
-            IAreaModel model = new AreaModel();
+            IAreaModel model = ObjectCreator.AreaModel();
 
             model.ID = item.ID;
             model.Name = item.Name;

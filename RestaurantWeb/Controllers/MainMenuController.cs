@@ -72,7 +72,7 @@ namespace RestaurantWeb.Controllers
 
             table.Occupied = true;
             tableData.Update(table);
-            table.SoldProducts.Add(soldProduct);
+            table.SoldProducts = soldProductData.GetBySubGroup(table.ID);
 
             mainPageModel.Products = productData.GetBySubGroup((int)idCategory);
             mainPageModel.Tables.Add(table);
@@ -182,10 +182,12 @@ namespace RestaurantWeb.Controllers
         public ActionResult DeleteConfirmed(int idItem)
         {
             ISoldProductModel product = soldProductData.FindById(idItem);
+            ITableModel table = tableData.GetAll().Where(x => x.ID == product.TableID).FirstOrDefault();
 
-            if (tableData.GetAll().Where(x => x.ID == product.TableID).FirstOrDefault().SoldProducts.Count() == 1)
+            if (table.SoldProducts.Count() == 1)
             {
-                tableData.GetAll().Where(x => x.ID == product.TableID).FirstOrDefault().Occupied = false;
+                table.Occupied = false;
+                tableData.Update(table);
             }
 
             soldProductData.Delete(idItem);
@@ -235,6 +237,5 @@ namespace RestaurantWeb.Controllers
         // add remove range method to delete all products by table
         // add button order by...
         // add pages for errors
-        // new objects function in internal services
     }
 }
