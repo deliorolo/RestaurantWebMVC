@@ -238,5 +238,6 @@ namespace RestaurantWeb.Controllers
         // add remove range method to delete all products by table
         // add button order by...
         // add pages for errors
+        // when a table is changed it is set as free
     }
 }
