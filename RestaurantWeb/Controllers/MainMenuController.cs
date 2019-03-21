@@ -55,7 +55,6 @@ namespace RestaurantWeb.Controllers
             return View(mainPageModel);
         }
 
-
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("TableProducts")]
         public ActionResult TableAddProduct(int? idTable, int? idCategory, int? idProduct)
@@ -73,7 +72,7 @@ namespace RestaurantWeb.Controllers
 
             table.Occupied = true;
             tableData.Update(table);
-            table.SoldProducts = soldProductData.GetBySubGroup(table.ID);
+            table.SoldProducts = soldProductData.GetByTable(table.ID);
 
             mainPageModel.Products = productData.GetBySubGroup((int)idCategory);
             mainPageModel.Tables.Add(table);
@@ -93,7 +92,7 @@ namespace RestaurantWeb.Controllers
         [HttpPost, ActionName("PayAll")]
         public ActionResult PayAllConfirm(int? id)
         {
-            List<ISoldProductModel> sold = soldProductData.GetBySubGroup((int)id);
+            List<ISoldProductModel> sold = soldProductData.GetByTable((int)id);
 
             foreach (ISoldProductModel product in sold)
             {
@@ -127,7 +126,7 @@ namespace RestaurantWeb.Controllers
         {
             if (Paid != null)
             {
-                List<ISoldProductModel> remaining = soldProductData.GetBySubGroup((int)id);
+                List<ISoldProductModel> remaining = soldProductData.GetByTable((int)id);
                 List<ISoldProductModel> sold = ObjectCreator.ISoldProductModelList();
 
                 foreach (int item in Paid)
@@ -238,6 +237,6 @@ namespace RestaurantWeb.Controllers
         // add remove range method to delete all products by table
         // add button order by...
         // add pages for errors
-        // when a table is changed it is set as free
+        // dont allow delete tables with products and so on
     }
 }

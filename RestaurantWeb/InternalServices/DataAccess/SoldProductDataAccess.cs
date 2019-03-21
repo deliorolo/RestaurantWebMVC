@@ -54,13 +54,26 @@ namespace RestaurantWeb.InternalServices
             return modelList;
         }
 
-        public List<ISoldProductModel> GetBySubGroup(int id)
+        public List<ISoldProductModel> GetByTable(int id)
         {
             List<SoldProduct> list = db.SoldProducts.Where(x => x.TableID == id).ToList();
             List<ISoldProductModel> modelList = ObjectCreator.ISoldProductModelList();
 
             foreach (var item in list)
             {               
+                modelList.Add(MapTheSoldProductObject(item));
+            }
+
+            return modelList;
+        }
+
+        public List<ISoldProductModel> GetByCategory(int id)
+        {
+            List<SoldProduct> list = db.SoldProducts.Where(x => x.CategoryID == id).ToList();
+            List<ISoldProductModel> modelList = ObjectCreator.ISoldProductModelList();
+
+            foreach (var item in list)
+            {
                 modelList.Add(MapTheSoldProductObject(item));
             }
 

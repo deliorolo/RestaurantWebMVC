@@ -48,7 +48,7 @@ namespace RestaurantWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -62,45 +62,11 @@ namespace RestaurantWeb.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.AreaID = new SelectList(areaData.GetAll(), "ID", "Name");
-
-            return View(table);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,NumberOfTable,AreaID,Occupied")] TableModel table)
-        {
-            if (ModelState.IsValid)
+            if(table.SoldProducts.Count > 0)
             {
-                if (tableData.CheckIfAlreadyExist(table.NumberOfTable.ToString()) == false ||
-                    tableData.FindById(table.ID).NumberOfTable == table.NumberOfTable)
-                {
-                    ITableModel model = table;
-                    tableData.Update(model);
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    return View("AlreadyExists");
-                }
-            }
-            return View(table);
-        }
-
-            public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("OpenedTable");
             }
 
-            ITableModel table = tableData.FindById((int)id);
-
-            if (table == null)
-            {
-                return HttpNotFound();
-            }
             return View(table);
         }
 

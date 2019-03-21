@@ -9,5 +9,6 @@ namespace RestaurantWeb.InternalServices
         void Delete(int id);
         ISoldProductAccomplishedModel FindById(int id);
         List<ISoldProductAccomplishedModel> GetAll();
+        List<ISoldProductAccomplishedModel> GetByCategory(int id);
     }
 }

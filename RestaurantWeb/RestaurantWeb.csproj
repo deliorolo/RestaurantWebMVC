@@ -335,7 +335,6 @@
     <Content Include="Views\Areas\Index.cshtml" />
     <Content Include="Views\Tables\Create.cshtml" />
     <Content Include="Views\Tables\Delete.cshtml" />
-    <Content Include="Views\Tables\Edit.cshtml" />
     <Content Include="Views\Tables\Index.cshtml" />
     <Content Include="Views\Categories\Create.cshtml" />
     <Content Include="Views\Categories\Delete.cshtml" />
@@ -362,6 +361,9 @@
     <Content Include="Views\Categories\AlreadyExists.cshtml" />
     <Content Include="Views\Products\AlreadyExists.cshtml" />
     <Content Include="Views\Tables\AlreadyExists.cshtml" />
+    <Content Include="Views\Tables\OpenedTable.cshtml" />
+    <Content Include="Views\Areas\OpenedTable.cshtml" />
+    <Content Include="Views\Categories\OpenedTables.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

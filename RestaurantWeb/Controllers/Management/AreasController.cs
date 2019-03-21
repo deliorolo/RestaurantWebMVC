@@ -92,12 +92,23 @@ namespace RestaurantWeb.Controllers
             }
 
             IAreaModel area = areaData.FindById((int)id);
-            area.NumberOfTables = tableData.GetBySubGroup((int)id).Count();
 
             if (area == null)
             {
                 return HttpNotFound();
             }
+
+            List<ITableModel> tables = tableData.GetBySubGroup((int)id);
+            area.NumberOfTables = tables.Count();
+
+            foreach (ITableModel table in tables)
+            {
+                if (table.Occupied)
+                {
+                    return View("OpenedTable");
+                }
+            }
+
             return View(area);
         }
 

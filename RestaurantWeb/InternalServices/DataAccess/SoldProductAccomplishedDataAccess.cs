@@ -51,6 +51,19 @@ namespace RestaurantWeb.InternalServices
             return modelList;
         }
 
+        public List<ISoldProductAccomplishedModel> GetByCategory(int id)
+        {
+            List<SoldProductAccomplished> list = db.SoldProductsAccomplished.Where(x => x.CategoryID == id).ToList();
+            List<ISoldProductAccomplishedModel> modelList = ObjectCreator.ISoldProductAccomplishedModelList();
+
+            foreach (var item in list)
+            {
+                modelList.Add(MapTheSoldProductAccomplishedObject(item));
+            }
+
+            return modelList;
+        }
+
         private ISoldProductAccomplishedModel MapTheSoldProductAccomplishedObject(SoldProductAccomplished item)
         {
             ISoldProductAccomplishedModel model = ObjectCreator.SoldProductAccomplishedModel();

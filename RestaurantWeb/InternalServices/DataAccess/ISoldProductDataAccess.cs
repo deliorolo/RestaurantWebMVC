@@ -9,7 +9,8 @@ namespace RestaurantWeb.InternalServices
         void Delete(int id);
         ISoldProductModel FindById(int id);
         List<ISoldProductModel> GetAll();
-        List<ISoldProductModel> GetBySubGroup(int id);
+        List<ISoldProductModel> GetByTable(int id);
+        List<ISoldProductModel> GetByCategory(int id);
         void Update(ISoldProductModel model);
     }
 }

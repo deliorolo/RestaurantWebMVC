@@ -16,6 +16,8 @@ namespace RestaurantWeb.Controllers
     {
         private IDataAccessRegular<ICategoryModel> categoryData = ObjectCreator.CategoryDataAccess();
         private IDataAccessSubCategory<IProductModel> productData = ObjectCreator.ProductDataAccess();
+        private ISoldProductDataAccess soldProductData = ObjectCreator.SoldProductDataAccess();
+        private ISoldProductAccomplishedDataAccess soldProductAccomplishedData = ObjectCreator.SoldProductAccomplishedDataAccess();
 
         public ActionResult Index()
         {
@@ -92,12 +94,20 @@ namespace RestaurantWeb.Controllers
             }
 
             ICategoryModel category = categoryData.FindById((int)id);
-            category.NumberOfProducts = productData.GetBySubGroup((int)id).Count();
-
+            
             if (category == null)
             {
                 return HttpNotFound();
             }
+
+            if(soldProductData.GetByCategory((int)id).Count() > 0 ||
+                soldProductAccomplishedData.GetByCategory((int)id).Count > 0)
+            {
+                return View("OpenedTables");
+            }
+
+            category.NumberOfProducts = productData.GetBySubGroup((int)id).Count();
+
             return View(category);
         }
 
