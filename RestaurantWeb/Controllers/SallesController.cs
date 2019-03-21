@@ -15,6 +15,7 @@ namespace RestaurantWeb.Controllers
         private ISalleDataAccess salleData = ObjectCreator.SalleDataAccess();
         private ISoldProductDataAccess soldProductsData = ObjectCreator.SoldProductDataAccess();
 
+        [Authorize]
         public ActionResult Menu()
         {
             List<ISalleModel> salles = ObjectCreator.ISalleModelList();
@@ -23,6 +24,7 @@ namespace RestaurantWeb.Controllers
             return View(salles.OrderByDescending(x => x.Ammount));
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Menu")]
         [ValidateAntiForgeryToken]
         public ActionResult ClosetheDay()
@@ -51,6 +53,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult DownloadMoneyIncomeFile()
         {
             if (ReadWriteFiles.DailyIncomeFileExist())
@@ -63,6 +66,7 @@ namespace RestaurantWeb.Controllers
             return View("FileNotFound");
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult DownloadLastProductsSoldFile()
         {
            FileInfo file = FilesDownload.GetDirectoryProductsSoldList().GetFiles().OrderByDescending(x => x.LastWriteTime).FirstOrDefault();
@@ -77,6 +81,7 @@ namespace RestaurantWeb.Controllers
             return View("FileNotFound");
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult DownloadProductsSoldFile(string fileName)
         {           
             FileInfo file = FilesDownload.GetDirectoryProductsSoldList().GetFiles().Where(x => x.Name == fileName).FirstOrDefault();
@@ -91,6 +96,7 @@ namespace RestaurantWeb.Controllers
             return View("FileNotFound");
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult ListAllLastProductsSoldFile()
         {
             ICollection<FileInfo> files = FilesDownload.GetDirectoryProductsSoldList().GetFiles();

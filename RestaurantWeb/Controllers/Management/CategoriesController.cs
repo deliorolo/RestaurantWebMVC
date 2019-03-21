@@ -11,6 +11,7 @@ using RestaurantWeb.InternalServices;
 
 namespace RestaurantWeb.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class CategoriesController : Controller
     {
         private IDataAccessRegular<ICategoryModel> categoryData = ObjectCreator.CategoryDataAccess();

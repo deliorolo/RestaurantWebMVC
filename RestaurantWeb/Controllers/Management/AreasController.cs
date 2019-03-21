@@ -11,6 +11,7 @@ using RestaurantWeb.InternalServices;
 
 namespace RestaurantWeb.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AreasController : Controller
     {
         private IDataAccessRegular<IAreaModel> areaData = ObjectCreator.AreaDataAccess();

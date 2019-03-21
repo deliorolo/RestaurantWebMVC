@@ -10,6 +10,7 @@ using RestaurantWeb.AccessoryCode;
 
 namespace RestaurantWeb.Controllers
 {
+    [Authorize]
     public class MainMenuController : Controller
     {
         private IDataAccessSubCategory<IProductModel> productData = ObjectCreator.ProductDataAccess();
