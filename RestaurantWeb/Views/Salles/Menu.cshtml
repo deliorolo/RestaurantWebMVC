@@ -10,16 +10,16 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Ammount)
+                @Html.ActionLink( "Ammount", "Menu", new { order = "ammount" }, new { @style = "color:#404040;" })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.ActionLink("Product", "Menu", new { order = "product" }, new { @style = "color:#404040;" })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
+                @Html.ActionLink("Category", "Menu", new { order = "category" }, new { @style = "color:#404040;" })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.ActionLink("Sum", "Menu", new { order = "sum" }, new { @style = "color:#404040;" })
             </th>
         </tr>
 

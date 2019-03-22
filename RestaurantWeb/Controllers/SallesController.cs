@@ -16,12 +16,21 @@ namespace RestaurantWeb.Controllers
         private ISoldProductDataAccess soldProductsData = ObjectCreator.SoldProductDataAccess();
 
         [Authorize]
-        public ActionResult Menu()
+        public ActionResult Menu(string order)
         {
             List<ISalleModel> salles = ObjectCreator.ISalleModelList();
             salles = salleData.GetSalleList();
-
-            return View(salles.OrderByDescending(x => x.Ammount));
+            switch (order)
+            {
+                case "product":
+                    return View(salles.OrderBy(x => x.Name));
+                case "category":
+                    return View(salles.OrderBy(x => x.CategoryName));
+                case "sum":
+                    return View(salles.OrderByDescending(x => x.Price));
+                default:
+                    return View(salles.OrderByDescending(x => x.Ammount));
+            }           
         }
 
         [Authorize(Roles = "admin")]
