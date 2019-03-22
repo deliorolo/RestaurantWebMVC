@@ -33,6 +33,14 @@ namespace RestaurantWeb.InternalServices
             db.SaveChanges();
         }
 
+        public void DeleteList(List<ISoldProductModel> list)
+        {
+            foreach (ISoldProductModel item in list)
+            {
+                Delete(item.ID);
+            }
+        }
+
         public ISoldProductModel FindById(int id)
         {
             SoldProduct item = db.SoldProducts.Find(id);
@@ -106,5 +114,6 @@ namespace RestaurantWeb.InternalServices
 
             return model;
         }
+
     }
 }

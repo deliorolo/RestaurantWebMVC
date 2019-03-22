@@ -12,5 +12,6 @@ namespace RestaurantWeb.InternalServices
         List<ISoldProductModel> GetByTable(int id);
         List<ISoldProductModel> GetByCategory(int id);
         void Update(ISoldProductModel model);
+        void DeleteList(List<ISoldProductModel> list);
     }
 }

@@ -94,16 +94,7 @@ namespace RestaurantWeb.Controllers
         {
             List<ISoldProductModel> sold = soldProductData.GetByTable((int)id);
 
-            foreach (ISoldProductModel product in sold)
-            {
-                ISoldProductAccomplishedModel auxProduct = MappingObjects.SoldProductToSoldProductAccomplished(product);
-                soldProductAccomplishedData.Create(auxProduct);
-            }
-
-            foreach (ISoldProductModel item in sold)
-            {
-                soldProductData.Delete(item.ID);
-            }
+            MainMenuHelper.PaySoldProducts(sold, soldProductData, soldProductAccomplishedData);
 
             ITableModel table = tableData.FindById((int)id);
             table.Occupied = false;
@@ -126,35 +117,14 @@ namespace RestaurantWeb.Controllers
         {
             if (Paid != null)
             {
-                List<ISoldProductModel> remaining = soldProductData.GetByTable((int)id);
-                List<ISoldProductModel> sold = ObjectCreator.ISoldProductModelList();
+                List<ISoldProductModel> fullList = soldProductData.GetByTable((int)id);
+                MainMenuHelper.PaySelectedSoldProducts(fullList, Paid, soldProductData, soldProductAccomplishedData);
 
-                foreach (int item in Paid)
-                {
-                    ISoldProductModel product = ObjectCreator.SoldProductModel();
-                    product = remaining[item];
-
-                    ISoldProductAccomplishedModel auxProduct = MappingObjects.SoldProductToSoldProductAccomplished(product);
-                    
-                    soldProductAccomplishedData.Create(auxProduct);
-                    sold.Add(product);
-                }
-
-                foreach (ISoldProductModel element in sold)
-                {
-                    remaining.Remove(element);
-                }
-
-                if (remaining.Count() < 1)
+                if (fullList.Count() < 1)
                 {
                     ITableModel table = tableData.FindById((int)id);
                     table.Occupied = false;
                     tableData.Update(table);
-                }
-
-                foreach (ISoldProductModel item in sold)
-                {
-                    soldProductData.Delete(item.ID);
                 }
             }
 
@@ -228,15 +198,11 @@ namespace RestaurantWeb.Controllers
         //TODO list
         // verify all buttons
         // use sqlite
-        // add security to menus
         // Change home controller views
         // Add Comments
         // check view bags
         // refactoring the code
         // edit price with coma
-        // add remove range method to delete all products by table
-        // add button order by...
         // add pages for errors
-        // dont allow delete tables with products and so on
     }
 }

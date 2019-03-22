@@ -168,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessoryCode\FilesDownload.cs" />
+    <Compile Include="AccessoryCode\MainMenuHelper.cs" />
     <Compile Include="AccessoryCode\MappingObjects.cs" />
     <Compile Include="AccessoryCode\ObjectCreator.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
