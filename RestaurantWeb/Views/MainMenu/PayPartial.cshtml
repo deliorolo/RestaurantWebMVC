@@ -72,8 +72,9 @@
     <h3> Total: <span id="Totalcost"> </span> €</h3>
     <br />
 
-    <div class="form-actions no-color">
+    <div class="form-actions no-color btn-group">
         <input type="submit" value="Confirm Payment" class="btn btn-success btn-lg" />
+        <button onclick="location.href='@Url.Action("TableCategories", "MainMenu", new { id = Model.ID })'" type="button" class="btn btn-warning btn-lg">Return</button>
     </div>
 }
 

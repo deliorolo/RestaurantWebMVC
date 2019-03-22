@@ -4,7 +4,7 @@
     ViewBag.Title = "Delete";
 }
 <br />
-<h3>Are you sure you want to remove this product?</h3>
+<h3>Are you sure you want to remove this product from the table?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -37,12 +37,10 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger" />
-        </div>
+    <div class="form-actions no-color btn-group">
+        <input type="submit" value="Remove" class="btn btn-danger" />
+        <button onclick="location.href='@Url.Action("TableCategories", "MainMenu", new { id = Model.TableID })'" type="button" class="btn btn-warning">Return</button>
+    </div>
     }
 </div>
 <br />
-<div>
-    @Html.ActionLink("Back to List", "Tables")
-</div>

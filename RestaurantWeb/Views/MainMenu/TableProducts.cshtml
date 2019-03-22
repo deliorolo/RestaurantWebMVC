@@ -42,8 +42,8 @@
                         @Html.DisplayFor(modelItem => item.Price) €
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { idItem = item.ID }) |
-                        @Html.ActionLink("Remove", "Delete", new { idItem = item.ID })
+                        @Html.ActionLink("✎", "Edit", new { idItem = item.ID }) |
+                        @Html.ActionLink("❌", "Delete", new { idItem = item.ID })
                     </td>
                 </tr>
             }
@@ -60,7 +60,7 @@
     </div>
     <div class="col-md-6">
         <br />
-        <h2>@Html.DisplayFor(modelItem => Model.Products.FirstOrDefault().Category.Name)</h2>
+        <h2 class="text-info">@Html.DisplayFor(modelItem => Model.Products.FirstOrDefault().Category.Name)</h2>
         <br />
 
         <div class="form-actions no-color form-inline">
