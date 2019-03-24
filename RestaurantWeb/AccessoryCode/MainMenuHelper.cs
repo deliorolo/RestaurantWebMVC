@@ -11,11 +11,11 @@ namespace RestaurantWeb.AccessoryCode
     {
         public static void PaySelectedSoldProducts(List<ISoldProductModel> fullList, int[] Paid, ISoldProductDataAccess soldProductData, ISoldProductAccomplishedDataAccess soldProductAccomplishedData)
         {
-            List<ISoldProductModel> sold = ObjectCreator.ISoldProductModelList();
+            List<ISoldProductModel> sold = Factory.InstanceISoldProductModelList();
 
             foreach (int item in Paid)
             {
-                ISoldProductModel product = ObjectCreator.SoldProductModel();
+                ISoldProductModel product = Factory.InstanceSoldProductModel();
                 product = fullList[item];
 
                 ISoldProductAccomplishedModel auxProduct = MappingObjects.SoldProductToSoldProductAccomplished(product);

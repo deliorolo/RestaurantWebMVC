@@ -10,7 +10,7 @@ namespace RestaurantWeb.InternalServices
 {
     public class SalleDataAccess : ISalleDataAccess
     {
-        private RestaurantContext db = ObjectCreator.RestaurantContext();
+        private RestaurantContext db = Factory.InstanceRestaurantContext();
 
         public void EraseDataFromSalleList()
         {
@@ -21,18 +21,18 @@ namespace RestaurantWeb.InternalServices
 
         public List<ISalleModel> GetSalleList()
         {
-            List<ISalleModel> salles = ObjectCreator.ISalleModelList();
+            List<ISalleModel> salles = Factory.InstanceISalleModelList();
             List<SoldProductAccomplished> products = db.SoldProductsAccomplished.ToList();
 
             foreach (SoldProductAccomplished product in products)
             {
-                ISalleModel salleAux = ObjectCreator.SalleModel();
+                ISalleModel salleAux = Factory.InstanceSalleModel();
 
                 salleAux = salles.Where(x => x.Name == product.Name && x.CategoryName == product.Category.Name).FirstOrDefault();
 
                 if (salleAux == null)
                 {
-                    ISalleModel salle = ObjectCreator.SalleModel();
+                    ISalleModel salle = Factory.InstanceSalleModel();
 
                     salle.Name = product.Name;
                     salle.CategoryName = product.Category.Name;

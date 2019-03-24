@@ -14,8 +14,8 @@ namespace RestaurantWeb.Controllers
     [Authorize(Roles = "admin")]
     public class ProductsController : Controller
     {
-        private IDataAccessSubCategory<IProductModel> productData = ObjectCreator.ProductDataAccess();
-        private IDataAccessRegular<ICategoryModel> categoryData = ObjectCreator.CategoryDataAccess();
+        private IDataAccessSubCategory<IProductModel> productData = Factory.InstanceProductDataAccess();
+        private IDataAccessRegular<ICategoryModel> categoryData = Factory.InstanceCategoryDataAccess();
 
         public ActionResult Index()
         {

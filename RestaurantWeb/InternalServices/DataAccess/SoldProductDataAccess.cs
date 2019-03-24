@@ -10,7 +10,7 @@ namespace RestaurantWeb.InternalServices
 {
     public class SoldProductDataAccess : ISoldProductDataAccess
     {
-        private RestaurantContext db = ObjectCreator.RestaurantContext();
+        private RestaurantContext db = Factory.InstanceRestaurantContext();
 
         public void Create(ISoldProductModel model)
         {
@@ -52,7 +52,7 @@ namespace RestaurantWeb.InternalServices
         public List<ISoldProductModel> GetAll()
         {
             List<SoldProduct> list = db.SoldProducts.ToList();
-            List<ISoldProductModel> modelList = ObjectCreator.ISoldProductModelList();
+            List<ISoldProductModel> modelList = Factory.InstanceISoldProductModelList();
 
             foreach (var item in list)
             {
@@ -65,7 +65,7 @@ namespace RestaurantWeb.InternalServices
         public List<ISoldProductModel> GetByTable(int id)
         {
             List<SoldProduct> list = db.SoldProducts.Where(x => x.TableID == id).ToList();
-            List<ISoldProductModel> modelList = ObjectCreator.ISoldProductModelList();
+            List<ISoldProductModel> modelList = Factory.InstanceISoldProductModelList();
 
             foreach (var item in list)
             {               
@@ -78,7 +78,7 @@ namespace RestaurantWeb.InternalServices
         public List<ISoldProductModel> GetByCategory(int id)
         {
             List<SoldProduct> list = db.SoldProducts.Where(x => x.CategoryID == id).ToList();
-            List<ISoldProductModel> modelList = ObjectCreator.ISoldProductModelList();
+            List<ISoldProductModel> modelList = Factory.InstanceISoldProductModelList();
 
             foreach (var item in list)
             {
@@ -100,7 +100,7 @@ namespace RestaurantWeb.InternalServices
 
         private ISoldProductModel MapTheSoldProductObject(SoldProduct item)
         {
-            ISoldProductModel model = ObjectCreator.SoldProductModel();
+            ISoldProductModel model = Factory.InstanceSoldProductModel();
 
             model.ID = item.ID;
             model.Name = item.Name;

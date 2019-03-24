@@ -10,7 +10,7 @@ namespace RestaurantWeb.AccessoryCode
     {
         public static ISoldProductModel ProductToSoldProduct(IProductModel product, int idTable)
         {
-            ISoldProductModel soldProduct = ObjectCreator.SoldProductModel();
+            ISoldProductModel soldProduct = Factory.InstanceSoldProductModel();
 
             soldProduct.Name = product.Name;
             soldProduct.Price = product.Price;
@@ -25,7 +25,7 @@ namespace RestaurantWeb.AccessoryCode
 
         public static ISoldProductAccomplishedModel SoldProductToSoldProductAccomplished(ISoldProductModel product)
         {
-            ISoldProductAccomplishedModel soldProductAccomplished = ObjectCreator.SoldProductAccomplishedModel();
+            ISoldProductAccomplishedModel soldProductAccomplished = Factory.InstanceSoldProductAccomplishedModel();
 
             soldProductAccomplished.Name = product.Name;
             soldProductAccomplished.CategoryID = product.CategoryID;

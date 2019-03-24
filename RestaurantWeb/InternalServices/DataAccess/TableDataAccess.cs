@@ -10,7 +10,7 @@ namespace RestaurantWeb.InternalServices
 {
     public class TableDataAccess : IDataAccessSubCategory<ITableModel>
     {
-        private RestaurantContext db = ObjectCreator.RestaurantContext();
+        private RestaurantContext db = Factory.InstanceRestaurantContext();
 
         public bool CheckIfAlreadyExist(string name)
         {
@@ -53,7 +53,7 @@ namespace RestaurantWeb.InternalServices
         public List<ITableModel> GetAll()
         {
             List<Table> list = db.Tables.ToList();
-            List<ITableModel> modelList = ObjectCreator.ITableModelList();
+            List<ITableModel> modelList = Factory.InstanceITableModelList();
 
             foreach (var item in list)
             {
@@ -66,7 +66,7 @@ namespace RestaurantWeb.InternalServices
         public List<ITableModel> GetBySubGroup(int id)
         {
             List<Table> list = db.Tables.Where(x => x.AreaID == id).ToList();
-            List<ITableModel> modelList = ObjectCreator.ITableModelList();
+            List<ITableModel> modelList = Factory.InstanceITableModelList();
 
             foreach (var item in list)
             {
@@ -89,7 +89,7 @@ namespace RestaurantWeb.InternalServices
 
         private ITableModel MapTheTableObject(Table item)
         {
-            ITableModel model = ObjectCreator.TableModel();
+            ITableModel model = Factory.InstanceTableModel();
 
             model.ID = item.ID;
             model.NumberOfTable = item.NumberOfTable;
@@ -100,7 +100,7 @@ namespace RestaurantWeb.InternalServices
 
             foreach (SoldProduct product in item.SoldProducts)
             {
-                ISoldProductModel soldProduct = ObjectCreator.SoldProductModel();
+                ISoldProductModel soldProduct = Factory.InstanceSoldProductModel();
 
                 soldProduct.ID = product.ID;
                 soldProduct.Name = product.Name;

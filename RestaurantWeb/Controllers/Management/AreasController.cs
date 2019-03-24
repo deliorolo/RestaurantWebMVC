@@ -14,8 +14,8 @@ namespace RestaurantWeb.Controllers
     [Authorize(Roles = "admin")]
     public class AreasController : Controller
     {
-        private IDataAccessRegular<IAreaModel> areaData = ObjectCreator.AreaDataAccess();
-        private IDataAccessSubCategory<ITableModel> tableData = ObjectCreator.TableDataAccess();
+        private IDataAccessRegular<IAreaModel> areaData = Factory.InstanceAreaDataAccess();
+        private IDataAccessSubCategory<ITableModel> tableData = Factory.InstanceTableDataAccess();
 
         public ActionResult Index()
         {

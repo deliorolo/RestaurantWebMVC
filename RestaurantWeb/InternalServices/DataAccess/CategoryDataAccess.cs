@@ -10,7 +10,7 @@ namespace RestaurantWeb.InternalServices
 {
     public class CategoryDataAccess : IDataAccessRegular<ICategoryModel>
     {
-        private RestaurantContext db = ObjectCreator.RestaurantContext();
+        private RestaurantContext db = Factory.InstanceRestaurantContext();
 
         public bool CheckIfAlreadyExist(string name)
         {
@@ -51,7 +51,7 @@ namespace RestaurantWeb.InternalServices
         public List<ICategoryModel> GetAll()
         {
             var list = db.Categories.ToList();
-            List<ICategoryModel> modelList = ObjectCreator.ICategoryModelList();
+            List<ICategoryModel> modelList = Factory.InstanceICategoryModelList();
 
             foreach (var item in list)
             {
@@ -71,7 +71,7 @@ namespace RestaurantWeb.InternalServices
 
         private ICategoryModel MapTheCategoryObject(Category item)
         {
-            ICategoryModel model = ObjectCreator.CategoryModel();
+            ICategoryModel model = Factory.InstanceCategoryModel();
 
             model.ID = item.ID;
             model.Name = item.Name;

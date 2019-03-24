@@ -26,7 +26,7 @@ namespace RestaurantWeb.Models
 
         [Required]
         [Display(Name = "Price (€)")]
-        [Range(0.05, 9999, ErrorMessage = "Please enter a valid price ex: 1.50")]
+        [Range(0.05, 9999, ErrorMessage = "Please enter a valid price ex: 1,50")]
         public decimal Price { get; set; }
     }
 }

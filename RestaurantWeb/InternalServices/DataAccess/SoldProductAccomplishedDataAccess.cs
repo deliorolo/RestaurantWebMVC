@@ -10,7 +10,7 @@ namespace RestaurantWeb.InternalServices
 {
     public class SoldProductAccomplishedDataAccess : ISoldProductAccomplishedDataAccess
     {
-        private RestaurantContext db = ObjectCreator.RestaurantContext();
+        private RestaurantContext db = Factory.InstanceRestaurantContext();
 
         public void Create(ISoldProductAccomplishedModel model)
         {
@@ -41,7 +41,7 @@ namespace RestaurantWeb.InternalServices
         public List<ISoldProductAccomplishedModel> GetAll()
         {
             List<SoldProductAccomplished> list = db.SoldProductsAccomplished.ToList();
-            List<ISoldProductAccomplishedModel> modelList = ObjectCreator.ISoldProductAccomplishedModelList();
+            List<ISoldProductAccomplishedModel> modelList = Factory.InstanceISoldProductAccomplishedModelList();
 
             foreach (var item in list)
             {
@@ -54,7 +54,7 @@ namespace RestaurantWeb.InternalServices
         public List<ISoldProductAccomplishedModel> GetByCategory(int id)
         {
             List<SoldProductAccomplished> list = db.SoldProductsAccomplished.Where(x => x.CategoryID == id).ToList();
-            List<ISoldProductAccomplishedModel> modelList = ObjectCreator.ISoldProductAccomplishedModelList();
+            List<ISoldProductAccomplishedModel> modelList = Factory.InstanceISoldProductAccomplishedModelList();
 
             foreach (var item in list)
             {
@@ -66,7 +66,7 @@ namespace RestaurantWeb.InternalServices
 
         private ISoldProductAccomplishedModel MapTheSoldProductAccomplishedObject(SoldProductAccomplished item)
         {
-            ISoldProductAccomplishedModel model = ObjectCreator.SoldProductAccomplishedModel();
+            ISoldProductAccomplishedModel model = Factory.InstanceSoldProductAccomplishedModel();
 
             model.ID = item.ID;
             model.Name = item.Name;

@@ -12,13 +12,13 @@ namespace RestaurantWeb.Controllers
 {
     public class SallesController : Controller
     {
-        private ISalleDataAccess salleData = ObjectCreator.SalleDataAccess();
-        private ISoldProductDataAccess soldProductsData = ObjectCreator.SoldProductDataAccess();
+        private ISalleDataAccess salleData = Factory.InstanceSalleDataAccess();
+        private ISoldProductDataAccess soldProductsData = Factory.InstanceSoldProductDataAccess();
 
         [Authorize]
         public ActionResult Menu(string order)
         {
-            List<ISalleModel> salles = ObjectCreator.ISalleModelList();
+            List<ISalleModel> salles = Factory.InstanceISalleModelList();
             salles = salleData.GetSalleList();
             switch (order)
             {
@@ -40,7 +40,7 @@ namespace RestaurantWeb.Controllers
         {
             if (soldProductsData.GetAll().Count < 1)
             {
-                List<ISalleModel> salles = ObjectCreator.ISalleModelList();
+                List<ISalleModel> salles = Factory.InstanceISalleModelList();
                 salles = salleData.GetSalleList();
 
                 DateTime time = DateTime.Now;

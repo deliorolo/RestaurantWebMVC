@@ -14,10 +14,10 @@ namespace RestaurantWeb.Controllers
     [Authorize(Roles = "admin")]
     public class CategoriesController : Controller
     {
-        private IDataAccessRegular<ICategoryModel> categoryData = ObjectCreator.CategoryDataAccess();
-        private IDataAccessSubCategory<IProductModel> productData = ObjectCreator.ProductDataAccess();
-        private ISoldProductDataAccess soldProductData = ObjectCreator.SoldProductDataAccess();
-        private ISoldProductAccomplishedDataAccess soldProductAccomplishedData = ObjectCreator.SoldProductAccomplishedDataAccess();
+        private IDataAccessRegular<ICategoryModel> categoryData = Factory.InstanceCategoryDataAccess();
+        private IDataAccessSubCategory<IProductModel> productData = Factory.InstanceProductDataAccess();
+        private ISoldProductDataAccess soldProductData = Factory.InstanceSoldProductDataAccess();
+        private ISoldProductAccomplishedDataAccess soldProductAccomplishedData = Factory.InstanceSoldProductAccomplishedDataAccess();
 
         public ActionResult Index()
         {

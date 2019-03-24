@@ -13,14 +13,14 @@ namespace RestaurantWeb.Controllers
     [Authorize]
     public class MainMenuController : Controller
     {
-        private IDataAccessSubCategory<IProductModel> productData = ObjectCreator.ProductDataAccess();
-        private IDataAccessRegular<ICategoryModel> categoryData = ObjectCreator.CategoryDataAccess();
-        private IDataAccessSubCategory<ITableModel> tableData = ObjectCreator.TableDataAccess();
-        private IDataAccessRegular<IAreaModel> areaData = ObjectCreator.AreaDataAccess();
-        private ISoldProductDataAccess soldProductData = ObjectCreator.SoldProductDataAccess();
-        private ISoldProductAccomplishedDataAccess soldProductAccomplishedData = ObjectCreator.SoldProductAccomplishedDataAccess();
+        private IDataAccessSubCategory<IProductModel> productData = Factory.InstanceProductDataAccess();
+        private IDataAccessRegular<ICategoryModel> categoryData = Factory.InstanceCategoryDataAccess();
+        private IDataAccessSubCategory<ITableModel> tableData = Factory.InstanceTableDataAccess();
+        private IDataAccessRegular<IAreaModel> areaData = Factory.InstanceAreaDataAccess();
+        private ISoldProductDataAccess soldProductData = Factory.InstanceSoldProductDataAccess();
+        private ISoldProductAccomplishedDataAccess soldProductAccomplishedData = Factory.InstanceSoldProductAccomplishedDataAccess();
 
-        private IMainPageModel mainPageModel = ObjectCreator.MainPageModel();
+        private IMainPageModel mainPageModel = Factory.InstanceMainPageModel();
 
         public ActionResult Tables()
         {
@@ -32,8 +32,8 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult TableCategories(int? id)
         {
-            ITableModel table = ObjectCreator.TableModel();
-            mainPageModel.Tables = ObjectCreator.ITableModelList();
+            ITableModel table = Factory.InstanceTableModel();
+            mainPageModel.Tables = Factory.InstanceITableModelList();
 
             mainPageModel.Categories = categoryData.GetAll();
             table = tableData.FindById((int)id);
@@ -44,8 +44,8 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult TableProducts(int? idTable, int? idCategory)
         {
-            ITableModel table = ObjectCreator.TableModel();
-            mainPageModel.Tables = ObjectCreator.ITableModelList();
+            ITableModel table = Factory.InstanceTableModel();
+            mainPageModel.Tables = Factory.InstanceITableModelList();
 
             table = tableData.FindById((int)idTable);
             mainPageModel.Tables.Add(table);
@@ -59,9 +59,9 @@ namespace RestaurantWeb.Controllers
         [HttpPost, ActionName("TableProducts")]
         public ActionResult TableAddProduct(int? idTable, int? idCategory, int? idProduct)
         {
-            ITableModel table = ObjectCreator.TableModel();
-            IProductModel product = ObjectCreator.ProductModel();           
-            mainPageModel.Tables = ObjectCreator.ITableModelList();
+            ITableModel table = Factory.InstanceTableModel();
+            IProductModel product = Factory.InstanceProductModel();           
+            mainPageModel.Tables = Factory.InstanceITableModelList();
 
             table = tableData.FindById((int)idTable);
             product = productData.FindById((int)idProduct);
@@ -82,7 +82,7 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult PayAll(int? id)
         {
-            ITableModel table = ObjectCreator.TableModel();
+            ITableModel table = Factory.InstanceTableModel();
             table = tableData.FindById((int)id);
 
             return View(table);
@@ -105,7 +105,7 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult PayPartial(int? id)
         {
-            ITableModel table = ObjectCreator.TableModel();
+            ITableModel table = Factory.InstanceTableModel();
             table = tableData.FindById((int)id);
 
             return View(table);
@@ -202,7 +202,6 @@ namespace RestaurantWeb.Controllers
         // Add Comments
         // check view bags
         // refactoring the code
-        // edit price with coma
         // add pages for errors
     }
 }
