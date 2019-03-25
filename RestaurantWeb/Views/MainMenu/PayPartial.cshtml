@@ -4,7 +4,7 @@
 
     var total = 0.00;
 
-    function test(item) {
+    function sum(item) {
         if (item.checked) {
             total += parseInt(item.id);
         } else {
@@ -44,7 +44,8 @@
             <th></th>
         </tr>
 
-        @{ int j = 0; decimal price;}
+        @{ int j = 0;
+           decimal price;}
         @foreach (var item in Model.SoldProducts)
         {
             <tr>
@@ -62,7 +63,7 @@
                 </td>
                 <td>
                     @{ price = item.Price * 100; }
-                    <input type="checkbox" value="@j" name="Paid" id="@price" onClick="test(this);"/>
+                    <input type="checkbox" value="@j" name="Paid" id="@price" onClick="sum(this);"/>
                 </td>
             </tr>
             j = j + 1;
