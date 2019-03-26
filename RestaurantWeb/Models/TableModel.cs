@@ -10,8 +10,13 @@ namespace RestaurantWeb.Models
     {
         public TableModel()
         {
-            Area = new AreaModel();
-            SoldProducts = new List<ISoldProductModel>();
+
+        }
+
+        public TableModel(IAreaModel area, List<ISoldProductModel> soldProducts)
+        {
+            Area = area;
+            SoldProducts = soldProducts;
         }
 
         public int ID { get; set; }

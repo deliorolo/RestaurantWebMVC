@@ -12,39 +12,39 @@ namespace RestaurantWeb.AccessoryCode
             return new RestaurantContext();
         }
 
-        public static AreaDataAccess InstanceAreaDataAccess()
+        public static IDataAccessRegular<IAreaModel> InstanceAreaDataAccess()
         {
-            return new AreaDataAccess();
+            return new AreaDataAccess(InstanceRestaurantContext());
         }
 
-        public static CategoryDataAccess InstanceCategoryDataAccess()
+        public static IDataAccessRegular<ICategoryModel> InstanceCategoryDataAccess()
         {
-            return new CategoryDataAccess();
+            return new CategoryDataAccess(InstanceRestaurantContext());
         }
 
-        public static TableDataAccess InstanceTableDataAccess()
+        public static IDataAccessSubCategory<ITableModel> InstanceTableDataAccess()
         {
-            return new TableDataAccess();
+            return new TableDataAccess(InstanceRestaurantContext());
         }
 
-        public static ProductDataAccess InstanceProductDataAccess()
+        public static IDataAccessSubCategory<IProductModel> InstanceProductDataAccess()
         {
-            return new ProductDataAccess();
+            return new ProductDataAccess(InstanceRestaurantContext());
         }
 
-        public static SoldProductDataAccess InstanceSoldProductDataAccess()
+        public static ISoldProductDataAccess InstanceSoldProductDataAccess()
         {
-            return new SoldProductDataAccess();
+            return new SoldProductDataAccess(InstanceRestaurantContext());
         }
 
-        public static SoldProductAccomplishedDataAccess InstanceSoldProductAccomplishedDataAccess()
+        public static ISoldProductAccomplishedDataAccess InstanceSoldProductAccomplishedDataAccess()
         {
-            return new SoldProductAccomplishedDataAccess();
+            return new SoldProductAccomplishedDataAccess(InstanceRestaurantContext());
         }
 
-        public static SalleDataAccess InstanceSalleDataAccess()
+        public static ISalleDataAccess InstanceSalleDataAccess()
         {
-            return new SalleDataAccess();
+            return new SalleDataAccess(InstanceRestaurantContext());
         }
 
         public static List<ISalleModel> InstanceISalleModelList()
@@ -82,44 +82,44 @@ namespace RestaurantWeb.AccessoryCode
             return new List<ISoldProductAccomplishedModel>();
         }
 
-        public static MainPageModel InstanceMainPageModel()
+        public static IMainPageModel InstanceMainPageModel()
         {
-            return new MainPageModel();
+            return new MainPageModel(InstanceIAreaModelList(), InstanceITableModelList(), InstanceICategoryModelList(), InstanceIProductModelList());
         }
 
-        public static TableModel InstanceTableModel()
+        public static ITableModel InstanceTableModel()
         {
-            return new TableModel();
+            return new TableModel(InstanceAreaModel(), InstanceISoldProductModelList());
         }
 
-        public static ProductModel InstanceProductModel()
+        public static IProductModel InstanceProductModel()
         {
-            return new ProductModel();
+            return new ProductModel(InstanceCategoryModel());
         }
 
-        public static AreaModel InstanceAreaModel()
+        public static IAreaModel InstanceAreaModel()
         {
             return new AreaModel();
         }
 
-        public static CategoryModel InstanceCategoryModel()
+        public static ICategoryModel InstanceCategoryModel()
         {
             return new CategoryModel();
         }
 
-        public static SalleModel InstanceSalleModel()
+        public static ISalleModel InstanceSalleModel()
         {
             return new SalleModel();
         }
 
-        public static SoldProductModel InstanceSoldProductModel()
+        public static ISoldProductModel InstanceSoldProductModel()
         {
-            return new SoldProductModel();
+            return new SoldProductModel(InstanceCategoryModel(), InstanceTableModel());
         }
 
-        public static SoldProductAccomplishedModel InstanceSoldProductAccomplishedModel()
+        public static ISoldProductAccomplishedModel InstanceSoldProductAccomplishedModel()
         {
-            return new SoldProductAccomplishedModel();
+            return new SoldProductAccomplishedModel(InstanceCategoryModel());
         }
     }
 }

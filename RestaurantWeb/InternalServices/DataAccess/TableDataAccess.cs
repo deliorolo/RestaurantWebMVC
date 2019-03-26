@@ -10,13 +10,18 @@ namespace RestaurantWeb.InternalServices
 {
     public class TableDataAccess : IDataAccessSubCategory<ITableModel>
     {
-        private RestaurantContext db = Factory.InstanceRestaurantContext();
+        private RestaurantContext _db;
+
+        public TableDataAccess(RestaurantContext db)
+        {
+            _db = db;
+        }
 
         public bool CheckIfAlreadyExist(string name)
         {
             bool exists = false;
 
-            if (db.Tables.Where(x => x.NumberOfTable.ToString() == name).FirstOrDefault() != null)
+            if (_db.Tables.Where(x => x.NumberOfTable.ToString() == name).FirstOrDefault() != null)
             {
                 exists = true;
             }
@@ -31,20 +36,20 @@ namespace RestaurantWeb.InternalServices
             item.NumberOfTable = model.NumberOfTable;
             item.AreaID = model.AreaID;
             item.Occupied = false;
-            db.Tables.Add(item);
-            db.SaveChanges();
+            _db.Tables.Add(item);
+            _db.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var item = db.Tables.Find(id);
-            db.Tables.Remove(item);
-            db.SaveChanges();
+            var item = _db.Tables.Find(id);
+            _db.Tables.Remove(item);
+            _db.SaveChanges();
         }
 
         public ITableModel FindById(int id)
         {
-            Table item = db.Tables.Find(id);
+            Table item = _db.Tables.Find(id);
             ITableModel model = MapTheTableObject(item);
 
             return model;
@@ -52,7 +57,7 @@ namespace RestaurantWeb.InternalServices
 
         public List<ITableModel> GetAll()
         {
-            List<Table> list = db.Tables.ToList();
+            List<Table> list = _db.Tables.ToList();
             List<ITableModel> modelList = Factory.InstanceITableModelList();
 
             foreach (var item in list)
@@ -65,7 +70,7 @@ namespace RestaurantWeb.InternalServices
 
         public List<ITableModel> GetBySubGroup(int id)
         {
-            List<Table> list = db.Tables.Where(x => x.AreaID == id).ToList();
+            List<Table> list = _db.Tables.Where(x => x.AreaID == id).ToList();
             List<ITableModel> modelList = Factory.InstanceITableModelList();
 
             foreach (var item in list)
@@ -78,13 +83,13 @@ namespace RestaurantWeb.InternalServices
 
         public void Update(ITableModel model)
         {
-            var item = db.Tables.Find(model.ID);
+            var item = _db.Tables.Find(model.ID);
 
             item.NumberOfTable = model.NumberOfTable;
             item.AreaID = model.AreaID;
             item.Occupied = model.Occupied;
 
-            db.SaveChanges();
+            _db.SaveChanges();
         }
 
         private ITableModel MapTheTableObject(Table item)

@@ -9,7 +9,12 @@ namespace RestaurantWeb.Models
     {
         public SoldProductAccomplishedModel()
         {
-            Category = new CategoryModel();
+
+        }
+
+        public SoldProductAccomplishedModel(ICategoryModel category)
+        {
+            Category = category;
         }
 
         public int ID { get; set; }

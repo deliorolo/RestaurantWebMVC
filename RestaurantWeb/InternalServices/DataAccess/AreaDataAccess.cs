@@ -11,13 +11,18 @@ namespace RestaurantWeb.InternalServices
 {
     public class AreaDataAccess : IDataAccessRegular<IAreaModel>
     {
-        private RestaurantContext db = Factory.InstanceRestaurantContext();
+        private RestaurantContext _db;
+
+        public AreaDataAccess(RestaurantContext db)
+        {
+            _db = db;
+        }
 
         public bool CheckIfAlreadyExist(string name)
         {
             bool exists = false;
 
-            if (db.Areas.Where(x => x.Name == name).FirstOrDefault() != null)
+            if (_db.Areas.Where(x => x.Name == name).FirstOrDefault() != null)
             {
                 exists = true;
             }
@@ -30,20 +35,20 @@ namespace RestaurantWeb.InternalServices
             Area item = new Area();
 
             item.Name = model.Name;
-            db.Areas.Add(item);
-            db.SaveChanges();
+            _db.Areas.Add(item);
+            _db.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var item = db.Areas.Find(id);
-            db.Areas.Remove(item);
-            db.SaveChanges();
+            var item = _db.Areas.Find(id);
+            _db.Areas.Remove(item);
+            _db.SaveChanges();
         }
 
         public IAreaModel FindById(int id)
         {
-            Area item = db.Areas.Find(id);
+            Area item = _db.Areas.Find(id);
             IAreaModel model = MapTheAreaObject(item);
 
             return model;
@@ -51,7 +56,7 @@ namespace RestaurantWeb.InternalServices
 
         public List<IAreaModel> GetAll()
         {
-            List<Area> list = db.Areas.ToList();
+            List<Area> list = _db.Areas.ToList();
             List<IAreaModel> modelList = Factory.InstanceIAreaModelList();
 
             foreach (Area item in list)
@@ -64,10 +69,10 @@ namespace RestaurantWeb.InternalServices
 
         public void Update(IAreaModel model)
         {
-            var item = db.Areas.Find(model.ID);
+            var item = _db.Areas.Find(model.ID);
 
             item.Name = model.Name;
-            db.SaveChanges();
+            _db.SaveChanges();
         }
 
         private IAreaModel MapTheAreaObject(Area item)

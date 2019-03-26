@@ -85,14 +85,5 @@ namespace RestaurantWeb.Controllers
 
             return View(tableData.GetBySubGroup((int)id));
         }
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }

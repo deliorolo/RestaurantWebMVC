@@ -10,13 +10,18 @@ namespace RestaurantWeb.InternalServices
 {
     public class CategoryDataAccess : IDataAccessRegular<ICategoryModel>
     {
-        private RestaurantContext db = Factory.InstanceRestaurantContext();
+        private RestaurantContext _db;
+
+        public CategoryDataAccess(RestaurantContext db)
+        {
+            _db = db;
+        }
 
         public bool CheckIfAlreadyExist(string name)
         {
             bool exists = false;
 
-            if (db.Categories.Where(x => x.Name == name).FirstOrDefault() != null)
+            if (_db.Categories.Where(x => x.Name == name).FirstOrDefault() != null)
             {
                 exists = true;
             }
@@ -29,20 +34,20 @@ namespace RestaurantWeb.InternalServices
             Category item = new Category();
 
             item.Name = model.Name;
-            db.Categories.Add(item);
-            db.SaveChanges();
+            _db.Categories.Add(item);
+            _db.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var item = db.Categories.Find(id);
-            db.Categories.Remove(item);
-            db.SaveChanges();
+            var item = _db.Categories.Find(id);
+            _db.Categories.Remove(item);
+            _db.SaveChanges();
         }
 
         public ICategoryModel FindById(int id)
         {
-            var item = db.Categories.Find(id);
+            var item = _db.Categories.Find(id);
             ICategoryModel model = MapTheCategoryObject(item);
 
             return model;
@@ -50,7 +55,7 @@ namespace RestaurantWeb.InternalServices
 
         public List<ICategoryModel> GetAll()
         {
-            var list = db.Categories.ToList();
+            var list = _db.Categories.ToList();
             List<ICategoryModel> modelList = Factory.InstanceICategoryModelList();
 
             foreach (var item in list)
@@ -63,10 +68,10 @@ namespace RestaurantWeb.InternalServices
 
         public void Update(ICategoryModel model)
         {
-            var item = db.Categories.Find(model.ID);
+            var item = _db.Categories.Find(model.ID);
 
             item.Name = model.Name;
-            db.SaveChanges();
+            _db.SaveChanges();
         }
 
         private ICategoryModel MapTheCategoryObject(Category item)

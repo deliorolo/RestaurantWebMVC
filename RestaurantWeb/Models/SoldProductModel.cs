@@ -8,11 +8,15 @@ namespace RestaurantWeb.Models
 {
     public class SoldProductModel : ISoldProductModel
     {
-
         public SoldProductModel()
         {
-            Category = new CategoryModel();
-            Table = new TableModel();
+
+        }
+
+        public SoldProductModel(ICategoryModel category, ITableModel table)
+        {
+            Category = category;
+            Table = table;
         }
 
         public int ID { get; set; }

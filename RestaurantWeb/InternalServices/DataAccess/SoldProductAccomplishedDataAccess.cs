@@ -10,7 +10,12 @@ namespace RestaurantWeb.InternalServices
 {
     public class SoldProductAccomplishedDataAccess : ISoldProductAccomplishedDataAccess
     {
-        private RestaurantContext db = Factory.InstanceRestaurantContext();
+        private RestaurantContext _db;
+
+        public SoldProductAccomplishedDataAccess(RestaurantContext db)
+        {
+            _db = db;
+        }
 
         public void Create(ISoldProductAccomplishedModel model)
         {
@@ -19,20 +24,20 @@ namespace RestaurantWeb.InternalServices
             item.Name = model.Name;
             item.CategoryID = model.CategoryID;
             item.Price = model.Price;
-            db.SoldProductsAccomplished.Add(item);
-            db.SaveChanges();
+            _db.SoldProductsAccomplished.Add(item);
+            _db.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var item = db.SoldProductsAccomplished.Find(id);
-            db.SoldProductsAccomplished.Remove(item);
-            db.SaveChanges();
+            var item = _db.SoldProductsAccomplished.Find(id);
+            _db.SoldProductsAccomplished.Remove(item);
+            _db.SaveChanges();
         }
 
         public ISoldProductAccomplishedModel FindById(int id)
         {
-            SoldProductAccomplished item = db.SoldProductsAccomplished.Find(id);
+            SoldProductAccomplished item = _db.SoldProductsAccomplished.Find(id);
             ISoldProductAccomplishedModel model = MapTheSoldProductAccomplishedObject(item);
 
             return model;
@@ -40,7 +45,7 @@ namespace RestaurantWeb.InternalServices
 
         public List<ISoldProductAccomplishedModel> GetAll()
         {
-            List<SoldProductAccomplished> list = db.SoldProductsAccomplished.ToList();
+            List<SoldProductAccomplished> list = _db.SoldProductsAccomplished.ToList();
             List<ISoldProductAccomplishedModel> modelList = Factory.InstanceISoldProductAccomplishedModelList();
 
             foreach (var item in list)
@@ -53,7 +58,7 @@ namespace RestaurantWeb.InternalServices
 
         public List<ISoldProductAccomplishedModel> GetByCategory(int id)
         {
-            List<SoldProductAccomplished> list = db.SoldProductsAccomplished.Where(x => x.CategoryID == id).ToList();
+            List<SoldProductAccomplished> list = _db.SoldProductsAccomplished.Where(x => x.CategoryID == id).ToList();
             List<ISoldProductAccomplishedModel> modelList = Factory.InstanceISoldProductAccomplishedModelList();
 
             foreach (var item in list)

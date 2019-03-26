@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 
 namespace RestaurantWeb.Models.EF
 {
-    public class RestaurantContext: DbContext
+    public class RestaurantContext : DbContext
     {
         public RestaurantContext() : base("DefaultConnection")
         {

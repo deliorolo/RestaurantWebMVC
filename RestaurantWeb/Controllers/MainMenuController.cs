@@ -31,7 +31,6 @@ namespace RestaurantWeb.Controllers
         public ActionResult TableCategories(int? id)
         {
             ITableModel table = Factory.InstanceTableModel();
-            mainPageModel.Tables = Factory.InstanceITableModelList();
 
             mainPageModel.Categories = categoryData.GetAll();
             table = tableData.FindById((int)id);
@@ -43,7 +42,6 @@ namespace RestaurantWeb.Controllers
         public ActionResult TableProducts(int? idTable, int? idCategory)
         {
             ITableModel table = Factory.InstanceTableModel();
-            mainPageModel.Tables = Factory.InstanceITableModelList();
 
             table = tableData.FindById((int)idTable);
             mainPageModel.Tables.Add(table);
@@ -59,7 +57,6 @@ namespace RestaurantWeb.Controllers
         {
             ITableModel table = Factory.InstanceTableModel();
             IProductModel product = Factory.InstanceProductModel();           
-            mainPageModel.Tables = Factory.InstanceITableModelList();
 
             table = tableData.FindById((int)idTable);
             product = productData.FindById((int)idProduct);
@@ -201,5 +198,6 @@ namespace RestaurantWeb.Controllers
         // check view bags
         // refactoring the code
         // add pages for errors
+        // unit testing
     }
 }

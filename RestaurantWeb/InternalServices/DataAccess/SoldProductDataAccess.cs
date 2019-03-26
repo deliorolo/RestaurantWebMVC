@@ -10,7 +10,12 @@ namespace RestaurantWeb.InternalServices
 {
     public class SoldProductDataAccess : ISoldProductDataAccess
     {
-        private RestaurantContext db = Factory.InstanceRestaurantContext();
+        private RestaurantContext _db;
+
+        public SoldProductDataAccess(RestaurantContext db)
+        {
+            _db = db;
+        }
 
         public void Create(ISoldProductModel model)
         {
@@ -22,15 +27,15 @@ namespace RestaurantWeb.InternalServices
             item.Price = model.Price;
             item.Detail = model.Detail;
 
-            db.SoldProducts.Add(item);
-            db.SaveChanges();
+            _db.SoldProducts.Add(item);
+            _db.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var item = db.SoldProducts.Find(id);
-            db.SoldProducts.Remove(item);
-            db.SaveChanges();
+            var item = _db.SoldProducts.Find(id);
+            _db.SoldProducts.Remove(item);
+            _db.SaveChanges();
         }
 
         public void DeleteList(List<ISoldProductModel> list)
@@ -43,7 +48,7 @@ namespace RestaurantWeb.InternalServices
 
         public ISoldProductModel FindById(int id)
         {
-            SoldProduct item = db.SoldProducts.Find(id);
+            SoldProduct item = _db.SoldProducts.Find(id);
             ISoldProductModel model = MapTheSoldProductObject(item);
 
             return model;
@@ -51,7 +56,7 @@ namespace RestaurantWeb.InternalServices
 
         public List<ISoldProductModel> GetAll()
         {
-            List<SoldProduct> list = db.SoldProducts.ToList();
+            List<SoldProduct> list = _db.SoldProducts.ToList();
             List<ISoldProductModel> modelList = Factory.InstanceISoldProductModelList();
 
             foreach (var item in list)
@@ -64,7 +69,7 @@ namespace RestaurantWeb.InternalServices
 
         public List<ISoldProductModel> GetByTable(int id)
         {
-            List<SoldProduct> list = db.SoldProducts.Where(x => x.TableID == id).ToList();
+            List<SoldProduct> list = _db.SoldProducts.Where(x => x.TableID == id).ToList();
             List<ISoldProductModel> modelList = Factory.InstanceISoldProductModelList();
 
             foreach (var item in list)
@@ -77,7 +82,7 @@ namespace RestaurantWeb.InternalServices
 
         public List<ISoldProductModel> GetByCategory(int id)
         {
-            List<SoldProduct> list = db.SoldProducts.Where(x => x.CategoryID == id).ToList();
+            List<SoldProduct> list = _db.SoldProducts.Where(x => x.CategoryID == id).ToList();
             List<ISoldProductModel> modelList = Factory.InstanceISoldProductModelList();
 
             foreach (var item in list)
@@ -90,12 +95,12 @@ namespace RestaurantWeb.InternalServices
 
         public void Update(ISoldProductModel model)
         {
-            var item = db.SoldProducts.Find(model.ID);
+            var item = _db.SoldProducts.Find(model.ID);
 
             item.Price = model.Price;
             item.Detail = model.Detail;
 
-            db.SaveChanges();
+            _db.SaveChanges();
         }
 
         private ISoldProductModel MapTheSoldProductObject(SoldProduct item)
@@ -106,7 +111,7 @@ namespace RestaurantWeb.InternalServices
             model.Name = item.Name;
             model.CategoryID = item.CategoryID;
             model.Category.ID = item.CategoryID;
-            model.Category.Name = db.Categories.Where(x => x.ID == item.CategoryID).FirstOrDefault().Name;
+            model.Category.Name = _db.Categories.Where(x => x.ID == item.CategoryID).FirstOrDefault().Name;
             model.TableID = item.TableID;
             model.Table.ID = item.TableID;
             model.Price = item.Price;
