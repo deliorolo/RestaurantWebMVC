@@ -217,13 +217,11 @@ C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\EntityFramework
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.csproj.GenerateResource.cache
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.csproj.CoreCompileInputs.cache
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.csproj.CopyComplete
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.dll
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.pdb
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.csprojAssemblyReference.cache
-C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\RestaurantWeb.Migrations.201903071013388_InitialCreate.resources
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\CodeLibrary.dll
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\CodeLibrary.pdb
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\CodeLibrary.dll.config

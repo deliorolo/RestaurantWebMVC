@@ -167,10 +167,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccessoryCode\FilesDownload.cs" />
-    <Compile Include="AccessoryCode\MainMenuHelper.cs" />
-    <Compile Include="AccessoryCode\MappingObjects.cs" />
-    <Compile Include="AccessoryCode\Factory.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -188,52 +184,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903071013388_InitialCreate.cs" />
-    <Compile Include="Migrations\201903071013388_InitialCreate.Designer.cs">
-      <DependentUpon>201903071013388_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelBinder.cs" />
-    <Compile Include="Models\AreaModel.cs" />
-    <Compile Include="Models\CategoryModel.cs" />
-    <Compile Include="Models\EF\RestaurantContext.cs" />
-    <Compile Include="Models\EF\SoldProduct.cs" />
-    <Compile Include="Models\EF\SoldProductAccomplished.cs" />
-    <Compile Include="Models\IAreaModel.cs" />
-    <Compile Include="Models\ICategoryModel.cs" />
-    <Compile Include="Models\IMainPageModel.cs" />
-    <Compile Include="Models\IProductModel.cs" />
-    <Compile Include="Models\ISalleModel.cs" />
-    <Compile Include="Models\ISoldProductAccomplishedModel.cs" />
-    <Compile Include="Models\ISoldProductModel.cs" />
-    <Compile Include="Models\ITableModel.cs" />
-    <Compile Include="Models\MainPageModel.cs" />
-    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\Registration\AccountViewModels.cs" />
-    <Compile Include="Models\EF\Area.cs" />
-    <Compile Include="Models\EF\Category.cs" />
     <Compile Include="Models\Registration\IdentityModels.cs" />
     <Compile Include="Models\Registration\ManageViewModels.cs" />
-    <Compile Include="Models\EF\Product.cs" />
-    <Compile Include="Models\EF\Table.cs" />
-    <Compile Include="Models\SalleModel.cs" />
-    <Compile Include="Models\SoldProductAccomplishedModel.cs" />
-    <Compile Include="Models\SoldProductModel.cs" />
-    <Compile Include="Models\TableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="InternalServices\DataAccess\AreaDataAccess.cs" />
-    <Compile Include="InternalServices\DataAccess\CategoryDataAccess.cs" />
-    <Compile Include="InternalServices\DataAccess\IDataAccessRegular.cs" />
-    <Compile Include="InternalServices\DataAccess\IDataAccessSubCategory.cs" />
-    <Compile Include="InternalServices\DataAccess\ISalleDataAccess.cs" />
-    <Compile Include="InternalServices\DataAccess\ISoldProductAccomplishedDataAccess.cs" />
-    <Compile Include="InternalServices\DataAccess\ISoldProductDataAccess.cs" />
-    <Compile Include="InternalServices\DataAccess\ProductDataAccess.cs" />
-    <Compile Include="InternalServices\DataAccess\SoldProductAccomplishedDataAccess.cs" />
-    <Compile Include="AccessoryCode\ReadWriteFiles.cs" />
-    <Compile Include="InternalServices\DataAccess\SalleDataAccess.cs" />
-    <Compile Include="InternalServices\DataAccess\SoldProductDataAccess.cs" />
-    <Compile Include="InternalServices\DataAccess\TableDataAccess.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -379,11 +334,6 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903071013388_InitialCreate.resx">
-      <DependentUpon>201903071013388_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
