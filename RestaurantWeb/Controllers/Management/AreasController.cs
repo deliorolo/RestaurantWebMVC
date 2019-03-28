@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using CodeLibrary.AccessoryCode;
+using CodeLibrary.EntityFramework.DataAccess;
+using CodeLibrary.ModelsMVC;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using RestaurantWeb.AccessoryCode;
-using RestaurantWeb.Models;
-using RestaurantWeb.InternalServices;
+//using RestaurantWeb.AccessoryCode;
+//using RestaurantWeb.Models;
+//using RestaurantWeb.InternalServices;
 
 namespace RestaurantWeb.Controllers
 {

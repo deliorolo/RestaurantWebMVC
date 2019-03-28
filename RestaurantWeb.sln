@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantWeb", "RestaurantWeb\RestaurantWeb.csproj", "{728C312E-EE53-4287-AD1E-E369AD8A03A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiRestaurantDataAccess", "WebApiRestaurantDataAccess\WebApiRestaurantDataAccess.csproj", "{DB18E3D5-0445-4693-98D8-F68C773E2767}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeLibrary", "CodeLibrary\CodeLibrary.csproj", "{3149025B-7006-426E-937B-6DD8A2B4284C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{728C312E-EE53-4287-AD1E-E369AD8A03A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{728C312E-EE53-4287-AD1E-E369AD8A03A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{728C312E-EE53-4287-AD1E-E369AD8A03A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB18E3D5-0445-4693-98D8-F68C773E2767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB18E3D5-0445-4693-98D8-F68C773E2767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB18E3D5-0445-4693-98D8-F68C773E2767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB18E3D5-0445-4693-98D8-F68C773E2767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3149025B-7006-426E-937B-6DD8A2B4284C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3149025B-7006-426E-937B-6DD8A2B4284C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3149025B-7006-426E-937B-6DD8A2B4284C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3149025B-7006-426E-937B-6DD8A2B4284C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

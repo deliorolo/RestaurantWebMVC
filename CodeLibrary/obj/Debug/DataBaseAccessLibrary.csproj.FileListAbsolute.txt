@@ -1,0 +1,14 @@
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\DataBaseAccessLibrary\bin\Debug\DataBaseAccessLibrary.dll.config
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\DataBaseAccessLibrary\bin\Debug\DataBaseAccessLibrary.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\DataBaseAccessLibrary\bin\Debug\DataBaseAccessLibrary.pdb
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\DataBaseAccessLibrary\bin\Debug\EntityFramework.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\DataBaseAccessLibrary\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\DataBaseAccessLibrary\bin\Debug\EntityFramework.xml
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\DataBaseAccessLibrary\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\DataBaseAccessLibrary\obj\Debug\DataBaseAccessLibrary.csprojAssemblyReference.cache
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\DataBaseAccessLibrary\obj\Debug\DataBaseAccessLibrary.Migrations.InitialCreate.resources
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\DataBaseAccessLibrary\obj\Debug\DataBaseAccessLibrary.csproj.GenerateResource.cache
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\DataBaseAccessLibrary\obj\Debug\DataBaseAccessLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\DataBaseAccessLibrary\obj\Debug\DataBaseAccessLibrary.csproj.CopyComplete
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\DataBaseAccessLibrary\obj\Debug\DataBaseAccessLibrary.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\DataBaseAccessLibrary\obj\Debug\DataBaseAccessLibrary.pdb
