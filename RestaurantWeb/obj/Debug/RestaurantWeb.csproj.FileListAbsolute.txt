@@ -225,3 +225,5 @@ C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\obj\Debug\Restauran
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\CodeLibrary.dll
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\CodeLibrary.pdb
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\CodeLibrary.dll.config
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Net.Http.Formatting.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Net.Http.Formatting.xml

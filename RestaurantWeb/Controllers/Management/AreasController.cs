@@ -1,5 +1,5 @@
 ﻿using CodeLibrary.AccessoryCode;
-using CodeLibrary.EntityFramework.DataAccess;
+using CodeLibrary.DataAccess;
 using CodeLibrary.ModelsMVC;
 using System.Collections.Generic;
 using System.Linq;

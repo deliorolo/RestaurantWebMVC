@@ -1,8 +1,8 @@
-﻿//using RestaurantWeb.Models.EF;
-using CodeLibrary.EntityFramework;
+﻿using CodeLibrary.EntityFramework;
 using System.Collections.Generic;
 using CodeLibrary.ModelsMVC;
-using CodeLibrary.EntityFramework.DataAccess;
+using CodeLibrary.DataAccess;
+using CodeLibrary.DataAccess.WebAPIAccess;
 
 namespace CodeLibrary.AccessoryCode
 {

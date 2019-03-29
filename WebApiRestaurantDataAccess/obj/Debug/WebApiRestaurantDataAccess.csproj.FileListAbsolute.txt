@@ -84,3 +84,10 @@ C:\Users\Délio\Documents\GitHub\RestaurantWeb\WebApiRestaurantDataAccess\obj\De
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\WebApiRestaurantDataAccess\obj\Debug\WebApiRestaurantDataAccess.csproj.CopyComplete
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\WebApiRestaurantDataAccess\obj\Debug\WebApiRestaurantDataAccess.dll
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\WebApiRestaurantDataAccess\obj\Debug\WebApiRestaurantDataAccess.pdb
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\WebApiRestaurantDataAccess\bin\CodeLibrary.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\WebApiRestaurantDataAccess\bin\EntityFramework.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\WebApiRestaurantDataAccess\bin\CodeLibrary.pdb
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\WebApiRestaurantDataAccess\bin\CodeLibrary.dll.config
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\WebApiRestaurantDataAccess\bin\EntityFramework.xml
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\WebApiRestaurantDataAccess\bin\EntityFramework.SqlServer.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\WebApiRestaurantDataAccess\bin\EntityFramework.SqlServer.xml

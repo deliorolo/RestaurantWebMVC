@@ -37,9 +37,15 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,25 +59,27 @@
     <Compile Include="AccessoryCode\MainMenuHelper.cs" />
     <Compile Include="AccessoryCode\MappingObjects.cs" />
     <Compile Include="AccessoryCode\ReadWriteFiles.cs" />
-    <Compile Include="EntityFramework\DataAccess\AreaDataAccess.cs" />
-    <Compile Include="EntityFramework\DataAccess\CategoryDataAccess.cs" />
-    <Compile Include="EntityFramework\DataAccess\IDataAccessRegular.cs" />
-    <Compile Include="EntityFramework\DataAccess\IDataAccessSubCategory.cs" />
-    <Compile Include="EntityFramework\DataAccess\ISalleDataAccess.cs" />
-    <Compile Include="EntityFramework\DataAccess\ISoldProductAccomplishedDataAccess.cs" />
-    <Compile Include="EntityFramework\DataAccess\ISoldProductDataAccess.cs" />
-    <Compile Include="EntityFramework\DataAccess\ProductDataAccess.cs" />
-    <Compile Include="EntityFramework\DataAccess\SalleDataAccess.cs" />
-    <Compile Include="EntityFramework\DataAccess\SoldProductAccomplishedDataAccess.cs" />
-    <Compile Include="EntityFramework\DataAccess\SoldProductDataAccess.cs" />
-    <Compile Include="EntityFramework\DataAccess\TableDataAccess.cs" />
-    <Compile Include="EntityFramework\Models\Area.cs" />
-    <Compile Include="EntityFramework\Models\Category.cs" />
-    <Compile Include="EntityFramework\Models\Product.cs" />
-    <Compile Include="EntityFramework\RestaurantContext.cs" />
-    <Compile Include="EntityFramework\Models\SoldProduct.cs" />
-    <Compile Include="EntityFramework\Models\SoldProductAccomplished.cs" />
-    <Compile Include="EntityFramework\Models\Table.cs" />
+    <Compile Include="APIClientConfig.cs" />
+    <Compile Include="DataAccess\DirectAccess\AreaDataAccess.cs" />
+    <Compile Include="DataAccess\DirectAccess\CategoryDataAccess.cs" />
+    <Compile Include="DataAccess\Interfaces\IDataAccessRegular.cs" />
+    <Compile Include="DataAccess\Interfaces\IDataAccessSubCategory.cs" />
+    <Compile Include="DataAccess\Interfaces\ISalleDataAccess.cs" />
+    <Compile Include="DataAccess\Interfaces\ISoldProductAccomplishedDataAccess.cs" />
+    <Compile Include="DataAccess\Interfaces\ISoldProductDataAccess.cs" />
+    <Compile Include="DataAccess\DirectAccess\ProductDataAccess.cs" />
+    <Compile Include="DataAccess\DirectAccess\SalleDataAccess.cs" />
+    <Compile Include="DataAccess\DirectAccess\SoldProductAccomplishedDataAccess.cs" />
+    <Compile Include="DataAccess\DirectAccess\SoldProductDataAccess.cs" />
+    <Compile Include="DataAccess\DirectAccess\TableDataAccess.cs" />
+    <Compile Include="DataAccess\WebAPIAccess\AreaDataAccessWebAPI.cs" />
+    <Compile Include="DataAccess\EntityFramework\Models\Area.cs" />
+    <Compile Include="DataAccess\EntityFramework\Models\Category.cs" />
+    <Compile Include="DataAccess\EntityFramework\Models\Product.cs" />
+    <Compile Include="DataAccess\EntityFramework\RestaurantContext.cs" />
+    <Compile Include="DataAccess\EntityFramework\Models\SoldProduct.cs" />
+    <Compile Include="DataAccess\EntityFramework\Models\SoldProductAccomplished.cs" />
+    <Compile Include="DataAccess\EntityFramework\Models\Table.cs" />
     <Compile Include="Migrations\201903071013388_InitialCreate.cs" />
     <Compile Include="Migrations\201903071013388_InitialCreate.Designer.cs">
       <DependentUpon>201903071013388_InitialCreate.cs</DependentUpon>
@@ -97,7 +105,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
