@@ -13,6 +13,11 @@ namespace CodeLibrary.AccessoryCode
             return new RestaurantContext();
         }
 
+        public static IDataAccessRegular<IAreaModel> InstanceAreaDataAccessWebAPI()
+        {
+            return new AreaDataAccessWebAPI();
+        }
+
         public static IDataAccessRegular<IAreaModel> InstanceAreaDataAccess()
         {
             return new AreaDataAccess(InstanceRestaurantContext());

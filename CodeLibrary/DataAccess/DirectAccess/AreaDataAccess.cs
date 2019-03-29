@@ -30,9 +30,10 @@ namespace CodeLibrary.DataAccess
 
         public void Create(IAreaModel model)
         {
-            Area item = new Area();
-
-            item.Name = model.Name;
+            Area item = new Area()
+            {
+                Name = model.Name
+            };
             _db.Areas.Add(item);
             _db.SaveChanges();
         }

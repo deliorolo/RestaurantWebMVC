@@ -19,14 +19,14 @@ namespace WebApiRestaurantDataAccess.Controllers
         // GET: api/Areas/5
         public IAreaModel Get(int id)
         {
-            if (areaData.GetAll().Exists(x => x.ID == id))
-            {
-                return areaData.FindById(id);
-            }
-            else
-            {
-                return null;
-            }
+            //if (areaData.GetAll().Exists(x => x.ID == id))
+            //{
+            return areaData.FindById(id);
+            //}
+            //else
+            //{
+            //    return null;
+            //}
         }
 
         // POST: api/Areas

@@ -226,4 +226,10 @@ C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\CodeLibrary.dll
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\CodeLibrary.pdb
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\CodeLibrary.dll.config
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Net.Http.Formatting.dll
-C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Net.Http.Formatting.xml
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Net.Http.Extensions.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Net.Http.Primitives.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Net.Http.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Security.Cryptography.Algorithms.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Security.Cryptography.Encoding.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Security.Cryptography.Primitives.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Security.Cryptography.X509Certificates.dll

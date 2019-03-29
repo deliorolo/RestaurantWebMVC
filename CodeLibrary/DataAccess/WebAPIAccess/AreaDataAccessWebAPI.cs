@@ -9,7 +9,7 @@ namespace CodeLibrary.DataAccess.WebAPIAccess
 {
     class AreaDataAccessWebAPI : IDataAccessRegular<IAreaModel>
     {
-        public AreaDataAccessWebAPI(RestaurantContext db)
+        public AreaDataAccessWebAPI()
         {
 
         }
@@ -30,15 +30,14 @@ namespace CodeLibrary.DataAccess.WebAPIAccess
         }
 
         public IAreaModel FindById(int id)
-        {
-            //using (var response = APIClientConfig.ApiClient.GetAsync($"areas/{id}"))
-            using (var response = APIClientConfig.ApiClient.GetAsync($"http://localhost:60168/api/areas/2"))
+        {            
+            using (var response = APIClientConfig.ApiClient.GetAsync($"areas/{id}"))
             {
                 response.Wait();
 
                 if (response.Result.IsSuccessStatusCode)
                 {
-                    var readTask = response.Result.Content.ReadAsAsync<IAreaModel>();
+                    var readTask = response.Result.Content.ReadAsAsync<AreaModel>();
                     readTask.Wait();
 
                     IAreaModel model = readTask.Result;

@@ -30,4 +30,3 @@ C:\Users\Délio\Documents\GitHub\RestaurantWeb\CodeLibrary\bin\Debug\Newtonsoft.
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\CodeLibrary\bin\Debug\System.Net.Http.Formatting.dll
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\CodeLibrary\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\CodeLibrary\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Délio\Documents\GitHub\RestaurantWeb\CodeLibrary\bin\Debug\System.Net.Http.Formatting.xml
