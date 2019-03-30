@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CodeLibrary.AccessoryCode;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,8 +29,10 @@ namespace CodeLibrary.ModelsMVC
 
         public string Name { get; set; }
 
+        [JsonConverter(typeof(ConcreteConverter<CategoryModel>))]
         public ICategoryModel Category { get; set; }
 
+        [JsonConverter(typeof(ConcreteConverter<TableModel>))]
         public ITableModel Table { get; set; }
 
         [Required]

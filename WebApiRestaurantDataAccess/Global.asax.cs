@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeLibrary.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,6 +20,7 @@ namespace WebApiRestaurantDataAccess
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            TypeOfAccess.Access = Connection.Direct;
         }
     }
 }

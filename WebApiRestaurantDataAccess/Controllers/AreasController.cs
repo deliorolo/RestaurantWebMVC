@@ -19,29 +19,46 @@ namespace WebApiRestaurantDataAccess.Controllers
         // GET: api/Areas/5
         public IAreaModel Get(int id)
         {
-            //if (areaData.GetAll().Exists(x => x.ID == id))
-            //{
-            return areaData.FindById(id);
-            //}
-            //else
-            //{
-            //    return null;
-            //}
+            if (areaData.GetAll().Exists(x => x.ID == id))
+            {
+                return areaData.FindById(id);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         // POST: api/Areas
-        public void Post([FromBody]string value)
+        public void Post([FromBody]AreaModel area)
         {
+            if (ModelState.IsValid)
+            {
+                if (areaData.CheckIfAlreadyExist(area.Name) == false)
+                {
+                    IAreaModel model = area;
+                    areaData.Create(model);
+                }
+            }
         }
 
         // PUT: api/Areas/5
-        public void Put(int id, [FromBody]string value)
+        public void Put([FromBody]AreaModel area)
         {
+            if (ModelState.IsValid)
+            {
+                if (areaData.CheckIfAlreadyExist(area.Name) == false)
+                {
+                    IAreaModel model = area;
+                    areaData.Update(model);
+                }
+            }
         }
 
         // DELETE: api/Areas/5
         public void Delete(int id)
         {
+            areaData.Delete(id);
         }
     }
 }

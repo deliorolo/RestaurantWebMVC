@@ -13,29 +13,52 @@ namespace CodeLibrary.AccessoryCode
             return new RestaurantContext();
         }
 
-        public static IDataAccessRegular<IAreaModel> InstanceAreaDataAccessWebAPI()
-        {
-            return new AreaDataAccessWebAPI();
-        }
-
         public static IDataAccessRegular<IAreaModel> InstanceAreaDataAccess()
         {
-            return new AreaDataAccess(InstanceRestaurantContext());
+            if (TypeOfAccess.Access == Connection.WebApi)
+            {
+                return new AreaDataAccessWebAPI();
+            }
+            else
+            {
+                return new AreaDataAccess(InstanceRestaurantContext());
+            }               
         }
 
         public static IDataAccessRegular<ICategoryModel> InstanceCategoryDataAccess()
         {
-            return new CategoryDataAccess(InstanceRestaurantContext());
+            if (TypeOfAccess.Access == Connection.WebApi)
+            {
+                return new CategoryDataAccessWebAPI();
+            }
+            else
+            {
+                return new CategoryDataAccess(InstanceRestaurantContext());
+            }
         }
 
         public static IDataAccessSubCategory<ITableModel> InstanceTableDataAccess()
         {
-            return new TableDataAccess(InstanceRestaurantContext());
+            if (TypeOfAccess.Access == Connection.WebApi)
+            {
+                return new TableDataAccessWebAPI();
+            }
+            else
+            {
+                return new TableDataAccess(InstanceRestaurantContext());
+            }
         }
 
         public static IDataAccessSubCategory<IProductModel> InstanceProductDataAccess()
         {
-            return new ProductDataAccess(InstanceRestaurantContext());
+            if (TypeOfAccess.Access == Connection.WebApi)
+            {
+                return new ProductDataAccessWebAPI();
+            }
+            else
+            {
+                return new ProductDataAccess(InstanceRestaurantContext());
+            }
         }
 
         public static ISoldProductDataAccess InstanceSoldProductDataAccess()

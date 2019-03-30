@@ -1,8 +1,5 @@
 ﻿using CodeLibrary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using CodeLibrary.DataAccess;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -16,14 +13,19 @@ namespace RestaurantWeb
         {
             AreaRegistration.RegisterAllAreas();
 
+            TypeOfAccess.Access = Connection.Direct;
             ModelBinders.Binders.Add(typeof(decimal), new ModelBinder.DecimalModelBinder());
             ModelBinders.Binders.Add(typeof(decimal?), new ModelBinder.DecimalModelBinder());
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+           
+            if (TypeOfAccess.Access == Connection.WebApi)
+            {
+                APIClientConfig.InitializeClient();
+            }
 
-            APIClientConfig.InitializeClient();
         }
     }
 }

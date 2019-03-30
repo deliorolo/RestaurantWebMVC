@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CodeLibrary.AccessoryCode;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -28,10 +30,12 @@ namespace CodeLibrary.ModelsMVC
         [Range(1,999, ErrorMessage = "Maximum number of table is 99999")]
         public int NumberOfTable { get; set; }
 
+        [JsonConverter(typeof(ConcreteConverter<AreaModel>))]
         public IAreaModel Area { get; set; }
 
         public bool Occupied { get; set; } = false;
 
+        [JsonIgnore]
         public List<ISoldProductModel> SoldProducts { get; set; }
     }
 }

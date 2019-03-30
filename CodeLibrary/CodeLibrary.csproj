@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessoryCode\ConcreteConverter.cs" />
     <Compile Include="AccessoryCode\Factory.cs" />
     <Compile Include="AccessoryCode\FilesDownload.cs" />
     <Compile Include="AccessoryCode\MainMenuHelper.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="DataAccess\DirectAccess\SoldProductAccomplishedDataAccess.cs" />
     <Compile Include="DataAccess\DirectAccess\SoldProductDataAccess.cs" />
     <Compile Include="DataAccess\DirectAccess\TableDataAccess.cs" />
+    <Compile Include="DataAccess\TypeOfAccess.cs" />
     <Compile Include="DataAccess\WebAPIAccess\AreaDataAccessWebAPI.cs" />
     <Compile Include="DataAccess\EntityFramework\Models\Area.cs" />
     <Compile Include="DataAccess\EntityFramework\Models\Category.cs" />
@@ -78,6 +80,9 @@
     <Compile Include="DataAccess\EntityFramework\Models\SoldProduct.cs" />
     <Compile Include="DataAccess\EntityFramework\Models\SoldProductAccomplished.cs" />
     <Compile Include="DataAccess\EntityFramework\Models\Table.cs" />
+    <Compile Include="DataAccess\WebAPIAccess\CategoryDataAccessWebAPI.cs" />
+    <Compile Include="DataAccess\WebAPIAccess\ProductDataAccessWebAPI.cs" />
+    <Compile Include="DataAccess\WebAPIAccess\TableDataAccessWebAPI.cs" />
     <Compile Include="Migrations\201903071013388_InitialCreate.cs" />
     <Compile Include="Migrations\201903071013388_InitialCreate.Designer.cs">
       <DependentUpon>201903071013388_InitialCreate.cs</DependentUpon>

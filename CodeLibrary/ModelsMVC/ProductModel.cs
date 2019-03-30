@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CodeLibrary.AccessoryCode;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,6 +29,7 @@ namespace CodeLibrary.ModelsMVC
         [StringLength(20, ErrorMessage = "Maximum of 20 characters field")]
         public string Name { get; set; }
 
+        [JsonConverter(typeof(ConcreteConverter<CategoryModel>))]
         public ICategoryModel Category { get; set; }
 
         [Required]

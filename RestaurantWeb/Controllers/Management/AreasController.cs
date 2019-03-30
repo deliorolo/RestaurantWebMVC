@@ -11,7 +11,6 @@ namespace RestaurantWeb.Controllers
     [Authorize(Roles = "admin")]
     public class AreasController : Controller
     {
-        //private IDataAccessRegular<IAreaModel> areaData = Factory.InstanceAreaDataAccessWebAPI();
         private IDataAccessRegular<IAreaModel> areaData = Factory.InstanceAreaDataAccess();
         private IDataAccessSubCategory<ITableModel> tableData = Factory.InstanceTableDataAccess();
 
