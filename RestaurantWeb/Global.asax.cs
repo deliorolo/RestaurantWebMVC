@@ -14,6 +14,7 @@ namespace RestaurantWeb
             AreaRegistration.RegisterAllAreas();
 
             TypeOfAccess.Access = Connection.Direct;
+
             ModelBinders.Binders.Add(typeof(decimal), new ModelBinder.DecimalModelBinder());
             ModelBinders.Binders.Add(typeof(decimal?), new ModelBinder.DecimalModelBinder());
 
