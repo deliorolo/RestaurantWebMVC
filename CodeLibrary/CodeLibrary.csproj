@@ -82,6 +82,9 @@
     <Compile Include="DataAccess\EntityFramework\Models\Table.cs" />
     <Compile Include="DataAccess\WebAPIAccess\CategoryDataAccessWebAPI.cs" />
     <Compile Include="DataAccess\WebAPIAccess\ProductDataAccessWebAPI.cs" />
+    <Compile Include="DataAccess\WebAPIAccess\SalleDataAccessWebAPI.cs" />
+    <Compile Include="DataAccess\WebAPIAccess\SoldProductAccomplishedDataAccessWebAPI.cs" />
+    <Compile Include="DataAccess\WebAPIAccess\SoldProductDataAccessWebAPI.cs" />
     <Compile Include="DataAccess\WebAPIAccess\TableDataAccessWebAPI.cs" />
     <Compile Include="Migrations\201903071013388_InitialCreate.cs" />
     <Compile Include="Migrations\201903071013388_InitialCreate.Designer.cs">

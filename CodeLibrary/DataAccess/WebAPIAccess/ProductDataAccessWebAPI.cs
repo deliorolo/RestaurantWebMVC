@@ -1,4 +1,5 @@
-﻿using CodeLibrary.ModelsMVC;
+﻿using CodeLibrary.AccessoryCode;
+using CodeLibrary.ModelsMVC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,7 +106,7 @@ namespace CodeLibrary.DataAccess.WebAPIAccess
             {
                 return GetAll().Where(x => x.CategoryID == id).ToList();
             }
-            return null;
+            return Factory.InstanceIProductModelList();
         }
 
         public void Update(IProductModel model)

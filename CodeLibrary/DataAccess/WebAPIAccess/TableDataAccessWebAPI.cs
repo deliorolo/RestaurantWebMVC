@@ -69,6 +69,10 @@ namespace CodeLibrary.DataAccess.WebAPIAccess
                     readTask.Wait();
 
                     ITableModel model = readTask.Result;
+                    ISoldProductDataAccess soldProductData = Factory.InstanceSoldProductDataAccess();
+
+                    model.SoldProducts = soldProductData.GetByTable(id);
+
                     return model;
                 }
                 else
@@ -90,7 +94,14 @@ namespace CodeLibrary.DataAccess.WebAPIAccess
                     readTask.Wait();
 
                     List<ITableModel> model = readTask.Result.ToList<ITableModel>();
-                    //TODO add sold products to model
+
+                    ISoldProductDataAccess soldProductData = Factory.InstanceSoldProductDataAccess();
+
+                    foreach (ITableModel table in model)
+                    {
+                        table.SoldProducts = soldProductData.GetByTable(table.ID);
+                    }
+
                     return model;
                 }
                 else
@@ -106,7 +117,7 @@ namespace CodeLibrary.DataAccess.WebAPIAccess
             {
                 return GetAll().Where(x => x.AreaID == id).ToList();
             }
-            return null;
+            return Factory.InstanceITableModelList();
         }
 
         public void Update(ITableModel model)

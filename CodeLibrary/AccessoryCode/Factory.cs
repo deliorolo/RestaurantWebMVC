@@ -63,17 +63,38 @@ namespace CodeLibrary.AccessoryCode
 
         public static ISoldProductDataAccess InstanceSoldProductDataAccess()
         {
-            return new SoldProductDataAccess(InstanceRestaurantContext());
+            if (TypeOfAccess.Access == Connection.WebApi)
+            {
+                return new SoldProductDataAccessWebAPI();
+            }
+            else
+            {
+                return new SoldProductDataAccess(InstanceRestaurantContext());
+            }
         }
 
         public static ISoldProductAccomplishedDataAccess InstanceSoldProductAccomplishedDataAccess()
         {
-            return new SoldProductAccomplishedDataAccess(InstanceRestaurantContext());
+            if (TypeOfAccess.Access == Connection.WebApi)
+            {
+                return new SoldProductAccomplishedDataAccessWebAPI();
+            }
+            else
+            {
+                return new SoldProductAccomplishedDataAccess(InstanceRestaurantContext());
+            }
         }
 
         public static ISalleDataAccess InstanceSalleDataAccess()
         {
-            return new SalleDataAccess(InstanceRestaurantContext());
+            if (TypeOfAccess.Access == Connection.WebApi)
+            {
+                return new SalleDataAccessWebAPI();
+            }
+            else
+            {
+                return new SalleDataAccess(InstanceRestaurantContext());
+            }
         }
 
         public static List<ISalleModel> InstanceISalleModelList()

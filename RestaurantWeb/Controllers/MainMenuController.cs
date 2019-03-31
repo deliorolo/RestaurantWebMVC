@@ -199,5 +199,6 @@ namespace RestaurantWeb.Controllers
         // refactoring the code
         // add pages for errors
         // unit testing
+        // model validation soldproducts and soldproductsaccomplished
     }
 }
