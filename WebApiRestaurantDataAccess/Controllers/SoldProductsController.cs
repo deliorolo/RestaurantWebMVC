@@ -36,11 +36,11 @@ namespace WebApiRestaurantDataAccess.Controllers
         // POST: api/SoldProducts
         public void Post([FromBody]SoldProductModel product)
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 ISoldProductModel model = product;
                 soldProductData.Create(model);
-            //}
+            }
         }
 
         // PUT: api/SoldProducts/5

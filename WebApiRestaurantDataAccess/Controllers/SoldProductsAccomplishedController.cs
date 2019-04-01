@@ -36,22 +36,12 @@ namespace WebApiRestaurantDataAccess.Controllers
         // POST: api/SoldProductsAccomplished
         public void Post([FromBody]SoldProductAccomplishedModel product)
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 ISoldProductAccomplishedModel model = product;
                 soldProductAccomplishedData.Create(model);
-            //}
+            }
         }
-
-        // PUT: api/SoldProductsAccomplished/5
-        //public void Put([FromBody]SoldProductAccomplishedModel product)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        ISoldProductAccomplishedModel model = product;
-        //        soldProductAccomplishedData.Update(model);
-        //    }
-        //}
 
         // DELETE: api/SoldProductsAccomplished/5
         public void Delete(int id)

@@ -61,7 +61,7 @@ namespace RestaurantWeb.Controllers
             table = tableData.FindById((int)idTable);
             product = productData.FindById((int)idProduct);
 
-            ISoldProductModel soldProduct = MappingObjects.ProductToSoldProduct(product, (int)idTable);
+            ISoldProductModel soldProduct = MappingObjects.ProductToSoldProduct(product, (int)idTable, tableData);
 
             soldProductData.Create(soldProduct);
 
@@ -192,13 +192,11 @@ namespace RestaurantWeb.Controllers
 
         //TODO list
         // verify all buttons
-        // use sqlite
         // Change home controller views
         // Add Comments
         // check view bags
         // refactoring the code
         // add pages for errors
         // unit testing
-        // model validation soldproducts and soldproductsaccomplished
     }
 }

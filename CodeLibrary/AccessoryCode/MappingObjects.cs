@@ -1,10 +1,11 @@
-﻿using CodeLibrary.ModelsMVC;
+﻿using CodeLibrary.DataAccess;
+using CodeLibrary.ModelsMVC;
 
 namespace CodeLibrary.AccessoryCode
 {
     public static class MappingObjects
     {
-        public static ISoldProductModel ProductToSoldProduct(IProductModel product, int idTable)
+        public static ISoldProductModel ProductToSoldProduct(IProductModel product, int idTable, IDataAccessSubCategory<ITableModel> tableData)
         {
             ISoldProductModel soldProduct = Factory.InstanceSoldProductModel();
 
@@ -15,6 +16,7 @@ namespace CodeLibrary.AccessoryCode
             soldProduct.Detail = "";
             soldProduct.Category.ID = product.CategoryID;
             soldProduct.Category.Name = product.Category.Name;
+            soldProduct.Table = tableData.FindById(idTable);
 
             return soldProduct;
         }
@@ -26,6 +28,8 @@ namespace CodeLibrary.AccessoryCode
             soldProductAccomplished.Name = product.Name;
             soldProductAccomplished.CategoryID = product.CategoryID;
             soldProductAccomplished.Price = product.Price;
+            soldProductAccomplished.Category.ID = product.CategoryID;
+            soldProductAccomplished.Category.Name = product.Category.Name;
 
             return soldProductAccomplished;
         }
