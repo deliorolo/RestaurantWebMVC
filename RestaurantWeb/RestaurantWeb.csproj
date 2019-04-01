@@ -341,6 +341,22 @@
     <Content Include="Views\Tables\OpenedTable.cshtml" />
     <Content Include="Views\Areas\OpenedTable.cshtml" />
     <Content Include="Views\Categories\OpenedTables.cshtml" />
+    <Content Include="Views\Salles\ErrorDownload.cshtml" />
+    <Content Include="Views\Salles\ErrorWriteToFile.cshtml" />
+    <Content Include="Views\MainMenu\ErrorTable.cshtml" />
+    <Content Include="Views\MainMenu\ErrorRetriveData.cshtml" />
+    <Content Include="Views\MainMenu\ErrorCategory.cshtml" />
+    <Content Include="Views\MainMenu\ErrorAddProduct.cshtml" />
+    <Content Include="Views\MainMenu\ErrorDeleteProduct.cshtml" />
+    <Content Include="Views\Salles\NoSoldProducts.cshtml" />
+    <Content Include="Views\MainMenu\ErrorEditProduct.cshtml" />
+    <Content Include="Views\Areas\ErrorRetriveData.cshtml" />
+    <Content Include="Views\Categories\ErrorRetriveData.cshtml" />
+    <Content Include="Views\Products\ErrorRetriveData.cshtml" />
+    <Content Include="Views\Tables\ErrorRetriveData.cshtml" />
+    <Content Include="Views\Areas\WrongData.cshtml" />
+    <Content Include="Views\Areas\ErrorEdit.cshtml" />
+    <Content Include="Views\Areas\ErrorDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

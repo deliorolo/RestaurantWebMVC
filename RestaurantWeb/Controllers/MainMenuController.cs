@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -22,104 +23,196 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult Tables()
         {
-            mainPageModel.Areas = areaData.GetAll();
-            mainPageModel.Tables = tableData.GetAll();
+            try
+            {
+                mainPageModel.Areas = areaData.GetAll();
+                mainPageModel.Tables = tableData.GetAll();
+            }
+            catch (Exception)
+            {
+                return View("ErrorRetriveData");
+            }
 
             return View(mainPageModel);
         }
 
         public ActionResult TableCategories(int? id)
         {
-            ITableModel table = Factory.InstanceTableModel();
+            if (id != null)
+            {
+                try
+                {
+                    mainPageModel.Categories = categoryData.GetAll();
+                    ITableModel table = tableData.FindById((int)id);
 
-            mainPageModel.Categories = categoryData.GetAll();
-            table = tableData.FindById((int)id);
-            mainPageModel.Tables.Add(table);
+                    if(table == null)
+                    {
+                        return View("ErrorTable");
+                    }
 
-            return View(mainPageModel);
+                    mainPageModel.Tables.Add(table);
+                }
+                catch (Exception)
+                {
+                    return View("ErrorRetriveData");
+                }
+
+                return View(mainPageModel); 
+            }
+            else
+            {
+                return View("ErrorTable");
+            }
         }
 
         public ActionResult TableProducts(int? idTable, int? idCategory)
         {
-            ITableModel table = Factory.InstanceTableModel();
+            if (idCategory != null)
+            {
+                try
+                {
+                    ITableModel table = tableData.FindById((int)idTable);
+                    mainPageModel.Tables.Add(table);
 
-            table = tableData.FindById((int)idTable);
-            mainPageModel.Tables.Add(table);
+                    mainPageModel.Products = productData.GetBySubGroup((int)idCategory);
+                }
+                catch (Exception)
+                {
+                    return View("ErrorRetriveData");
+                }
 
-            mainPageModel.Products = productData.GetBySubGroup((int)idCategory);
-
-            return View(mainPageModel);
+                return View(mainPageModel); 
+            }
+            else
+            {
+                return View("ErrorCategory");
+            }
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("TableProducts")]
         public ActionResult TableAddProduct(int? idTable, int? idCategory, int? idProduct)
         {
-            ITableModel table = Factory.InstanceTableModel();
-            IProductModel product = Factory.InstanceProductModel();           
+            if (idProduct != null)
+            {
+                try
+                {
+                    ITableModel table = tableData.FindById((int)idTable);
+                    IProductModel product = productData.FindById((int)idProduct);
 
-            table = tableData.FindById((int)idTable);
-            product = productData.FindById((int)idProduct);
+                    if (product == null)
+                    {
+                        return View("ErrorAddProduct");
+                    }
 
-            ISoldProductModel soldProduct = MappingObjects.ProductToSoldProduct(product, (int)idTable, tableData);
+                    ISoldProductModel soldProduct = MappingObjects.ProductToSoldProduct(product, (int)idTable, tableData);
 
-            soldProductData.Create(soldProduct);
+                    soldProductData.Create(soldProduct);
 
-            table.Occupied = true;
-            tableData.Update(table);
-            table.SoldProducts = soldProductData.GetByTable(table.ID);
+                    table.Occupied = true;
+                    tableData.Update(table);
+                    table.SoldProducts = soldProductData.GetByTable(table.ID);
 
-            mainPageModel.Products = productData.GetBySubGroup((int)idCategory);
-            mainPageModel.Tables.Add(table);
+                    mainPageModel.Products = productData.GetBySubGroup((int)idCategory);
 
-            return View(mainPageModel);
+                    mainPageModel.Tables.Add(table);
+                }
+                catch (Exception)
+                {
+                    return View("ErrorRetriveData");
+                }
+
+                return View(mainPageModel); 
+            }
+            else
+            {
+                return View("ErrorAddProduct");
+            }
         }
 
         public ActionResult PayAll(int? id)
         {
-            ITableModel table = Factory.InstanceTableModel();
-            table = tableData.FindById((int)id);
-
-            return View(table);
+            if (id != null)
+            {
+                try
+                {
+                    ITableModel table = tableData.FindById((int)id);
+                    return View(table);
+                }
+                catch (Exception)
+                {
+                    return View("ErrorRetriveData");
+                }
+            }
+            else
+            {
+                return View("ErrorTable");
+            }
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("PayAll")]
-        public ActionResult PayAllConfirm(int? id)
+        public ActionResult PayAllConfirm(int id)
         {
-            List<ISoldProductModel> sold = soldProductData.GetByTable((int)id);
+            try
+            {
+                List<ISoldProductModel> sold = soldProductData.GetByTable(id);
 
-            MainMenuHelper.PaySoldProducts(sold, soldProductData, soldProductAccomplishedData);
+                MainMenuHelper.PaySoldProducts(sold, soldProductData, soldProductAccomplishedData);
 
-            ITableModel table = tableData.FindById((int)id);
-            table.Occupied = false;
-            tableData.Update(table);
+                ITableModel table = tableData.FindById(id);
+                table.Occupied = false;
+                tableData.Update(table);
+            }
+            catch (Exception)
+            {
+                return View("ErrorRetriveData");
+            }
 
             return RedirectToAction("Tables");
         }
 
         public ActionResult PayPartial(int? id)
         {
-            ITableModel table = Factory.InstanceTableModel();
-            table = tableData.FindById((int)id);
-
-            return View(table);
+            if (id != null)
+            {
+                try
+                {
+                    ITableModel table = tableData.FindById((int)id);
+                    return View(table);
+                }
+                catch (Exception)
+                {
+                    return View("ErrorRetriveData");
+                }
+            }
+            else
+            {
+                return View("ErrorTable");
+            }
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult PayPartial(int? id, int[] Paid)
+        public ActionResult PayPartial(int id, int[] Paid)
         {
             if (Paid != null)
             {
-                List<ISoldProductModel> fullList = soldProductData.GetByTable((int)id);
-                MainMenuHelper.PaySelectedSoldProducts(fullList, Paid, soldProductData, soldProductAccomplishedData);
-
-                if (fullList.Count() < 1)
+                try
                 {
-                    ITableModel table = tableData.FindById((int)id);
-                    table.Occupied = false;
-                    tableData.Update(table);
+                    List<ISoldProductModel> fullList = soldProductData.GetByTable(id);
+                    MainMenuHelper.PaySelectedSoldProducts(fullList, Paid, soldProductData, soldProductAccomplishedData);
+
+                    if (fullList.Count() < 1)
+                    {
+                        ITableModel table = tableData.FindById(id);
+                        table.Occupied = false;
+                        tableData.Update(table);
+                    }
+                }
+                catch (Exception)
+                {
+                    return View("ErrorRetriveData");
                 }
             }
 
@@ -128,52 +221,79 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult Delete(int? idItem)
         {
-            if (idItem == null)
+            if (idItem != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                try
+                {
+                    ISoldProductModel product = soldProductData.FindById((int)idItem);
+
+                    if (product == null)
+                    {
+                        return View("ErrorDeleteProduct");
+                    }
+                    return View(product);
+                }
+
+                catch (Exception)
+                {
+                    return View("ErrorRetriveData");
+                }               
             }
-
-            ISoldProductModel product = soldProductData.FindById((int)idItem);
-
-            if (product == null)
+            else
             {
-                return HttpNotFound();
+                return View("ErrorDeleteProduct");
             }
-            return View(product);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int idItem)
         {
-            ISoldProductModel product = soldProductData.FindById(idItem);
-            ITableModel table = tableData.GetAll().Where(x => x.ID == product.TableID).FirstOrDefault();
-
-            if (table.SoldProducts.Count() == 1)
+            try
             {
-                table.Occupied = false;
-                tableData.Update(table);
-            }
+                ISoldProductModel product = soldProductData.FindById(idItem);
+                ITableModel table = tableData.GetAll().Where(x => x.ID == product.TableID).FirstOrDefault();
 
-            soldProductData.Delete(idItem);
+                if (table.SoldProducts.Count() == 1)
+                {
+                    table.Occupied = false;
+                    tableData.Update(table);
+                }
+
+                soldProductData.Delete(idItem);
+            }
+            catch (Exception)
+            {
+                return View("ErrorRetriveData");
+            }
 
             return RedirectToAction("Tables");
         }
 
         public ActionResult Edit(int? idItem)
         {
-            if (idItem == null)
+            if (idItem != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                try
+                {
+                    ISoldProductModel product = soldProductData.FindById((int)idItem);
+
+                    if (product == null)
+                    {
+                        return View("ErrorEditProduct");
+                    }
+                    return View(product);
+                }
+
+                catch (Exception)
+                {
+                    return View("ErrorRetriveData");
+                }
             }
-
-            ISoldProductModel product = soldProductData.FindById((int)idItem);
-
-            if (product == null)
+            else
             {
-                return HttpNotFound();
+                return View("ErrorEditProduct");
             }
-            return View(product);
         }
 
         [HttpPost, ActionName("Edit")]
@@ -183,11 +303,22 @@ namespace RestaurantWeb.Controllers
             if (ModelState.IsValid)
             {
                 ISoldProductModel model = product;
-                soldProductData.Update(model);
+
+                try
+                {
+                    soldProductData.Update(model);
+                }
+                catch (Exception)
+                {
+                    return View("ErrorRetriveData");
+                }
+
                 return RedirectToAction("Tables");
             }
-
-            return View(product);
+            else
+            {
+                return View("ErrorEditProduct");
+            }
         }
 
         //TODO list

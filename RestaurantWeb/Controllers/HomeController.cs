@@ -8,6 +8,5 @@ namespace RestaurantWeb.Controllers
         {
             return View();
         }
-
     }
 }

@@ -17,8 +17,8 @@ namespace RestaurantWeb.Controllers
         [Authorize]
         public ActionResult Menu(string order)
         {
-            List<ISalleModel> salles = Factory.InstanceISalleModelList();
-            salles = salleData.GetSalleList();
+            List<ISalleModel> salles = salleData.GetSalleList();
+
             switch (order)
             {
                 case "product":
@@ -39,8 +39,12 @@ namespace RestaurantWeb.Controllers
         {
             if (soldProductsData.GetAll().Count < 1)
             {
-                List<ISalleModel> salles = Factory.InstanceISalleModelList();
-                salles = salleData.GetSalleList();
+                List<ISalleModel> salles = salleData.GetSalleList();
+
+                if (salles.Count < 1)
+                {
+                    return View("NoSoldProducts");
+                }
 
                 DateTime time = DateTime.Now;
                 string day = time.ToString("dd-MM-yyyy");
@@ -48,8 +52,15 @@ namespace RestaurantWeb.Controllers
 
                 decimal money = salles.Sum(x => x.Price);
 
-                ReadWriteFiles.AddFileOfTodaySoldProducts(salles, time);
-                ReadWriteFiles.WriteInDailyIncomeFile(day, hours, money);
+                try
+                {
+                    ReadWriteFiles.AddFileOfTodaySoldProducts(salles, time);
+                    ReadWriteFiles.WriteInDailyIncomeFile(day, hours, money);
+                }
+                catch (Exception)
+                {
+                    return View("ErrorWriteToFile");
+                }
 
                 salleData.EraseDataFromSalleList();
 
@@ -66,9 +77,16 @@ namespace RestaurantWeb.Controllers
         {
             if (ReadWriteFiles.DailyIncomeFileExist())
             {
-                string file = AppDomain.CurrentDomain.BaseDirectory + @"\DailyIncome.csv";
-                string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                return File(file, contentType, Path.GetFileName(file));
+                try
+                {
+                    string file = AppDomain.CurrentDomain.BaseDirectory + @"\DailyIncome.csv";
+                    string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    return File(file, contentType, Path.GetFileName(file));
+                }
+                catch (Exception)
+                {
+                    return View("ErrorDownload");
+                }
             }
 
             return View("FileNotFound");
@@ -81,9 +99,16 @@ namespace RestaurantWeb.Controllers
 
             if (file != null)
             {
-                string filePath = file.FullName;
-                string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                return File(filePath, contentType, Path.GetFileName(filePath));
+                try
+                {
+                    string filePath = file.FullName;
+                    string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    return File(filePath, contentType, Path.GetFileName(filePath));
+                }
+                catch (Exception)
+                {
+                    return View("ErrorDownload");
+                }
             }
 
             return View("FileNotFound");
@@ -96,9 +121,16 @@ namespace RestaurantWeb.Controllers
 
             if (file != null)
             {
-                string filePath = file.FullName;
-                string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                return File(filePath, contentType, Path.GetFileName(filePath));
+                try
+                {
+                    string filePath = file.FullName;
+                    string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    return File(filePath, contentType, Path.GetFileName(filePath));
+                }
+                catch (Exception)
+                {
+                    return View("ErrorDownload");
+                }
             }
 
             return View("FileNotFound");
@@ -107,14 +139,22 @@ namespace RestaurantWeb.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult ListAllLastProductsSoldFile()
         {
-            ICollection<FileInfo> files = FilesDownload.GetDirectoryProductsSoldList().GetFiles();
-
-            if(files.Count < 1)
+            try
             {
-                return View("FileNotFound");
+                ICollection<FileInfo> files = FilesDownload.GetDirectoryProductsSoldList().GetFiles();
+
+                if (files.Count < 1)
+                {
+                    return View("FileNotFound");
+                }
+
+                return View(FilesDownload.GetListFilesNames(files));
             }
 
-            return View(FilesDownload.GetListFilesNames(files));
+            catch (Exception)
+            {
+                return View("ErrorDownload");
+            }           
         }
     }
 }

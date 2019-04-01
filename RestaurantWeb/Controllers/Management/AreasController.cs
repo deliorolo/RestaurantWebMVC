@@ -1,6 +1,7 @@
 ﻿using CodeLibrary.AccessoryCode;
 using CodeLibrary.DataAccess;
 using CodeLibrary.ModelsMVC;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -16,7 +17,14 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult Index()
         {
-            return View(areaData.GetAll());
+            try
+            {
+                return View(areaData.GetAll());
+            }
+            catch (Exception)
+            {
+                return View("ErrorRetriveData");
+            }
         }
 
         public ActionResult Create()
@@ -30,35 +38,55 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (areaData.CheckIfAlreadyExist(area.Name) == false)
+                try
                 {
-                    IAreaModel model = area;
-                    areaData.Create(model);
+                    if (areaData.CheckIfAlreadyExist(area.Name) == false)
+                    {
+                        IAreaModel model = area;
+                        areaData.Create(model);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View("AlreadyExists");
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    return View("AlreadyExists");
+                    return View("ErrorRetriveData");
                 }
             }
+            else
+            {
+                return View("WrongData");
+            }
 
-            return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (id != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                try
+                {
+                    IAreaModel area = areaData.FindById((int)id);
+
+                    if (area == null)
+                    {
+                        return View("ErrorEdit");
+                    }
+                    return View(area);
+                }
+
+                catch (Exception)
+                {
+                    return View("ErrorRetriveData");
+                }
             }
-
-            IAreaModel area = areaData.FindById((int)id);
-
-            if (area == null)
+            else
             {
-                return HttpNotFound();
+                return View("ErrorEdit");
             }
-
-            return View(area);
         }
 
         [HttpPost]
@@ -67,53 +95,80 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (areaData.CheckIfAlreadyExist(area.Name) == false)
+                try
                 {
-                    IAreaModel model = area;
-                    areaData.Update(model);
-                    return RedirectToAction("Index");
+                    if (areaData.CheckIfAlreadyExist(area.Name) == false)
+                    {
+                        IAreaModel model = area;
+                        areaData.Update(model);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View("AlreadyExists");
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    return View("AlreadyExists");
+                    return View("ErrorRetriveData");
                 }
             }
-            return View(area);
+            else
+            {
+                return View("ErrorEdit");
+            }
         }
 
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (id != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            IAreaModel area = areaData.FindById((int)id);
-
-            if (area == null)
-            {
-                return HttpNotFound();
-            }
-
-            List<ITableModel> tables = tableData.GetBySubGroup((int)id);
-            area.NumberOfTables = tables.Count();
-
-            foreach (ITableModel table in tables)
-            {
-                if (table.Occupied)
+                try
                 {
-                    return View("OpenedTable");
+                    IAreaModel area = areaData.FindById((int)id);
+
+                    if (area == null)
+                    {
+                        return View("ErrorDelete");
+                    }
+
+                    List<ITableModel> tables = tableData.GetBySubGroup((int)id);
+                    area.NumberOfTables = tables.Count();
+
+                    foreach (ITableModel table in tables)
+                    {
+                        if (table.Occupied)
+                        {
+                            return View("OpenedTable");
+                        }
+                    }
+
+                    return View(area);
+                }
+
+                catch (Exception)
+                {
+                    return View("ErrorRetriveData");
                 }
             }
-
-            return View(area);
+            else
+            {
+                return View("ErrorDelete");
+            }
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            areaData.Delete(id);
+            try
+            {
+                areaData.Delete(id);
+            }
+            catch (Exception)
+            {
+                return View("ErrorRetriveData");
+            }
 
             return RedirectToAction("Index");
         }
