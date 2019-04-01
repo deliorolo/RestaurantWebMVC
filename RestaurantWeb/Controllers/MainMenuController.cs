@@ -192,11 +192,10 @@ namespace RestaurantWeb.Controllers
 
         //TODO list
         // verify all buttons
-        // Change home controller views
         // Add Comments
-        // check view bags
         // refactoring the code
         // add pages for errors
         // unit testing
+        // include try catch
     }
 }
