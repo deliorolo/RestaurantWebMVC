@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -16,12 +17,26 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult Index()
         {
-            return View(productData.GetAll().OrderBy(x => x.Category.Name));
+            try
+            {
+                return View(productData.GetAll().OrderBy(x => x.Category.Name));
+            }
+            catch (Exception)
+            {
+                return View("ErrorRetriveData");
+            }           
         }
 
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(categoryData.GetAll(), "ID", "Name");
+            try
+            {
+                ViewBag.CategoryID = new SelectList(categoryData.GetAll(), "ID", "Name");
+            }
+            catch (Exception)
+            {
+                return View("ErrorRetriveData");
+            }
             return View();
         }
 
@@ -31,37 +46,55 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (productData.CheckIfAlreadyExist(product.Name) == false)
+                try
                 {
-                    IProductModel model = product;
-                    productData.Create(model);
+                    if (productData.CheckIfAlreadyExist(product.Name) == false)
+                    {
+                        IProductModel model = product;
+                        productData.Create(model);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View("AlreadyExists");
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    return View("AlreadyExists");
+                    return View("ErrorRetriveData");
                 }
             }
-
-            return RedirectToAction("Index");
+            else
+            {
+                return View("WrongData");
+            }
         }
 
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (id != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                try
+                {
+                    IProductModel product = productData.FindById((int)id);
+                    ViewBag.CategoryID = new SelectList(categoryData.GetAll(), "ID", "Name");
+
+                    if (product == null)
+                    {
+                        return View("ErrorEdit");
+                    }
+                    return View(product);
+                }
+
+                catch (Exception)
+                {
+                    return View("ErrorRetriveData");
+                }
             }
-
-            IProductModel product = productData.FindById((int)id);
-
-            if (product == null)
+            else
             {
-                return HttpNotFound();
+                return View("ErrorEdit");
             }
-
-            ViewBag.CategoryID = new SelectList(categoryData.GetAll(), "ID", "Name");
-
-            return View(product);
         }
 
         [HttpPost]
@@ -70,42 +103,70 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (productData.CheckIfAlreadyExist(product.Name) == false ||
-                    productData.FindById(product.ID).Name == product.Name)
+                try
                 {
-                    IProductModel model = product;
-                    productData.Update(model);
-                    return RedirectToAction("Index"); 
+                    if (productData.CheckIfAlreadyExist(product.Name) == false ||
+                                productData.FindById(product.ID).Name == product.Name)
+                    {
+                        IProductModel model = product;
+                        productData.Update(model);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View("AlreadyExists");
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    return View("AlreadyExists");
+                    return View("ErrorRetriveData");
                 }
             }
-            return View(product);
+            else
+            {
+                return View("ErrorEdit");
+            }
         }
 
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (id != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                try
+                {
+                    IProductModel product = productData.FindById((int)id);
+
+                    if (product == null)
+                    {
+                        return View("ErrorDelete");
+                    }
+
+                    return View(product);
+                }
+
+                catch (Exception)
+                {
+                    return View("ErrorRetriveData");
+                }
             }
-
-            IProductModel product = productData.FindById((int)id);
-
-            if (product == null)
+            else
             {
-                return HttpNotFound();
+                return View("ErrorDelete");
             }
-            return View(product);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            productData.Delete(id);
+            try
+            {
+                productData.Delete(id);
+            }
+            catch (Exception)
+            {
+                return View("ErrorRetriveData");
+            }
 
             return RedirectToAction("Index");
         }
@@ -114,10 +175,17 @@ namespace RestaurantWeb.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("ErrorAccessCategory");
             }
 
-            return View(productData.GetBySubGroup((int)id));
+            try
+            {
+                return View(productData.GetBySubGroup((int)id));
+            }
+            catch (Exception)
+            {
+                return View("ErrorRetriveData");
+            }
         }
 
     }

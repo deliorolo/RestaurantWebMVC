@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -16,12 +17,27 @@ namespace RestaurantWeb.Controllers
 
         public ActionResult Index()
         {
-            return View(tableData.GetAll().OrderBy(x => x.NumberOfTable));
+            try
+            {
+                return View(tableData.GetAll().OrderBy(x => x.NumberOfTable));
+            }
+            catch (Exception)
+            {
+                return View("ErrorRetriveData");
+            }
+
         }
 
         public ActionResult Create()
         {
-            ViewBag.AreaID = new SelectList(areaData.GetAll(), "ID", "Name");
+            try
+            {
+                ViewBag.AreaID = new SelectList(areaData.GetAll(), "ID", "Name");
+            }
+            catch (Exception)
+            {
+                return View("ErrorRetriveData");
+            }
             return View();
         }
 
@@ -31,47 +47,73 @@ namespace RestaurantWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (tableData.CheckIfAlreadyExist(table.NumberOfTable.ToString()) == false)
+                try
                 {
-                    ITableModel model = table;
-                    tableData.Create(model);
+                    if (tableData.CheckIfAlreadyExist(table.NumberOfTable.ToString()) == false)
+                    {
+                        ITableModel model = table;
+                        tableData.Create(model);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View("AlreadyExists");
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    return View("AlreadyExists");
+                    return View("ErrorRetriveData");
                 }
             }
-
-            return RedirectToAction("Index");
+            else
+            {
+                return View("WrongData");
+            }
         }
 
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (id != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                try
+                {
+                    ITableModel table = tableData.FindById((int)id);
+
+                    if (table == null)
+                    {
+                        return View("ErrorDelete");
+                    }
+
+                    if (table.SoldProducts.Count > 0)
+                    {
+                        return View("OpenedTable");
+                    }
+
+                    return View(table);
+                }
+                catch (Exception)
+                {
+                    return View("ErrorRetriveData");
+                } 
             }
-
-            ITableModel table = tableData.FindById((int)id);
-
-            if (table == null)
+            else
             {
-                return HttpNotFound();
+                return View("ErrorDelete");
             }
-
-            if(table.SoldProducts.Count > 0)
-            {
-                return View("OpenedTable");
-            }
-
-            return View(table);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            tableData.Delete(id);
+            try
+            {
+                tableData.Delete(id);
+            }
+            catch (Exception)
+            {
+                return View("ErrorRetriveData");
+            }
 
             return RedirectToAction("Index");
         }
@@ -80,10 +122,17 @@ namespace RestaurantWeb.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("ErrorAccessArea");
             }
 
-            return View(tableData.GetBySubGroup((int)id));
+            try
+            {
+                return View(tableData.GetBySubGroup((int)id));
+            }
+            catch (Exception)
+            {
+                return View("ErrorRetriveData");
+            }
         }
     }
 }

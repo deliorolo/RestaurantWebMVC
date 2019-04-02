@@ -357,6 +357,16 @@
     <Content Include="Views\Areas\WrongData.cshtml" />
     <Content Include="Views\Areas\ErrorEdit.cshtml" />
     <Content Include="Views\Areas\ErrorDelete.cshtml" />
+    <Content Include="Views\Categories\ErrorDelete.cshtml" />
+    <Content Include="Views\Categories\ErrorEdit.cshtml" />
+    <Content Include="Views\Categories\WrongData.cshtml" />
+    <Content Include="Views\Products\ErrorDelete.cshtml" />
+    <Content Include="Views\Products\ErrorEdit.cshtml" />
+    <Content Include="Views\Products\WrongData.cshtml" />
+    <Content Include="Views\Products\ErrorAccessCategory.cshtml" />
+    <Content Include="Views\Tables\WrongData.cshtml" />
+    <Content Include="Views\Tables\ErrorDelete.cshtml" />
+    <Content Include="Views\Tables\ErrorAccessArea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

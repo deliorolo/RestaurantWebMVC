@@ -328,5 +328,6 @@ namespace RestaurantWeb.Controllers
         // add pages for errors
         // unit testing
         // include try catch
+        // when editing product select by default initial category
     }
 }
