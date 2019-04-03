@@ -26,7 +26,6 @@ namespace RestaurantWeb
             {
                 APIClientConfig.InitializeClient();
             }
-
         }
     }
 }
