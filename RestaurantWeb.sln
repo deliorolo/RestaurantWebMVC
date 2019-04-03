@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiRestaurantDataAccess"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeLibrary", "CodeLibrary\CodeLibrary.csproj", "{3149025B-7006-426E-937B-6DD8A2B4284C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeLibrary.Tests", "CodeLibrary.Tests\CodeLibrary.Tests.csproj", "{9A03A55B-B8C9-4FC7-8BA6-CFF2F782BA7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3149025B-7006-426E-937B-6DD8A2B4284C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3149025B-7006-426E-937B-6DD8A2B4284C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3149025B-7006-426E-937B-6DD8A2B4284C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A03A55B-B8C9-4FC7-8BA6-CFF2F782BA7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A03A55B-B8C9-4FC7-8BA6-CFF2F782BA7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A03A55B-B8C9-4FC7-8BA6-CFF2F782BA7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A03A55B-B8C9-4FC7-8BA6-CFF2F782BA7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
