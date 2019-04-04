@@ -7,7 +7,7 @@ namespace CodeLibrary.EntityFramework
     {
         public RestaurantContext() : base("DefaultConnection")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<RestaurantContext, CodeLibrary.Migrations.Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<RestaurantContext, Migrations.Configuration>());
         }
 
         public DbSet<Area> Areas { get; set; }

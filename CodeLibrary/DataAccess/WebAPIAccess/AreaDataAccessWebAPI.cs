@@ -1,10 +1,8 @@
-﻿using CodeLibrary.EntityFramework;
-using CodeLibrary.ModelsMVC;
+﻿using CodeLibrary.ModelsMVC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace CodeLibrary.DataAccess.WebAPIAccess
 {

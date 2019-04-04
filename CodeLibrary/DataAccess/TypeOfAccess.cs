@@ -9,6 +9,5 @@
     {
         Direct,
         WebApi
-
     }
 }

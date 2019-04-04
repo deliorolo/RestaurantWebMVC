@@ -13,7 +13,7 @@ namespace RestaurantWeb
         {
             AreaRegistration.RegisterAllAreas();
 
-            TypeOfAccess.Access = Connection.Direct;
+            TypeOfAccess.Access = Connection.WebApi;
 
             ModelBinders.Binders.Add(typeof(decimal), new ModelBinder.DecimalModelBinder());
             ModelBinders.Binders.Add(typeof(decimal?), new ModelBinder.DecimalModelBinder());

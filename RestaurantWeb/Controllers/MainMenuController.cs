@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web.Mvc;
 using CodeLibrary.AccessoryCode;
 using CodeLibrary.DataAccess;
@@ -324,10 +323,5 @@ namespace RestaurantWeb.Controllers
         //TODO list
         // verify all buttons
         // Add Comments
-        // refactoring the code
-        // add pages for errors
-        // unit testing
-        // include try catch
-        // when editing product select by default initial category
     }
 }
