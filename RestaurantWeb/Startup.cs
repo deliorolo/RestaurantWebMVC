@@ -2,6 +2,8 @@
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(RestaurantWeb.Startup))]
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+
 namespace RestaurantWeb
 {
     public partial class Startup

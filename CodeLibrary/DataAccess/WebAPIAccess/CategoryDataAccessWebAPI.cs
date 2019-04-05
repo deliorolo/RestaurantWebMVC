@@ -12,7 +12,7 @@ namespace CodeLibrary.DataAccess.WebAPIAccess
         {
             bool exists = false;
 
-            if (GetAll().Where(x => x.Name == name).FirstOrDefault() != null)
+            if (GetAll().Where(x => x.Name.ToLower() == name.ToLower()).FirstOrDefault() != null)
             {
                 exists = true;
             }

@@ -11,6 +11,8 @@ namespace RestaurantWeb.Controllers
     [Authorize]
     public class MainMenuController : Controller
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private IDataAccessSubCategory<IProductModel> productData = Factory.InstanceProductDataAccess();
         private IDataAccessRegular<ICategoryModel> categoryData = Factory.InstanceCategoryDataAccess();
         private IDataAccessSubCategory<ITableModel> tableData = Factory.InstanceTableDataAccess();
@@ -27,8 +29,9 @@ namespace RestaurantWeb.Controllers
                 mainPageModel.Areas = areaData.GetAll();
                 mainPageModel.Tables = tableData.GetAll();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error("Could't load areas or tables from Database", ex);
                 return View("ErrorRetriveData");
             }
 
@@ -46,13 +49,15 @@ namespace RestaurantWeb.Controllers
 
                     if(table == null)
                     {
+                        log.Error("Could't find a table in the Database - return null");
                         return View("ErrorTable");
                     }
 
                     mainPageModel.Tables.Add(table);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't load categories or tables from Database", ex);
                     return View("ErrorRetriveData");
                 }
 
@@ -60,6 +65,7 @@ namespace RestaurantWeb.Controllers
             }
             else
             {
+                log.Error("The table ID was null while trying to access");
                 return View("ErrorTable");
             }
         }
@@ -75,8 +81,9 @@ namespace RestaurantWeb.Controllers
 
                     mainPageModel.Products = productData.GetBySubGroup((int)idCategory);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't load products or tables from Database", ex);
                     return View("ErrorRetriveData");
                 }
 
@@ -84,6 +91,7 @@ namespace RestaurantWeb.Controllers
             }
             else
             {
+                log.Error("The category ID was null while trying to access");
                 return View("ErrorCategory");
             }
         }
@@ -101,6 +109,7 @@ namespace RestaurantWeb.Controllers
 
                     if (product == null)
                     {
+                        log.Error("Could't find a product in the Database - return null");
                         return View("ErrorAddProduct");
                     }
 
@@ -116,8 +125,9 @@ namespace RestaurantWeb.Controllers
 
                     mainPageModel.Tables.Add(table);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't load products, sold products or tables from Database", ex);
                     return View("ErrorRetriveData");
                 }
 
@@ -125,6 +135,7 @@ namespace RestaurantWeb.Controllers
             }
             else
             {
+                log.Error("The product ID was null while trying to access");
                 return View("ErrorAddProduct");
             }
         }
@@ -138,13 +149,15 @@ namespace RestaurantWeb.Controllers
                     ITableModel table = tableData.FindById((int)id);
                     return View(table);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't load tables from Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The table ID was null while trying to access");
                 return View("ErrorTable");
             }
         }
@@ -163,8 +176,9 @@ namespace RestaurantWeb.Controllers
                 table.Occupied = false;
                 tableData.Update(table);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error("Could't load sold products or tables from Database", ex);
                 return View("ErrorRetriveData");
             }
 
@@ -180,13 +194,15 @@ namespace RestaurantWeb.Controllers
                     ITableModel table = tableData.FindById((int)id);
                     return View(table);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't load tables from Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The table ID was null while trying to access");
                 return View("ErrorTable");
             }
         }
@@ -209,8 +225,9 @@ namespace RestaurantWeb.Controllers
                         tableData.Update(table);
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't load sold products or tables from Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
@@ -228,18 +245,21 @@ namespace RestaurantWeb.Controllers
 
                     if (product == null)
                     {
+                        log.Error("Could't find a product in the Database - return null");
                         return View("ErrorDeleteProduct");
                     }
                     return View(product);
                 }
 
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't load product from Database", ex);
                     return View("ErrorRetriveData");
                 }               
             }
             else
             {
+                log.Error("The sold product ID was null while trying to access");
                 return View("ErrorDeleteProduct");
             }
         }
@@ -260,13 +280,14 @@ namespace RestaurantWeb.Controllers
                 }
 
                 soldProductData.Delete(idItem);
+
+                return RedirectToAction("TableCategories", new { id = product.TableID });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error("Could't load sold products or tables from Database", ex);
                 return View("ErrorRetriveData");
             }
-
-            return RedirectToAction("Tables");
         }
 
         public ActionResult Edit(int? idItem)
@@ -279,18 +300,21 @@ namespace RestaurantWeb.Controllers
 
                     if (product == null)
                     {
+                        log.Error("Could't find a product in the Database - return null");
                         return View("ErrorEditProduct");
                     }
                     return View(product);
                 }
 
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't load product from Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The sold product ID was null while trying to access");
                 return View("ErrorEditProduct");
             }
         }
@@ -306,16 +330,17 @@ namespace RestaurantWeb.Controllers
                 try
                 {
                     soldProductData.Update(model);
+                    return RedirectToAction("TableCategories", new { id = soldProductData.FindById(model.ID).TableID });
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't load sold product from Database", ex);
                     return View("ErrorRetriveData");
                 }
-
-                return RedirectToAction("Tables");
             }
             else
             {
+                log.Error("The model state of the  sold product is invalid");
                 return View("ErrorEditProduct");
             }
         }

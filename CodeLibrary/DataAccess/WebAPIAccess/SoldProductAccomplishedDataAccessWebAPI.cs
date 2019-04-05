@@ -77,6 +77,13 @@ namespace CodeLibrary.DataAccess.WebAPIAccess
 
                     List<ISoldProductAccomplishedModel> model = readTask.Result.ToList<ISoldProductAccomplishedModel>();
 
+                    IDataAccessRegular<ICategoryModel> categoryData = Factory.InstanceCategoryDataAccess();
+
+                    foreach (ISoldProductAccomplishedModel product in model)
+                    {
+                        product.Category = categoryData.FindById(product.CategoryID);
+                    }
+
                     return model;
                 }
                 else

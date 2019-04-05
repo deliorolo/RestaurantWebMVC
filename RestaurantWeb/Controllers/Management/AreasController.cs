@@ -11,6 +11,8 @@ namespace RestaurantWeb.Controllers
     [Authorize(Roles = "admin")]
     public class AreasController : Controller
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private IDataAccessRegular<IAreaModel> areaData = Factory.InstanceAreaDataAccess();
         private IDataAccessSubCategory<ITableModel> tableData = Factory.InstanceTableDataAccess();
 
@@ -20,8 +22,9 @@ namespace RestaurantWeb.Controllers
             {
                 return View(areaData.GetAll());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error("Could't load areas from Database", ex);
                 return View("ErrorRetriveData");
             }
         }
@@ -47,19 +50,21 @@ namespace RestaurantWeb.Controllers
                     }
                     else
                     {
+                        log.Info("The user tried to add an area that already existed");
                         return View("AlreadyExists");
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't create a new area in the Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The model state of the area is invalid");
                 return View("WrongData");
             }
-
         }
 
         public ActionResult Edit(int? id)
@@ -72,18 +77,21 @@ namespace RestaurantWeb.Controllers
 
                     if (area == null)
                     {
+                        log.Error("Could't find an area in the Database - return null");
                         return View("ErrorEdit");
                     }
                     return View(area);
                 }
 
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't find an area in the Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The area ID was null while trying to edit");
                 return View("ErrorEdit");
             }
         }
@@ -104,16 +112,19 @@ namespace RestaurantWeb.Controllers
                     }
                     else
                     {
+                        log.Info("The user tried to add an area that already existed");
                         return View("AlreadyExists");
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't edit an area from Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The model state of the area is invalid");
                 return View("ErrorEdit");
             }
         }
@@ -128,6 +139,7 @@ namespace RestaurantWeb.Controllers
 
                     if (area == null)
                     {
+                        log.Error("Could't find an area in the Database - return null");
                         return View("ErrorDelete");
                     }
 
@@ -138,6 +150,7 @@ namespace RestaurantWeb.Controllers
                     {
                         if (table.Occupied)
                         {
+                            log.Info("The user tried to delete an area with opened tables");
                             return View("OpenedTable");
                         }
                     }
@@ -145,13 +158,15 @@ namespace RestaurantWeb.Controllers
                     return View(area);
                 }
 
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't find an area in the Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The area ID was null while trying to delete");
                 return View("ErrorDelete");
             }
         }
@@ -164,8 +179,9 @@ namespace RestaurantWeb.Controllers
             {
                 areaData.Delete(id);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error("Could't delete an area from the Database", ex);
                 return View("ErrorRetriveData");
             }
 

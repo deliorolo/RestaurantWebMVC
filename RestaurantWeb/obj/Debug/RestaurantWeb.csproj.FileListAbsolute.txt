@@ -233,3 +233,5 @@ C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Security
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Security.Cryptography.Encoding.dll
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Security.Cryptography.Primitives.dll
 C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\log4net.dll
+C:\Users\Délio\Documents\GitHub\RestaurantWeb\RestaurantWeb\bin\log4net.xml

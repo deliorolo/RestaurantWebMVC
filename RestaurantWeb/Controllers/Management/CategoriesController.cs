@@ -10,6 +10,8 @@ namespace RestaurantWeb.Controllers
     [Authorize(Roles = "admin")]
     public class CategoriesController : Controller
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private IDataAccessRegular<ICategoryModel> categoryData = Factory.InstanceCategoryDataAccess();
         private IDataAccessSubCategory<IProductModel> productData = Factory.InstanceProductDataAccess();
         private ISoldProductDataAccess soldProductData = Factory.InstanceSoldProductDataAccess();
@@ -21,8 +23,9 @@ namespace RestaurantWeb.Controllers
             {
                 return View(categoryData.GetAll());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error("Could't load categories from Database", ex);
                 return View("ErrorRetriveData");
             }
         }
@@ -48,16 +51,19 @@ namespace RestaurantWeb.Controllers
                     }
                     else
                     {
+                        log.Info("The user tried to add a category that already existed");
                         return View("AlreadyExists");
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't create a new category in the Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The model state of the category is invalid");
                 return View("WrongData");
             }
         }
@@ -72,18 +78,21 @@ namespace RestaurantWeb.Controllers
 
                     if (category == null)
                     {
+                        log.Error("Could't find a category in the Database - return null");
                         return View("ErrorEdit");
                     }
                     return View(category);
                 }
 
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't find a category in the Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The category ID was null while trying to edit");
                 return View("ErrorEdit");
             }
         }
@@ -104,16 +113,19 @@ namespace RestaurantWeb.Controllers
                     }
                     else
                     {
+                        log.Info("The user tried to add a category that already existed");
                         return View("AlreadyExists");
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't edit a category from Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The model state of the category is invalid");
                 return View("ErrorEdit");
             }
         }
@@ -128,12 +140,14 @@ namespace RestaurantWeb.Controllers
 
                     if (category == null)
                     {
+                        log.Error("Could't find a category in the Database - return null");
                         return View("ErrorDelete");
                     }
 
                     if (soldProductData.GetByCategory((int)id).Count() > 0 ||
                         soldProductAccomplishedData.GetByCategory((int)id).Count > 0)
                     {
+                        log.Info("The user tried to delete a category with products in opened tables");
                         return View("OpenedTables");
                     }
 
@@ -141,13 +155,15 @@ namespace RestaurantWeb.Controllers
 
                     return View(category);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't find a category in the Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The category ID was null while trying to delete");
                 return View("ErrorDelete");
             }
         }
@@ -160,8 +176,9 @@ namespace RestaurantWeb.Controllers
             {
                 categoryData.Delete(id);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error("Could't delete a category from the Database", ex);
                 return View("ErrorRetriveData");
             }
 

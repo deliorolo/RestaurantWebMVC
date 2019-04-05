@@ -11,6 +11,8 @@ namespace RestaurantWeb.Controllers
     [Authorize(Roles = "admin")]
     public class ProductsController : Controller
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private IDataAccessSubCategory<IProductModel> productData = Factory.InstanceProductDataAccess();
         private IDataAccessRegular<ICategoryModel> categoryData = Factory.InstanceCategoryDataAccess();
 
@@ -20,8 +22,9 @@ namespace RestaurantWeb.Controllers
             {
                 return View(productData.GetAll().OrderBy(x => x.Category.Name));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error("Could't load products from Database", ex);
                 return View("ErrorRetriveData");
             }           
         }
@@ -32,8 +35,9 @@ namespace RestaurantWeb.Controllers
             {
                 ViewBag.CategoryID = new SelectList(categoryData.GetAll(), "ID", "Name");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error("Could't load categories from Database", ex);
                 return View("ErrorRetriveData");
             }
             return View();
@@ -55,16 +59,19 @@ namespace RestaurantWeb.Controllers
                     }
                     else
                     {
+                        log.Info("The user tried to add a product that already existed");
                         return View("AlreadyExists");
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't create a new product in the Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The model state of the product is invalid");
                 return View("WrongData");
             }
         }
@@ -80,18 +87,21 @@ namespace RestaurantWeb.Controllers
 
                     if (product == null)
                     {
+                        log.Error("Could't find a product in the Database - return null");
                         return View("ErrorEdit");
                     }
                     return View(product);
                 }
 
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't find a product in the Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The product ID was null while trying to edit");
                 return View("ErrorEdit");
             }
         }
@@ -113,16 +123,19 @@ namespace RestaurantWeb.Controllers
                     }
                     else
                     {
+                        log.Info("The user tried to add a product that already existed");
                         return View("AlreadyExists");
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't edit a product from Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The model state of the product is invalid");
                 return View("ErrorEdit");
             }
         }
@@ -137,19 +150,22 @@ namespace RestaurantWeb.Controllers
 
                     if (product == null)
                     {
+                        log.Error("Could't find a product in the Database - return null");
                         return View("ErrorDelete");
                     }
 
                     return View(product);
                 }
 
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Error("Could't find a product in the Database", ex);
                     return View("ErrorRetriveData");
                 }
             }
             else
             {
+                log.Error("The product ID was null while trying to delete");
                 return View("ErrorDelete");
             }
         }
@@ -162,8 +178,9 @@ namespace RestaurantWeb.Controllers
             {
                 productData.Delete(id);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error("Could't delete a product from the Database", ex);
                 return View("ErrorRetriveData");
             }
 
@@ -174,6 +191,7 @@ namespace RestaurantWeb.Controllers
         {
             if (id == null)
             {
+                log.Error("The category ID was null while trying to load products");
                 return View("ErrorAccessCategory");
             }
 
@@ -181,8 +199,9 @@ namespace RestaurantWeb.Controllers
             {
                 return View(productData.GetBySubGroup((int)id));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error("Could't load products of a category from Database", ex);
                 return View("ErrorRetriveData");
             }
         }

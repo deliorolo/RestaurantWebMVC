@@ -20,7 +20,7 @@ namespace CodeLibrary.DataAccess
         {
             bool exists = false;
 
-            if (_db.Areas.Where(x => x.Name == name).FirstOrDefault() != null)
+            if (_db.Areas.Where(x => x.Name.ToLower() == name.ToLower()).FirstOrDefault() != null)
             {
                 exists = true;
             }
