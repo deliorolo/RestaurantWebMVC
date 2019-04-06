@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
+//Unit testing for the methods of class MainMenuHelper in the CodeLibrary
+
 namespace CodeLibrary.Tests
 {
     public class MainMenuHelperTests

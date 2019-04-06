@@ -8,7 +8,6 @@ namespace CodeLibrary.DataAccess.WebAPIAccess
 {
     class AreaDataAccessWebAPI : IDataAccessRegular<IAreaModel>
     {
-
         public bool CheckIfAlreadyExist(string name)
         {
             bool exists = false;

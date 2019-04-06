@@ -344,9 +344,5 @@ namespace RestaurantWeb.Controllers
                 return View("ErrorEditProduct");
             }
         }
-
-        //TODO list
-        // verify all buttons
-        // Add Comments
     }
 }

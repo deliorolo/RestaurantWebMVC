@@ -9,6 +9,9 @@ namespace CodeLibrary.AccessoryCode
 {
     public static class ReadWriteFiles
     {
+        /// <summary>
+        /// It adds lines to an csv file with the time and money accomplished
+        /// </summary>
         public static void WriteInDailyIncomeFile(string day, string hours, decimal money)
         {
             bool fileExist = false;
@@ -45,6 +48,9 @@ namespace CodeLibrary.AccessoryCode
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"\DailyIncome.csv", sb.ToString(), Encoding.UTF8);
         }
 
+        /// <summary>
+        /// It creates a new file with time and list of all sold products
+        /// </summary>
         public static void AddFileOfTodaySoldProducts(List<ISalleModel> soldProducts, DateTime time)
         {
             Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\Products Sold List");
@@ -107,6 +113,9 @@ namespace CodeLibrary.AccessoryCode
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"\Products Sold List\" + fileName, sb.ToString(), Encoding.UTF8);
         }
 
+        /// <summary>
+        /// It checks if the DailyIncome.csv exists
+        /// </summary>
         public static bool DailyIncomeFileExist()
         {
             bool fileExist = false;

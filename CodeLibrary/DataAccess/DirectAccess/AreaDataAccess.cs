@@ -74,6 +74,9 @@ namespace CodeLibrary.DataAccess
             _db.SaveChanges();
         }
 
+        /// <summary>
+        /// It maps an object of type Area from Entity Framework to an object of type IAreaModel
+        /// </summary>
         private IAreaModel MapTheAreaObject(Area item)
         {
             IAreaModel model = Factory.InstanceAreaModel();

@@ -1,4 +1,6 @@
-﻿namespace CodeLibrary.DataAccess
+﻿// Class that provides the possibility to choose how we want to access to the database
+
+namespace CodeLibrary.DataAccess
 {
     public static class TypeOfAccess
     {

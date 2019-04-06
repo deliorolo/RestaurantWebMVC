@@ -6,6 +6,9 @@ namespace CodeLibrary.AccessoryCode
 {
     public static class MainMenuHelper
     {
+        /// <summary>
+        /// It completes the payment of selected items in a list based in indexes from variable "Paid"
+        /// </summary>
         public static void PaySelectedSoldProducts(List<ISoldProductModel> fullList, int[] Paid, ISoldProductDataAccess soldProductData, ISoldProductAccomplishedDataAccess soldProductAccomplishedData)
         {
             List<ISoldProductModel> sold = Factory.InstanceISoldProductModelList();
@@ -29,6 +32,9 @@ namespace CodeLibrary.AccessoryCode
             soldProductData.DeleteList(sold);
         }
 
+        /// <summary>
+        /// It completes the payment for all products of the List
+        /// </summary>
         public static void PaySoldProducts (List<ISoldProductModel> sold, ISoldProductDataAccess soldProductData, ISoldProductAccomplishedDataAccess soldProductAccomplishedData)
         {
             foreach (ISoldProductModel product in sold)

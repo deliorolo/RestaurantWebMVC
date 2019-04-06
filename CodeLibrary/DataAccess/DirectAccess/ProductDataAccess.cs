@@ -91,6 +91,9 @@ namespace CodeLibrary.DataAccess
             _db.SaveChanges();
         }
 
+        /// <summary>
+        /// It maps an object of type Product from Entity Framework to an object of type IProductModel
+        /// </summary>
         private IProductModel MapTheProductObject(Product item)
         {
             IProductModel model = Factory.InstanceProductModel();

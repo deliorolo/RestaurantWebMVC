@@ -5,6 +5,8 @@ using FluentAssertions;
 using Moq;
 using CodeLibrary.DataAccess;
 
+//Unit testing for the methods of class MappingObjects in the CodeLibrary
+
 namespace CodeLibrary.Tests
 {
     public class MappingObjectsTests

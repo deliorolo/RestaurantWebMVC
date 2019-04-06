@@ -5,6 +5,9 @@ namespace CodeLibrary.AccessoryCode
 {
     public static class MappingObjects
     {
+        /// <summary>
+        /// It maps an object of type ProductModel to SoldProductModel
+        /// </summary>
         public static ISoldProductModel ProductToSoldProduct(IProductModel product, int idTable, IDataAccessSubCategory<ITableModel> tableData)
         {
             ISoldProductModel soldProduct = Factory.InstanceSoldProductModel();
@@ -21,6 +24,9 @@ namespace CodeLibrary.AccessoryCode
             return soldProduct;
         }
 
+        /// <summary>
+        /// It maps an object of type SoldProductModel to SoldProductAccomplishedModel
+        /// </summary>
         public static ISoldProductAccomplishedModel SoldProductToSoldProductAccomplished(ISoldProductModel product)
         {
             ISoldProductAccomplishedModel soldProductAccomplished = Factory.InstanceSoldProductAccomplishedModel();

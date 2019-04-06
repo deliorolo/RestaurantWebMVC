@@ -73,6 +73,9 @@ namespace CodeLibrary.DataAccess
             _db.SaveChanges();
         }
 
+        /// <summary>
+        /// It maps an object of type Category from Entity Framework to an object of type ICategoryModel
+        /// </summary>
         private ICategoryModel MapTheCategoryObject(Category item)
         {
             ICategoryModel model = Factory.InstanceCategoryModel();
