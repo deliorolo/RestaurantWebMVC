@@ -16,6 +16,7 @@ namespace RestaurantWeb.Controllers
         private IDataAccessRegular<IAreaModel> areaData = Factory.InstanceAreaDataAccess();
         private IDataAccessSubCategory<ITableModel> tableData = Factory.InstanceTableDataAccess();
 
+        // Lists all areas
         public ActionResult Index()
         {
             try
@@ -29,11 +30,13 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Form to create a new area
         public ActionResult Create()
         {
             return View();
         }
 
+        // Adds a new area to the database
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name")] AreaModel area)
@@ -67,6 +70,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Form to edit an area
         public ActionResult Edit(int? id)
         {
             if (id != null)
@@ -96,6 +100,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Changes an existing area in the database
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name")] AreaModel area)
@@ -129,6 +134,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Asks for confirmation in order to delete an area from the database
         public ActionResult Delete(int? id)
         {
             if (id != null)
@@ -171,6 +177,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Deletes an area from the database
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

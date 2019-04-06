@@ -16,6 +16,7 @@ namespace RestaurantWeb.Controllers
         private IDataAccessSubCategory<ITableModel> tableData = Factory.InstanceTableDataAccess();
         private IDataAccessRegular<IAreaModel> areaData = Factory.InstanceAreaDataAccess();
 
+        // Lists all tables
         public ActionResult Index()
         {
             try
@@ -30,6 +31,7 @@ namespace RestaurantWeb.Controllers
 
         }
 
+        // Form to create a new table
         public ActionResult Create()
         {
             try
@@ -44,6 +46,7 @@ namespace RestaurantWeb.Controllers
             return View();
         }
 
+        // Adds a new table to the database
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,NumberOfTable,AreaID,Occupied")] TableModel table)
@@ -77,6 +80,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Asks for confirmation in order to delete a table from the database
         public ActionResult Delete(int? id)
         {
             if (id != null)
@@ -112,6 +116,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Deletes a table from the database
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -129,6 +134,7 @@ namespace RestaurantWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        // Lists the tables that belong to a selected area
         public ActionResult TablesByArea(int? id)
         {
             if (id == null)

@@ -17,6 +17,7 @@ namespace RestaurantWeb.Controllers
         private ISoldProductDataAccess soldProductData = Factory.InstanceSoldProductDataAccess();
         private ISoldProductAccomplishedDataAccess soldProductAccomplishedData = Factory.InstanceSoldProductAccomplishedDataAccess();
 
+        // Lists all categories
         public ActionResult Index()
         {
             try
@@ -29,12 +30,14 @@ namespace RestaurantWeb.Controllers
                 return View("ErrorRetriveData");
             }
         }
-  
+
+        // Form to create a new category
         public ActionResult Create()
         {
             return View();
         }
 
+        // Adds a new category to the database
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name")] CategoryModel category)
@@ -68,6 +71,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Form to edit a category
         public ActionResult Edit(int? id)
         {
             if (id != null)
@@ -97,6 +101,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Changes an existing category in the database
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name")] CategoryModel category)
@@ -130,6 +135,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Asks for confirmation in order to delete a category from the database
         public ActionResult Delete(int? id)
         {        
             if (id != null)
@@ -168,6 +174,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Deletes a category from the database
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

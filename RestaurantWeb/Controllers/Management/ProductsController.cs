@@ -16,6 +16,7 @@ namespace RestaurantWeb.Controllers
         private IDataAccessSubCategory<IProductModel> productData = Factory.InstanceProductDataAccess();
         private IDataAccessRegular<ICategoryModel> categoryData = Factory.InstanceCategoryDataAccess();
 
+        // Lists all products
         public ActionResult Index()
         {
             try
@@ -29,6 +30,7 @@ namespace RestaurantWeb.Controllers
             }           
         }
 
+        // Form to create a new product
         public ActionResult Create()
         {
             try
@@ -43,6 +45,7 @@ namespace RestaurantWeb.Controllers
             return View();
         }
 
+        // Adds a new product to the database
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,CategoryID,Price")] ProductModel product)
@@ -76,6 +79,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Form to edit a product
         public ActionResult Edit(int? id)
         {
             if (id != null)
@@ -106,6 +110,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Changes an existing product in the database
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,CategoryID,Price")] ProductModel product)
@@ -140,6 +145,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Asks for confirmation in order to delete a product from the database
         public ActionResult Delete(int? id)
         {
             if (id != null)
@@ -170,6 +176,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Deletes a product from the database
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -187,6 +194,7 @@ namespace RestaurantWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        // Lists the products that belong to a selected category
         public ActionResult ProductsByCategory(int? id)
         {
             if (id == null)

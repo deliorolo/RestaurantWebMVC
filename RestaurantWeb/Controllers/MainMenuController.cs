@@ -27,6 +27,7 @@ namespace RestaurantWeb.Controllers
         {
             try
             {
+                // Joining list of areas and tables to a single model
                 mainPageModel.Areas = areaData.GetAll();
                 mainPageModel.Tables = tableData.GetAll();
             }
@@ -46,6 +47,7 @@ namespace RestaurantWeb.Controllers
             {
                 try
                 {
+                    // Joining list of categories and selected table to a single model
                     mainPageModel.Categories = categoryData.GetAll();
                     ITableModel table = tableData.FindById((int)id);
 
@@ -79,6 +81,7 @@ namespace RestaurantWeb.Controllers
             {
                 try
                 {
+                    // Joining list of products and selected table to a single model
                     ITableModel table = tableData.FindById((int)idTable);
                     mainPageModel.Tables.Add(table);
 
@@ -108,6 +111,7 @@ namespace RestaurantWeb.Controllers
             {
                 try
                 {
+                    // Finding the selected product and the table where is going to be added
                     ITableModel table = tableData.FindById((int)idTable);
                     IProductModel product = productData.FindById((int)idProduct);
 
@@ -117,16 +121,17 @@ namespace RestaurantWeb.Controllers
                         return View("ErrorAddProduct");
                     }
 
+                    // Creates a SoldProductModel from a ProductModel that can be added to a list in each TableModel
                     ISoldProductModel soldProduct = MappingObjects.ProductToSoldProduct(product, (int)idTable, tableData);
-
                     soldProductData.Create(soldProduct);
 
+                    // Sets the current table as opened (Occupied by products)
                     table.Occupied = true;
                     tableData.Update(table);
                     table.SoldProducts = soldProductData.GetByTable(table.ID);
 
+                    // Joins list of products and selected table to a single model
                     mainPageModel.Products = productData.GetBySubGroup((int)idCategory);
-
                     mainPageModel.Tables.Add(table);
                 }
                 catch (Exception ex)
@@ -151,6 +156,7 @@ namespace RestaurantWeb.Controllers
             {
                 try
                 {
+                    // Finding the selected table is order to list the Sold Products on it
                     ITableModel table = tableData.FindById((int)id);
                     return View(table);
                 }
@@ -174,10 +180,13 @@ namespace RestaurantWeb.Controllers
         {
             try
             {
+                // Finding the sold products from the table that are confirmed as paid
                 List<ISoldProductModel> sold = soldProductData.GetByTable(id);
 
+                // Moving in the database the sold products to a table of all sold products accomplished
                 MainMenuHelper.PaySoldProducts(sold, soldProductData, soldProductAccomplishedData);
 
+                //Set the table to empty
                 ITableModel table = tableData.FindById(id);
                 table.Occupied = false;
                 tableData.Update(table);
@@ -198,6 +207,7 @@ namespace RestaurantWeb.Controllers
             {
                 try
                 {
+                    // Finding the selected table is order to list the Sold Products on it
                     ITableModel table = tableData.FindById((int)id);
                     return View(table);
                 }
@@ -223,9 +233,13 @@ namespace RestaurantWeb.Controllers
             {
                 try
                 {
+                    // Finding the sold products from the table that are selected to be paid
                     List<ISoldProductModel> fullList = soldProductData.GetByTable(id);
+
+                    // Moving in the database the selected sold products to a table of all sold products accomplished
                     MainMenuHelper.PaySelectedSoldProducts(fullList, Paid, soldProductData, soldProductAccomplishedData);
 
+                    //if the table is without any product set it to empty
                     if (fullList.Count() < 1)
                     {
                         ITableModel table = tableData.FindById(id);
