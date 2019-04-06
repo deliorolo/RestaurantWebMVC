@@ -22,6 +22,7 @@ namespace RestaurantWeb.Controllers
 
         private IMainPageModel mainPageModel = Factory.InstanceMainPageModel();
 
+        // Menu where is the list of all areas with its corresponding tables
         public ActionResult Tables()
         {
             try
@@ -38,6 +39,7 @@ namespace RestaurantWeb.Controllers
             return View(mainPageModel);
         }
 
+        // Menu where is a table with its products and available categories of products
         public ActionResult TableCategories(int? id)
         {
             if (id != null)
@@ -70,6 +72,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Menu where is a table with its products and available products do add a from selected category
         public ActionResult TableProducts(int? idTable, int? idCategory)
         {
             if (idCategory != null)
@@ -96,6 +99,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Add a product to the selected table
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("TableProducts")]
         public ActionResult TableAddProduct(int? idTable, int? idCategory, int? idProduct)
@@ -140,6 +144,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // It shows a menu where is the list of all products on a table ready for payment
         public ActionResult PayAll(int? id)
         {
             if (id != null)
@@ -162,6 +167,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Confirmation of all the products on the table to be paid
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("PayAll")]
         public ActionResult PayAllConfirm(int id)
@@ -185,6 +191,7 @@ namespace RestaurantWeb.Controllers
             return RedirectToAction("Tables");
         }
 
+        // It shows a menu where is the list of all products on a table that can be selected for payment
         public ActionResult PayPartial(int? id)
         {
             if (id != null)
@@ -207,6 +214,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Confirmation of selected products on the table to be paid
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult PayPartial(int id, int[] Paid)
@@ -235,6 +243,7 @@ namespace RestaurantWeb.Controllers
             return RedirectToAction("Tables");
         }
 
+        // It asks for a confirmation in deleting a selected product from the table
         public ActionResult Delete(int? idItem)
         {
             if (idItem != null)
@@ -264,6 +273,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Confirmation of selected product on the table to be deleted
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int idItem)
@@ -290,6 +300,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // It display a form in order to edit a selected product from the table
         public ActionResult Edit(int? idItem)
         {
             if (idItem != null)
@@ -319,6 +330,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // Confirmation of selected product on the table to be edited
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult EditConfirmed([Bind(Include = "ID, Price, Detail")] SoldProductModel product)

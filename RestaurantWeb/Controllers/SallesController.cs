@@ -16,6 +16,7 @@ namespace RestaurantWeb.Controllers
         private ISalleDataAccess salleData = Factory.InstanceSalleDataAccess();
         private ISoldProductDataAccess soldProductsData = Factory.InstanceSoldProductDataAccess();
 
+        // Salles menu from all sold products from the day
         [Authorize]
         public ActionResult Menu(string order)
         {
@@ -23,6 +24,7 @@ namespace RestaurantWeb.Controllers
             {
                 List<ISalleModel> salles = salleData.GetSalleList();
 
+                // Selection of the order of the list
                 switch (order)
                 {
                     case "product":
@@ -42,6 +44,7 @@ namespace RestaurantWeb.Controllers
             }        
         }
 
+        // Closes the day and creates files in order to save the data
         [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Menu")]
         [ValidateAntiForgeryToken]
@@ -49,10 +52,12 @@ namespace RestaurantWeb.Controllers
         {
             try
             {
+                // It checks if all tables on the system are empty
                 if (soldProductsData.GetAll().Count < 1)
                 {
                     List<ISalleModel> salles = salleData.GetSalleList();
 
+                    // Checks if there are sold products on this day
                     if (salles.Count < 1)
                     {
                         log.Info("User tried to close the day without sold products");
@@ -64,9 +69,10 @@ namespace RestaurantWeb.Controllers
                     string hours = time.ToString("HH:mm");
 
                     decimal money = salles.Sum(x => x.Price);
-
+                  
                     try
                     {
+                        // Creates and adds data to files about time, money income and list of sold products
                         ReadWriteFiles.AddFileOfTodaySoldProducts(salles, time);
                         ReadWriteFiles.WriteInDailyIncomeFile(day, hours, money);
                     }
@@ -76,6 +82,7 @@ namespace RestaurantWeb.Controllers
                         return View("ErrorWriteToFile");
                     }
 
+                    // Deletes all list of sold products on this day from database
                     salleData.EraseDataFromSalleList();
 
                     return RedirectToAction("Menu");
@@ -93,6 +100,7 @@ namespace RestaurantWeb.Controllers
             }
         }
 
+        // It downloads the csv file where the system writes all money income from each day
         [Authorize(Roles = "admin")]
         public ActionResult DownloadMoneyIncomeFile()
         {
@@ -115,6 +123,7 @@ namespace RestaurantWeb.Controllers
             return View("FileNotFound");
         }
 
+        // It downloads the csv file from the last day closed where is the info from all products sold
         [Authorize(Roles = "admin")]
         public ActionResult DownloadLastProductsSoldFile()
         {
@@ -139,6 +148,7 @@ namespace RestaurantWeb.Controllers
             return View("FileNotFound");
         }
 
+        // It downloads the selected csv file where is the info from all products sold
         [Authorize(Roles = "admin")]
         public ActionResult DownloadProductsSoldFile(string fileName)
         {           
@@ -163,6 +173,7 @@ namespace RestaurantWeb.Controllers
             return View("FileNotFound");
         }
 
+        // It gets the list of files with info of sold products from all days from its directory
         [Authorize(Roles = "admin")]
         public ActionResult ListAllLastProductsSoldFile()
         {
