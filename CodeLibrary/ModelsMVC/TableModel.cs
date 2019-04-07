@@ -35,5 +35,8 @@ namespace CodeLibrary.ModelsMVC
 
         [JsonIgnore]
         public List<ISoldProductModel> SoldProducts { get; set; }
+
+        [JsonIgnore]
+        public string OrderSoldProducts { get; set; }
     }
 }

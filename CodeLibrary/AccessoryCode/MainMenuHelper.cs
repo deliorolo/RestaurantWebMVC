@@ -1,6 +1,7 @@
 ﻿using CodeLibrary.DataAccess;
 using CodeLibrary.ModelsMVC;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeLibrary.AccessoryCode
 {
@@ -44,6 +45,32 @@ namespace CodeLibrary.AccessoryCode
             }
 
             soldProductData.DeleteList(sold);
+        }
+
+        /// <summary>
+        /// It orders the list of Sold Products by order selected
+        /// </summary>
+        public static List<ISoldProductModel> OrderListSoldProducts (List<ISoldProductModel> list, string order)
+        {
+            switch (order)
+            {
+                case "product":
+                    list = list.OrderBy(x => x.Name).ToList();
+                    break;
+                case "category":
+                    list = list.OrderBy(x => x.Category.Name).ToList();
+                    break;
+                case "detail":
+                    list = list.OrderBy(x => x.Detail).ToList();
+                    break;
+                case "price":
+                    list = list.OrderByDescending(x => x.Price).ToList();
+                    break;
+                default:
+                    break;
+            }
+
+            return list;
         }
     }
 }

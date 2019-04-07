@@ -18,7 +18,7 @@ namespace RestaurantWeb.Controllers
         private IDataAccessSubCategory<ITableModel> tableData = Factory.InstanceTableDataAccess();
         private IDataAccessRegular<IAreaModel> areaData = Factory.InstanceAreaDataAccess();
         private ISoldProductDataAccess soldProductData = Factory.InstanceSoldProductDataAccess();
-        private ISoldProductAccomplishedDataAccess soldProductAccomplishedData = Factory.InstanceSoldProductAccomplishedDataAccess();
+        private readonly ISoldProductAccomplishedDataAccess soldProductAccomplishedData = Factory.InstanceSoldProductAccomplishedDataAccess();
 
         private IMainPageModel mainPageModel = Factory.InstanceMainPageModel();
 
@@ -41,7 +41,7 @@ namespace RestaurantWeb.Controllers
         }
 
         // Menu where is a table with its products and available categories of products
-        public ActionResult TableCategories(int? id)
+        public ActionResult TableCategories(int? id, string order)
         {
             if (id != null)
             {
@@ -56,6 +56,9 @@ namespace RestaurantWeb.Controllers
                         log.Error("Could't find a table in the Database - return null");
                         return View("ErrorTable");
                     }
+
+                    // Selection of the order of the list
+                    table.SoldProducts = MainMenuHelper.OrderListSoldProducts(table.SoldProducts, order);
 
                     mainPageModel.Tables.Add(table);
                 }
@@ -150,7 +153,7 @@ namespace RestaurantWeb.Controllers
         }
 
         // It shows a menu where is the list of all products on a table ready for payment
-        public ActionResult PayAll(int? id)
+        public ActionResult PayAll(int? id, string order)
         {
             if (id != null)
             {
@@ -158,6 +161,10 @@ namespace RestaurantWeb.Controllers
                 {
                     // Finding the selected table is order to list the Sold Products on it
                     ITableModel table = tableData.FindById((int)id);
+
+                    // Selection of the order of the list
+                    table.SoldProducts = MainMenuHelper.OrderListSoldProducts(table.SoldProducts, order);
+
                     return View(table);
                 }
                 catch (Exception ex)
@@ -201,7 +208,7 @@ namespace RestaurantWeb.Controllers
         }
 
         // It shows a menu where is the list of all products on a table that can be selected for payment
-        public ActionResult PayPartial(int? id)
+        public ActionResult PayPartial(int? id, string order)
         {
             if (id != null)
             {
@@ -209,6 +216,11 @@ namespace RestaurantWeb.Controllers
                 {
                     // Finding the selected table is order to list the Sold Products on it
                     ITableModel table = tableData.FindById((int)id);
+
+                    // Selection of the order of the list
+                    table.SoldProducts = MainMenuHelper.OrderListSoldProducts(table.SoldProducts, order);
+
+                    table.OrderSoldProducts = order;
                     return View(table);
                 }
                 catch (Exception ex)
@@ -227,7 +239,7 @@ namespace RestaurantWeb.Controllers
         // Confirmation of selected products on the table to be paid
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult PayPartial(int id, int[] Paid)
+        public ActionResult PayPartial(int id, int[] Paid, string order)
         {
             if (Paid != null)
             {
@@ -235,6 +247,9 @@ namespace RestaurantWeb.Controllers
                 {
                     // Finding the sold products from the table that are selected to be paid
                     List<ISoldProductModel> fullList = soldProductData.GetByTable(id);
+
+                    // Selection of the order of the list
+                    fullList = MainMenuHelper.OrderListSoldProducts(fullList, order);
 
                     // Moving in the database the selected sold products to a table of all sold products accomplished
                     MainMenuHelper.PaySelectedSoldProducts(fullList, Paid, soldProductData, soldProductAccomplishedData);

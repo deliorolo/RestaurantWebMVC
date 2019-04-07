@@ -12,16 +12,16 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Tables.FirstOrDefault().SoldProducts.FirstOrDefault().Name)
+                    @Html.ActionLink("Product", "TableCategories", new { order = "product", id = Model.Tables.FirstOrDefault().ID }, new { @style = "color:#404040;" })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Tables.FirstOrDefault().SoldProducts.FirstOrDefault().Category.Name)
+                    @Html.ActionLink("Category", "TableCategories", new { order = "category", id = Model.Tables.FirstOrDefault().ID }, new { @style = "color:#404040;" })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Tables.FirstOrDefault().SoldProducts.FirstOrDefault().Detail)
+                    @Html.ActionLink("Detail", "TableCategories", new { order = "detail", id = Model.Tables.FirstOrDefault().ID }, new { @style = "color:#404040;" })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Tables.FirstOrDefault().SoldProducts.FirstOrDefault().Price)
+                    @Html.ActionLink("Price", "TableCategories", new { order = "price", id = Model.Tables.FirstOrDefault().ID }, new { @style = "color:#404040;" })
                 </th>
                 <th></th>
             </tr>

@@ -27,16 +27,16 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SoldProducts.FirstOrDefault().Name)
+                @Html.ActionLink("Product", "PayPartial", new { order = "product", id = Model.ID }, new { @style = "color:#404040;" })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SoldProducts.FirstOrDefault().Category.Name)
+                @Html.ActionLink("Category", "PayPartial", new { order = "category", id = Model.ID }, new { @style = "color:#404040;" })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SoldProducts.FirstOrDefault().Price)
+                @Html.ActionLink("Price", "PayPartial", new { order = "price", id = Model.ID }, new { @style = "color:#404040;" })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SoldProducts.FirstOrDefault().Detail)
+                @Html.ActionLink("Detail", "PayPartial", new { order = "detail", id = Model.ID }, new { @style = "color:#404040;" })
             </th>
             <th>
                 Select
@@ -75,7 +75,7 @@
 
     <div class="form-actions no-color btn-group">
         <input type="submit" value="Confirm Payment" class="btn btn-success btn-lg" />
-        <button onclick="location.href='@Url.Action("TableCategories", "MainMenu", new { id = Model.ID })'" type="button" class="btn btn-warning btn-lg">Return</button>
+        <button onclick="location.href='@Url.Action("TableCategories", "MainMenu", new { id = Model.ID, order = Model.OrderSoldProducts })'" type="button" class="btn btn-warning btn-lg">Return</button>
     </div>
 }
 
