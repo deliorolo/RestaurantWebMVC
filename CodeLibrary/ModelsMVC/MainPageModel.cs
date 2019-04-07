@@ -2,6 +2,7 @@
 
 namespace CodeLibrary.ModelsMVC
 {
+    // Main Page model is used in order to merge to a single model data from different models to be used in the views
     public class MainPageModel : IMainPageModel
     {
         public MainPageModel()

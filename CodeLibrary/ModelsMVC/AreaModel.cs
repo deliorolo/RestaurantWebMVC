@@ -2,6 +2,7 @@
 
 namespace CodeLibrary.ModelsMVC
 {
+    // Area model represents a group that contains tables of the same location on it
     public class AreaModel : IAreaModel
     {
         public int ID { get; set; }

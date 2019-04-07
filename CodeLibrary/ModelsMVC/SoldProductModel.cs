@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CodeLibrary.ModelsMVC
 {
+    // Sold product model represents products that were added to the tables and waiting to be paid
     public class SoldProductModel : ISoldProductModel
     {
         public SoldProductModel()

@@ -297,6 +297,7 @@ namespace RestaurantWeb.Controllers
                 ISoldProductModel product = soldProductData.FindById(idItem);
                 ITableModel table = tableData.GetAll().Where(x => x.ID == product.TableID).FirstOrDefault();
 
+                //if the table is without any product set it to empty
                 if (table.SoldProducts.Count() == 1)
                 {
                     table.Occupied = false;

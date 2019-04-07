@@ -45,6 +45,7 @@ namespace RestaurantWeb.Controllers
             {
                 try
                 {
+                    // Checking if already exist an area with same name (case insensitive)
                     if (areaData.CheckIfAlreadyExist(area.Name) == false)
                     {
                         IAreaModel model = area;
@@ -109,6 +110,7 @@ namespace RestaurantWeb.Controllers
             {
                 try
                 {
+                    // Checking if already exist an area with same name (case insensitive)
                     if (areaData.CheckIfAlreadyExist(area.Name) == false)
                     {
                         IAreaModel model = area;
@@ -149,6 +151,7 @@ namespace RestaurantWeb.Controllers
                         return View("ErrorDelete");
                     }
 
+                    // It gets the number of tables in selected area in order to display to the user
                     List<ITableModel> tables = tableData.GetBySubGroup((int)id);
                     area.NumberOfTables = tables.Count();
 

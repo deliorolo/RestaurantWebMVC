@@ -55,6 +55,7 @@ namespace RestaurantWeb.Controllers
             {
                 try
                 {
+                    // Checking if already exist a table with same number
                     if (tableData.CheckIfAlreadyExist(table.NumberOfTable.ToString()) == false)
                     {
                         ITableModel model = table;

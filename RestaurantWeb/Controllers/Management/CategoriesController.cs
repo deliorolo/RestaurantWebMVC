@@ -46,6 +46,7 @@ namespace RestaurantWeb.Controllers
             {
                 try
                 {
+                    // Checking if already exist a category with same name (case insensitive)
                     if (categoryData.CheckIfAlreadyExist(category.Name) == false)
                     {
                         ICategoryModel model = category;
@@ -110,6 +111,7 @@ namespace RestaurantWeb.Controllers
             {
                 try
                 {
+                    // Checking if already exist a category with same name (case insensitive)
                     if (categoryData.CheckIfAlreadyExist(category.Name) == false)
                     {
                         ICategoryModel model = category;
@@ -150,6 +152,7 @@ namespace RestaurantWeb.Controllers
                         return View("ErrorDelete");
                     }
 
+                    // Checking if the category to delete doesn't have products on the tables or alredy sold
                     if (soldProductData.GetByCategory((int)id).Count() > 0 ||
                         soldProductAccomplishedData.GetByCategory((int)id).Count > 0)
                     {
@@ -157,6 +160,7 @@ namespace RestaurantWeb.Controllers
                         return View("OpenedTables");
                     }
 
+                    // Getting the number of products in category in order to display to user
                     category.NumberOfProducts = productData.GetBySubGroup((int)id).Count();
 
                     return View(category);

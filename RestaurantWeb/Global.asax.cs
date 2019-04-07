@@ -13,6 +13,7 @@ namespace RestaurantWeb
         {
             AreaRegistration.RegisterAllAreas();
 
+            // You can change here the connection to a different database (Direct or WebApi access)
             TypeOfAccess.Access = Connection.WebApi;
 
             ModelBinders.Binders.Add(typeof(decimal), new ModelBinder.DecimalModelBinder());

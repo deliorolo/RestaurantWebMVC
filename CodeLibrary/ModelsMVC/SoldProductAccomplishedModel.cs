@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace CodeLibrary.ModelsMVC
 {
+    // Sold product accomplished model represents products that were alredy paid from the tables
     public class SoldProductAccomplishedModel : ISoldProductAccomplishedModel
     {
         public SoldProductAccomplishedModel()

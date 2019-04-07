@@ -2,6 +2,7 @@
 
 namespace CodeLibrary.ModelsMVC
 {
+    // Salle model is used for better vizualization of the complete sold products accomplished during all day
     public class SalleModel : ISalleModel
     {
         [Display(Name = "Ammount")]

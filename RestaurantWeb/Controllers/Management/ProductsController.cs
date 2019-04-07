@@ -54,6 +54,7 @@ namespace RestaurantWeb.Controllers
             {
                 try
                 {
+                    // Checking if already exist a product with same name (case insensitive)
                     if (productData.CheckIfAlreadyExist(product.Name) == false)
                     {
                         IProductModel model = product;
@@ -119,6 +120,7 @@ namespace RestaurantWeb.Controllers
             {
                 try
                 {
+                    // Checking if already exist a product with same name that is not the one selected (case insensitive)
                     if (productData.CheckIfAlreadyExist(product.Name) == false ||
                                 productData.FindById(product.ID).Name == product.Name)
                     {

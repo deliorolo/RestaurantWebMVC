@@ -2,6 +2,7 @@
 
 namespace CodeLibrary.ModelsMVC
 {
+    // Category model represents a group that contains products of the same sort on it
     public class CategoryModel : ICategoryModel
     {
         public int ID { get; set; }

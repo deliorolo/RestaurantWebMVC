@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CodeLibrary.ModelsMVC
 {
+    // Product model represents a individual product that is created by user and it is ready to be added to tables
     public class ProductModel : IProductModel
     {
         public ProductModel()

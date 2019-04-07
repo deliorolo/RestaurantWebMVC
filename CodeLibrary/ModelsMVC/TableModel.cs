@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CodeLibrary.ModelsMVC
 {
+    // Table model represents each table identified by a number and with products on it
     public class TableModel : ITableModel
     {
         public TableModel()
