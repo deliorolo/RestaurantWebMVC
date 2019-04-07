@@ -21,7 +21,7 @@ namespace RestaurantWeb.Controllers
         {
             try
             {
-                return View(areaData.GetAll());
+                return View(areaData.GetAll().OrderBy(x => x.Name));
             }
             catch (Exception ex)
             {

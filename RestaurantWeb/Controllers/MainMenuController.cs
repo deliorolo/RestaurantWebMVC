@@ -28,8 +28,8 @@ namespace RestaurantWeb.Controllers
             try
             {
                 // Joining list of areas and tables to a single model
-                mainPageModel.Areas = areaData.GetAll();
-                mainPageModel.Tables = tableData.GetAll();
+                mainPageModel.Areas = areaData.GetAll().OrderBy(x => x.Name).ToList();
+                mainPageModel.Tables = tableData.GetAll().OrderBy(x => x.NumberOfTable).ToList();
             }
             catch (Exception ex)
             {
@@ -48,7 +48,7 @@ namespace RestaurantWeb.Controllers
                 try
                 {
                     // Joining list of categories and selected table to a single model
-                    mainPageModel.Categories = categoryData.GetAll();
+                    mainPageModel.Categories = categoryData.GetAll().OrderBy(x => x.Name).ToList();
                     ITableModel table = tableData.FindById((int)id);
 
                     if(table == null)
@@ -88,7 +88,7 @@ namespace RestaurantWeb.Controllers
                     ITableModel table = tableData.FindById((int)idTable);
                     mainPageModel.Tables.Add(table);
 
-                    mainPageModel.Products = productData.GetBySubGroup((int)idCategory);
+                    mainPageModel.Products = productData.GetBySubGroup((int)idCategory).OrderBy(x => x.Name).ToList();
                 }
                 catch (Exception ex)
                 {

@@ -22,7 +22,7 @@ namespace RestaurantWeb.Controllers
         {
             try
             {
-                return View(categoryData.GetAll());
+                return View(categoryData.GetAll().OrderBy(x => x.Name));
             }
             catch (Exception ex)
             {

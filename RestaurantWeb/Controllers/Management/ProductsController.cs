@@ -21,7 +21,7 @@ namespace RestaurantWeb.Controllers
         {
             try
             {
-                return View(productData.GetAll().OrderBy(x => x.Category.Name));
+                return View(productData.GetAll().OrderBy(x => x.Name));
             }
             catch (Exception ex)
             {
@@ -207,7 +207,7 @@ namespace RestaurantWeb.Controllers
 
             try
             {
-                return View(productData.GetBySubGroup((int)id));
+                return View(productData.GetBySubGroup((int)id).OrderBy(x => x.Name));
             }
             catch (Exception ex)
             {
