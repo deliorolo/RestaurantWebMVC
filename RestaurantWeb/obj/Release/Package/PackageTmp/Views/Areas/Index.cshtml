@@ -1,0 +1,33 @@
+﻿@model IEnumerable<CodeLibrary.ModelsMVC.IAreaModel>
+
+@{
+    ViewBag.Title = "Areas";
+}
+<br />
+<h2>Areas (Tables)</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Tables", "TablesByArea", "Tables", new { id = item.ID }, new { }) |
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>

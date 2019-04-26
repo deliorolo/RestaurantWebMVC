@@ -1,0 +1,58 @@
+﻿@model CodeLibrary.ModelsMVC.ITableModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    ViewBag.Title = "Pay All";
+    <br />
+
+    <h2>Table @Html.DisplayFor(modelItem => Model.NumberOfTable) - @Html.DisplayFor(modelItem => Model.Area.Name)</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Product", "PayAll", new { order = "product", id = Model.ID }, new { @style = "color:#404040;" })
+            </th>
+            <th>
+                @Html.ActionLink("Category", "PayAll", new { order = "category", id = Model.ID }, new { @style = "color:#404040;" })
+            </th>
+            <th>
+                @Html.ActionLink("Price", "PayAll", new { order = "price", id = Model.ID }, new { @style = "color:#404040;" })
+            </th>
+            <th>
+                @Html.ActionLink("Detail", "PayAll", new { order = "detail", id = Model.ID }, new { @style = "color:#404040;" })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.SoldProducts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price) €
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Detail)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    <h3>Total: @Model.SoldProducts.Sum(x => x.Price) €</h3>
+    <br />
+
+    <div class="form-actions no-color btn-group">
+        <input type="submit" value="Confirm Payment" class="btn btn-success btn-lg" />
+        <button onclick="location.href='@Url.Action("TableCategories", "MainMenu", new { id = Model.ID })'" type="button" class="btn btn-warning btn-lg">Return</button>
+    </div>
+    
+}
+

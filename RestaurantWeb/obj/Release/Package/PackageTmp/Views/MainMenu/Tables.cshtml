@@ -1,0 +1,33 @@
+﻿@model CodeLibrary.ModelsMVC.IMainPageModel
+
+@{
+    ViewBag.Title = "Tables";
+}
+
+<div class="row">
+
+    @foreach (var area in Model.Areas)
+    {
+        <div class="col-md-2">
+            <br />
+            <h2>@Html.DisplayFor(modelItem => area.Name)</h2>
+
+            @foreach (var table in Model.Tables.Where(x => x.AreaID == area.ID))
+            {
+                if (table.Occupied == false)
+                {
+                    <div class="btn-group btn-lg btn-block btn-success">
+                        <button onclick="location.href='@Url.Action("TableCategories", "MainMenu", new { id = table.ID })'" type="button" class="btn" style="font-size : 18px">@Html.DisplayFor(modelItem => table.NumberOfTable)</button>
+                    </div>
+                }
+                else
+                {
+                    <div class="btn-group btn-lg btn-block btn-danger">
+                        <button onclick="location.href='@Url.Action("TableCategories", "MainMenu", new { id = table.ID })'" type="button" class="btn" style="font-size : 18px">@Html.DisplayFor(modelItem => table.NumberOfTable)</button>
+                    </div>
+                }
+            }
+        </div>
+    }
+</div>
+

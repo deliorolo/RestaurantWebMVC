@@ -1,0 +1,57 @@
+﻿@model IEnumerable<CodeLibrary.ModelsMVC.ISalleModel>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    ViewBag.Title = "Sold products";
+    <br />
+    <h2>Sold products</h2>
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink( "Ammount", "Menu", new { order = "ammount" }, new { @style = "color:#404040;" })
+            </th>
+            <th>
+                @Html.ActionLink("Product", "Menu", new { order = "product" }, new { @style = "color:#404040;" })
+            </th>
+            <th>
+                @Html.ActionLink("Category", "Menu", new { order = "category" }, new { @style = "color:#404040;" })
+            </th>
+            <th>
+                @Html.ActionLink("Sum", "Menu", new { order = "sum" }, new { @style = "color:#404040;" })
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ammount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price) €
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+    <h3>Total: @Model.Sum(x => x.Price) €</h3>
+    <br />
+
+    <div class="btn-group" role="group">
+        <div class="form-actions no-color">
+            <input type="submit" value="Close the day" class="btn btn-success btn-lg" onclick="return confirm('Are you sure you want to close the day?')" />
+        </div>
+        <button type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("DownloadMoneyIncomeFile", "Salles")'">Money Income File</button>
+        <button type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("DownloadLastProductsSoldFile", "Salles")'">Products Sold File (Last Day)</button>
+        <button type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("ListAllLastProductsSoldFile", "Salles")'">Products Sold File (All List)</button>
+    </div>
+}

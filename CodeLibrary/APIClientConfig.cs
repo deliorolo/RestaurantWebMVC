@@ -17,7 +17,9 @@ namespace CodeLibrary
         {
             ApiClient = new HttpClient()
             {
+                //Debug vs Deployed
                 BaseAddress = new Uri("http://localhost:60168/api/")
+                //BaseAddress = new Uri("https://webapirestaurantdataaccess.azurewebsites.net/api/")
             };
 
             ApiClient.DefaultRequestHeaders.Accept.Clear();

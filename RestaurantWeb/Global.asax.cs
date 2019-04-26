@@ -16,8 +16,8 @@ namespace RestaurantWeb
             // You can change here the connection to a different database (Direct or WebApi access)
             TypeOfAccess.Access = Connection.WebApi;
 
-            ModelBinders.Binders.Add(typeof(decimal), new ModelBinder.DecimalModelBinder());
-            ModelBinders.Binders.Add(typeof(decimal?), new ModelBinder.DecimalModelBinder());
+           // ModelBinders.Binders.Add(typeof(decimal), new ModelBinder.DecimalModelBinder());
+           // ModelBinders.Binders.Add(typeof(decimal?), new ModelBinder.DecimalModelBinder());
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
