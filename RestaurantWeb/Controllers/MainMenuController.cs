@@ -134,7 +134,7 @@ namespace RestaurantWeb.Controllers
                     table.SoldProducts = soldProductData.GetByTable(table.ID);
 
                     // Joins list of products and selected table to a single model
-                    mainPageModel.Products = productData.GetBySubGroup((int)idCategory);
+                    mainPageModel.Products = productData.GetBySubGroup((int)idCategory).OrderBy(x => x.Name).ToList(); ;
                     mainPageModel.Tables.Add(table);
                 }
                 catch (Exception ex)
