@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace CodeLibrary.DataAccess
 {
-    public interface ISalleDataAccess
+    public interface ISaleDataAccess
     {
         /// <summary>
         /// It retrieves the list of all items from the database
         /// </summary>
-        List<ISalleModel> GetSalleList();
+        List<ISaleModel> GetSaleList();
 
         /// <summary>
-        /// It deletes all items from the database on the Salles table
+        /// It deletes all items from the database on the Sales table
         /// </summary>
-        void EraseDataFromSalleList();
+        void EraseDataFromSaleList();
     }
 }

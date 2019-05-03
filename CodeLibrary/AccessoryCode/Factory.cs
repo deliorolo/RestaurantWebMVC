@@ -85,21 +85,21 @@ namespace CodeLibrary.AccessoryCode
             }
         }
 
-        public static ISalleDataAccess InstanceSalleDataAccess()
+        public static ISaleDataAccess InstanceSaleDataAccess()
         {
             if (TypeOfAccess.Access == Connection.WebApi)
             {
-                return new SalleDataAccessWebAPI();
+                return new SaleDataAccessWebAPI();
             }
             else
             {
-                return new SalleDataAccess(InstanceRestaurantContext());
+                return new SaleDataAccess(InstanceRestaurantContext());
             }
         }
 
-        public static List<ISalleModel> InstanceISalleModelList()
+        public static List<ISaleModel> InstanceISaleModelList()
         {
-            return new List<ISalleModel>();
+            return new List<ISaleModel>();
         }
 
         public static List<ITableModel> InstanceITableModelList()
@@ -157,9 +157,9 @@ namespace CodeLibrary.AccessoryCode
             return new CategoryModel();
         }
 
-        public static ISalleModel InstanceSalleModel()
+        public static ISaleModel InstanceSaleModel()
         {
-            return new SalleModel();
+            return new SaleModel();
         }
 
         public static ISoldProductModel InstanceSoldProductModel()

@@ -1,0 +1,13 @@
+﻿@model IEnumerable<string>
+
+@{
+    ViewBag.Title = "List of files";
+}
+<br />
+<h2>Select the file you wish to download</h2>
+<br />
+@foreach (string name in Model)
+{
+    <button onclick="location.href='@Url.Action("DownloadProductsSoldFile", "Sales", new { fileName = name })'" type="button" class="btn btn-primary fixed_button border">@Html.DisplayFor(modelItem => name)</button>
+}
+

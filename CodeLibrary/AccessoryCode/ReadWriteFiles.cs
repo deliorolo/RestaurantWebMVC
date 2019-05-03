@@ -51,7 +51,7 @@ namespace CodeLibrary.AccessoryCode
         /// <summary>
         /// It creates a new file with time and list of all sold products
         /// </summary>
-        public static void AddFileOfTodaySoldProducts(List<ISalleModel> soldProducts, DateTime time)
+        public static void AddFileOfTodaySoldProducts(List<ISaleModel> soldProducts, DateTime time)
         {
             Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\Products Sold List");
 
@@ -75,7 +75,7 @@ namespace CodeLibrary.AccessoryCode
             sb.AppendLine();
             sb.AppendLine();
 
-            foreach (ISalleModel p in soldProducts)
+            foreach (ISaleModel p in soldProducts)
             {
                 if (p.Name != "***null***")
                 {

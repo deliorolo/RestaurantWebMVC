@@ -203,7 +203,7 @@
     <Compile Include="Controllers\MainMenuController.cs" />
     <Compile Include="Controllers\Login\ManageController.cs" />
     <Compile Include="Controllers\Management\ProductsController.cs" />
-    <Compile Include="Controllers\SallesController.cs" />
+    <Compile Include="Controllers\SalesController.cs" />
     <Compile Include="Controllers\Management\TablesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -335,10 +335,10 @@
     <Content Include="Views\MainMenu\PayAll.cshtml" />
     <Content Include="Views\MainMenu\PayPartial.cshtml" />
     <Content Include="Views\MainMenu\Delete.cshtml" />
-    <Content Include="Views\Salles\Menu.cshtml" />
-    <Content Include="Views\Salles\OpenedTables.cshtml" />
-    <Content Include="Views\Salles\FileNotFound.cshtml" />
-    <Content Include="Views\Salles\ListAllLastProductsSoldFile.cshtml" />
+    <Content Include="Views\Sales\Menu.cshtml" />
+    <Content Include="Views\Sales\OpenedTables.cshtml" />
+    <Content Include="Views\Sales\FileNotFound.cshtml" />
+    <Content Include="Views\Sales\ListAllLastProductsSoldFile.cshtml" />
     <Content Include="Views\MainMenu\Edit.cshtml" />
     <Content Include="Views\Areas\AlreadyExists.cshtml" />
     <Content Include="Views\Categories\AlreadyExists.cshtml" />
@@ -347,14 +347,14 @@
     <Content Include="Views\Tables\OpenedTable.cshtml" />
     <Content Include="Views\Areas\OpenedTable.cshtml" />
     <Content Include="Views\Categories\OpenedTables.cshtml" />
-    <Content Include="Views\Salles\ErrorDownload.cshtml" />
-    <Content Include="Views\Salles\ErrorWriteToFile.cshtml" />
+    <Content Include="Views\Sales\ErrorDownload.cshtml" />
+    <Content Include="Views\Sales\ErrorWriteToFile.cshtml" />
     <Content Include="Views\MainMenu\ErrorTable.cshtml" />
     <Content Include="Views\MainMenu\ErrorRetriveData.cshtml" />
     <Content Include="Views\MainMenu\ErrorCategory.cshtml" />
     <Content Include="Views\MainMenu\ErrorAddProduct.cshtml" />
     <Content Include="Views\MainMenu\ErrorDeleteProduct.cshtml" />
-    <Content Include="Views\Salles\NoSoldProducts.cshtml" />
+    <Content Include="Views\Sales\NoSoldProducts.cshtml" />
     <Content Include="Views\MainMenu\ErrorEditProduct.cshtml" />
     <Content Include="Views\Areas\ErrorRetriveData.cshtml" />
     <Content Include="Views\Categories\ErrorRetriveData.cshtml" />
@@ -373,7 +373,7 @@
     <Content Include="Views\Tables\WrongData.cshtml" />
     <Content Include="Views\Tables\ErrorDelete.cshtml" />
     <Content Include="Views\Tables\ErrorAccessArea.cshtml" />
-    <Content Include="Views\Salles\ErrorRetriveData.cshtml" />
+    <Content Include="Views\Sales\ErrorRetriveData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

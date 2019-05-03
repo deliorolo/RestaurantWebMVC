@@ -7,52 +7,52 @@ using CodeLibrary.ModelsMVC;
 
 namespace CodeLibrary.DataAccess
 {
-    public class SalleDataAccess : ISalleDataAccess
+    public class SaleDataAccess : ISaleDataAccess
     {
         private RestaurantContext _db;
 
-        public SalleDataAccess(RestaurantContext db)
+        public SaleDataAccess(RestaurantContext db)
         {
             _db = db;
         }
 
-        public void EraseDataFromSalleList()
+        public void EraseDataFromSaleList()
         {
             List<SoldProductAccomplished> products = _db.SoldProductsAccomplished.ToList();
             _db.SoldProductsAccomplished.RemoveRange(products);
             _db.SaveChanges();
         }
 
-        public List<ISalleModel> GetSalleList()
+        public List<ISaleModel> GetSaleList()
         {
-            List<ISalleModel> salles = Factory.InstanceISalleModelList();
+            List<ISaleModel> sales = Factory.InstanceISaleModelList();
             List<SoldProductAccomplished> products = _db.SoldProductsAccomplished.ToList();
 
             foreach (SoldProductAccomplished product in products)
             {
-                ISalleModel salleAux = Factory.InstanceSalleModel();
+                ISaleModel saleAux = Factory.InstanceSaleModel();
 
-                salleAux = salles.Where(x => x.Name == product.Name && x.CategoryName == product.Category.Name).FirstOrDefault();
+                saleAux = sales.Where(x => x.Name == product.Name && x.CategoryName == product.Category.Name).FirstOrDefault();
 
-                if (salleAux == null)
+                if (saleAux == null)
                 {
-                    ISalleModel salle = Factory.InstanceSalleModel();
+                    ISaleModel sale = Factory.InstanceSaleModel();
 
-                    salle.Name = product.Name;
-                    salle.CategoryName = product.Category.Name;
-                    salle.Price = product.Price;
-                    salle.Ammount = 1;
+                    sale.Name = product.Name;
+                    sale.CategoryName = product.Category.Name;
+                    sale.Price = product.Price;
+                    sale.Ammount = 1;
 
-                    salles.Add(salle);
+                    sales.Add(sale);
                 }
                 else
                 {
-                    salles.Where(x => x.Name == product.Name && x.CategoryName == product.Category.Name).FirstOrDefault().Ammount++;
-                    salles.Where(x => x.Name == product.Name && x.CategoryName == product.Category.Name).FirstOrDefault().Price += product.Price;
+                    sales.Where(x => x.Name == product.Name && x.CategoryName == product.Category.Name).FirstOrDefault().Ammount++;
+                    sales.Where(x => x.Name == product.Name && x.CategoryName == product.Category.Name).FirstOrDefault().Price += product.Price;
                 }
             }
 
-            return salles;
+            return sales;
         }
     }
 }

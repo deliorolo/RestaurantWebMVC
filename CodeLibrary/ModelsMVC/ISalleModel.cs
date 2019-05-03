@@ -2,7 +2,7 @@
 
 namespace CodeLibrary.ModelsMVC
 {
-    public interface ISalleModel
+    public interface ISaleModel
     {
         [Display(Name = "Ammount")]
         int Ammount { get; set; }
